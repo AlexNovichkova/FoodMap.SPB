@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply font-rubik;
+}
+
+body {
+  margin: 0;
+}
+
+.header_nav_container {
+  max-height: 65px;
+  margin: auto;
+}
+
+.header_heading {
+  font-size: clamp(2.25rem, 1.3027rem + 4.0964vw, 4.375rem);
+}
+
+.header_paragraph {
+  font-size: clamp(1.25rem, 1.0082rem + 1.0458vw, 2.25rem);
+}
+
+.header_heading_container {
+  width: clamp(278px, 90%, 2300px);
+  margin: auto;
+}
+
+.bg_image_meal {
+  background: radial-gradient(
+    circle at right top,
+    transparent 70%,
+    rgb(0 0 0 / 0.05)
+  );
+}
+
+.login_button:hover .login_icon {
+  size: 30px;
+}
