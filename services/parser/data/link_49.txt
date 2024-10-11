@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/discovery/kafe-i-restorany-v-bolshikh-parkakh/', 'https://yandex.ru/maps/org/chayka/45825088261/', 'https://yandex.ru/maps/org/nota/24894756132/', 'https://yandex.ru/maps/org/ostrov/1197384641/', 'https://yandex.ru/maps/org/bali/1208553870/']
