@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/discovery/kafe-i-restorany-v-bolshikh-parkakh/', 'https://yandex.ru/maps/org/kombinat/112661936731/', 'https://yandex.ru/maps/org/veranda/143261220794/', 'https://yandex.ru/maps/org/severa/210170590830/', 'https://yandex.ru/maps/org/baggins_coffee/84829482668/']

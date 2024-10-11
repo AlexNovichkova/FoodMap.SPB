@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/aleal/5539820142/', 'https://yandex.ru/maps/org/kafe/110783597382/', 'https://yandex.ru/maps/org/dym/59499143123/', 'https://yandex.ru/maps/org/parkala/115579721452/', 'https://yandex.ru/maps/org/shashlychnaya_u_miko/1818702762/']
