@@ -52,7 +52,8 @@ module.exports = {
     extend: {
       boxShadow: {
         'accent-orange':
-          '0px 5px 10px 0px rgba(248, 130, 64, 0.29),0px 20px 40px 0px rgba(248, 130, 64, 0.29)'
+          '0px 5px 10px 0px rgba(248, 130, 64, 0.29),0px 20px 40px 0px rgba(248, 130, 64, 0.29)',
+        'orange-400': '0px 5px 20px 0px rgba(255, 178, 56, 0.24)'
       }
     }
   },
