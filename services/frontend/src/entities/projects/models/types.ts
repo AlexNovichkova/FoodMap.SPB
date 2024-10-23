@@ -3,7 +3,7 @@ export interface ICategory {
   id: string;
   name: string;
 }
-export interface IRestaurant {
+export type TRestaurant = {
   id: string;
   name: string;
   category: ICategory[];
@@ -11,17 +11,17 @@ export interface IRestaurant {
   image: string;
   price?: TPriceMode;
   description?: string;
-}
+};
 
-export interface IUser {
-  id: string;
+export type TUser = {
+  email: string;
   name: string;
-  image: string;
-  liked: IRestaurant[];
-}
+  image?: string;
+  liked?: TRestaurant[];
+};
 
 export interface IAppState {
-  catalog: IRestaurant[];
+  catalog: TRestaurant[];
   liked: string[];
   loading: boolean;
 }
