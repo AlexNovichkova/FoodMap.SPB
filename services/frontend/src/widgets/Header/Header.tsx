@@ -23,7 +23,7 @@ export const Header = () => {
   return (
     <header className={` mx-auto mt-7`}>
       <div className=' md:w-[90%] header_nav_container flex flex-row justify-between items-center relative'>
-        <div className=' ml-7 md:ml-0 flex flex-row gap-3 items-center'>
+        <div className=' ml-5 md:ml-0 flex flex-row gap-3 items-center'>
           <div className=' min-w-9 max-w-11 md:max-w-14'>
             <img
               className=' object-cover object-center'
@@ -39,7 +39,7 @@ export const Header = () => {
           <LoginButton className=' text-accent_green ' title='Войти' />
         </div>
         <div
-          className={` mr-7 md:hidden block cursor-pointer `}
+          className={` mr-5 md:hidden block cursor-pointer `}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (

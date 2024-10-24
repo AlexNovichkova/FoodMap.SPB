@@ -21,9 +21,9 @@ module.exports = {
         '100%': { transform: 'translateX(0px)' }
       },
       arrowMoving: {
-        '0%': { transform: 'translateY(0px) scale(1.1)' },
-        '50%': { transform: 'translateY(5px) scale(1.1)' },
-        '100%': { transform: 'translateY(0px) scale(1.1)' }
+        '0%': { transform: 'translateX(0px) scale(1.05)' },
+        '50%': { transform: 'translateX(5px) scale(1.05)' },
+        '100%': { transform: 'translateX(0px) scale(1.05)' }
       }
     },
     animation: {
@@ -52,7 +52,8 @@ module.exports = {
     extend: {
       boxShadow: {
         'accent-orange':
-          '0px 5px 10px 0px rgba(248, 130, 64, 0.29),0px 20px 40px 0px rgba(248, 130, 64, 0.29)'
+          '0px 5px 10px 0px rgba(248, 130, 64, 0.29),0px 20px 40px 0px rgba(248, 130, 64, 0.29)',
+        'orange-400': '0px 5px 20px 0px rgba(255, 178, 56, 0.24)'
       }
     }
   },

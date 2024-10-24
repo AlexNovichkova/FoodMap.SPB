@@ -17,7 +17,9 @@ export const MainButton: React.FC<{
       type={type}
     >
       <div className={`flex items-center justify-center mx-auto`}>
-        <ArrowIcon />
+        <ArrowIcon
+          className={` size-[18px] opacity-0 group-hover:opacity-100 transition-all`}
+        />
         <span className=' title leading-none translate-x-0 animate-textBackwards -ml-6 group-hover:animate-textForwards'>
           {title}
         </span>

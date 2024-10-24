@@ -36,6 +36,15 @@ body {
   );
 }
 
+.bg_section_category {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 178, 56, 0.22) 0%,
+    rgba(255, 178, 56, 0.22) 20%,
+    rgba(253, 237, 202, 0) 100%
+  );
+}
+
 .login_button:hover .login_icon {
   size: 30px;
 }
