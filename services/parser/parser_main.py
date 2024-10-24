@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
 
     #парсинг всех ссылок с секторов
-    with open(f"data\\base_links.txt", "r") as file:
+    with open("C:\work\FoodMap.SPB\services\parser\data\\base_links.txt", "r") as file:
         section_urls = file.read().split(', ')
     counter = 0
     section_urls = section_urls
