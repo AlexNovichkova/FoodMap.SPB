@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/steak_club/1187872698/', 'https://yandex.ru/maps/org/loft/66713614568/', 'https://yandex.ru/maps/discovery/neobychnye-kafe-i-restorany-peterburga/', 'https://yandex.ru/maps/org/makarena/34691185010/', 'https://yandex.ru/maps/org/baby_land/59390185188/']

@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/bruno_ivanovich/1089303828/', 'https://yandex.ru/maps/org/sunpark_grill_bar/1696243668/', 'https://yandex.ru/maps/discovery/neobychnye-kafe-i-restorany-peterburga/', 'https://yandex.ru/maps/org/uyut/242453719504/', 'https://yandex.ru/maps/org/modilyani/1312116385/']

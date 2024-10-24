@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/motylyok/156628581556/', 'https://yandex.ru/maps/org/yeda_bez_truda/1372463574/', 'https://yandex.ru/maps/org/moulin/217994890686/', 'https://yandex.ru/maps/org/chaykhana_bek/161080629496/', 'https://yandex.ru/maps/org/kofikrat/244773599563/']

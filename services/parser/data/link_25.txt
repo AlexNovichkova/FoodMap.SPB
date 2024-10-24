@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/bushe/74394532767/', 'https://yandex.ru/maps/org/lisa_prishla/56287463254/', 'https://yandex.ru/maps/org/farsh/230399012301/', 'https://yandex.ru/maps/org/fern/102260196405/', 'https://yandex.ru/maps/org/pkhalikhinkali/43205796198/']

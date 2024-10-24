@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/lou_lou/24570888237/', 'https://yandex.ru/maps/discovery/kafe-i-restorany-v-bolshikh-parkakh/', 'https://yandex.ru/maps/org/faces/66256902364/', 'https://yandex.ru/maps/org/marselyeza/1046329109/', 'https://yandex.ru/maps/org/mina/164200275017/']

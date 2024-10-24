@@ -1,6 +1,7 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -22,7 +23,7 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /\.module\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.module\.css$/i,
@@ -34,7 +35,8 @@ module.exports = {
             options: {
               modules: true
             }
-          }
+          },
+          'postcss-loader'
         ]
       },
       {
@@ -48,11 +50,14 @@ module.exports = {
     ]
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [{ from: 'public', to: 'public' }]
+    }),
     new ESLintPlugin({
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: 'index.html'
     }),
     new Dotenv()
   ],
@@ -71,14 +76,8 @@ module.exports = {
       '.jpg'
     ],
     alias: {
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@ui': path.resolve(__dirname, './src/components/ui'),
-      '@ui-pages': path.resolve(__dirname, './src/components/ui/pages'),
-      '@utils-types': path.resolve(__dirname, './src/utils/types'),
-      '@api': path.resolve(__dirname, './src/utils/burger-api.ts'),
-      '@slices': path.resolve(__dirname, './src/services/slices'),
-      '@selectors': path.resolve(__dirname, './src/services/selectors')
+      src: path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, '')
     }
   },
   output: {
