@@ -1,3 +1,4 @@
+import { FC, SyntheticEvent, Dispatch, SetStateAction } from 'react';
 export type TPriceMode = 'дешево' | 'средне' | 'дорого';
 export interface ICategory {
   id: string;
@@ -25,3 +26,10 @@ export interface IAppState {
   liked: string[];
   loading: boolean;
 }
+
+export type PageUIProps = {
+  errorText: string | undefined;
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+  handleSubmit: (e: SyntheticEvent) => void;
+};
