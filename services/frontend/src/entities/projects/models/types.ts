@@ -19,6 +19,7 @@ export type TUser = {
   name: string;
   image?: string;
   liked?: TRestaurant[];
+  recommended?: TRestaurant[];
 };
 
 export interface IAppState {

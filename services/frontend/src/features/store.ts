@@ -9,7 +9,7 @@ import {
 } from 'react-redux';
 
 const rootReducer = combineReducers({
-  ingredients: restaurantsSlice,
+  restaurants: restaurantsSlice,
   user: userSlice
 });
 

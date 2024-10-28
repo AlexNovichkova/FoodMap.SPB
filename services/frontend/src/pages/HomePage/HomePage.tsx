@@ -5,10 +5,10 @@ import { HeadingSection } from './ui/HeadingSection';
 
 export const HomePage = () => {
   return (
-    <>
+    <main>
       <HeadingSection />
       <CategorySection />
       <HighRateSection />
-    </>
+    </main>
   );
 };

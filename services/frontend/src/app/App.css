@@ -45,6 +45,16 @@ body {
   );
 }
 
+.bg_section_profile {
+  background: linear-gradient(
+    360deg,
+    rgba(37, 158, 98, 0.05) 0%,
+    rgba(153, 206, 101, 0.05) 25%,
+    rgba(255, 178, 56, 0.05) 75%,
+    rgba(248, 130, 64, 0.05) 100%
+  );
+}
+
 .login_button:hover .login_icon {
   size: 30px;
 }
@@ -65,4 +75,28 @@ body {
     0px 16px 24px rgba(0, 0, 0, 0.04),
     0px 4px 8px rgba(0, 0, 0, 0.04),
     0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+.bg_profile_img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.bg_profile_img::before {
+  position: absolute;
+  content: '';
+  z-index: -1;
+  top: -10px; /* Увеличьте отступ сверху */
+  right: -10px; /* Увеличьте отступ справа */
+  bottom: -10px; /* Увеличьте отступ снизу */
+  left: -10px; /* Увеличьте отступ слева */
+  background: linear-gradient(
+    to right,
+    rgba(37, 158, 98, 1) 0%,
+    rgba(153, 206, 101, 1) 25%,
+    rgba(255, 178, 56, 1) 75%,
+    rgba(248, 130, 64, 1) 100%
+  );
+  border-radius: 50%; /* Убедитесь, что градиент также круглый */
 }

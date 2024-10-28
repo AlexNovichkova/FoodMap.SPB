@@ -1,5 +1,4 @@
 import { RouterProvider } from 'react-router-dom';
-import { router } from './Router';
 import './App.css';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'src/features/store';
@@ -10,6 +9,7 @@ import { Layout } from './Layout';
 import { Register } from 'src/widgets/Auth/Register';
 import { ResetPassword } from 'src/widgets/Auth/ResetPassword';
 import { ForgotPassword } from 'src/widgets/Auth/ForgotPassword';
+import { Profile } from 'src/pages/Profile';
 
 export const App = () => {
   const location = useLocation();
@@ -44,6 +44,7 @@ export const App = () => {
 
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
         {backgroundLocation && (
           <Routes>

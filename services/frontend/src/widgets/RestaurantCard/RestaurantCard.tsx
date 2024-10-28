@@ -14,7 +14,7 @@ export const RestaurantCard: FC = () => {
 
   return (
     <div className=' flex flex-col gap-4'>
-      <div className=' w-full h-full md:w-56 md:h-56 lg:w-[350px] lg:h-[350px]'>
+      <div className=' w-full h-full md:w-48 md:h-48 lg:w-56 lg:h-56 2xl:w-64 2xl:h-64'>
         <img
           className=' object-cover object-center rounded-[16px] h-full w-full'
           src='https://i.pinimg.com/736x/5d/04/ed/5d04ed8a45ba7d555b9a998daebd2a23.jpg'

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { ArrowIcon } from '../ArrowIcon';
 
 export const MainButton: React.FC<{
   title: string;
-  onClick?: () => void;
+  onClick?: (() => void) | ((e: SyntheticEvent) => void);
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   className: string;
 }> = ({ title, onClick, type, className }) => {
