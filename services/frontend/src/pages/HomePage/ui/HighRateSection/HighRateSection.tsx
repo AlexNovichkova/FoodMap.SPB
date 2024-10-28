@@ -12,7 +12,7 @@ export const HighRateSection = () => {
             Заведения с высоким рейтингом
           </h2>
         </div>
-        <RestaurantsContainer />
+        <RestaurantsContainer shouldFilterByRating={true} />
       </div>
     </section>
   );

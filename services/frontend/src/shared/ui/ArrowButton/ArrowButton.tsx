@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { ArrowIcon } from '../ArrowIcon';
 
 export const ArrowButton: React.FC<{
+  onClick?: (() => void) | ((e: SyntheticEvent) => void);
   className?: string;
-}> = ({ className }) => {
+}> = ({ className, onClick }) => {
   return (
     <button
+      onClick={onClick}
       className={
         className +
         ' text-white group flex items-center size-8 md:size-10 lg:size-14 xl:size-16 justify-center py-[9px] pl-[11px] pr-[10px] rounded-full hover:shadow-green-400'

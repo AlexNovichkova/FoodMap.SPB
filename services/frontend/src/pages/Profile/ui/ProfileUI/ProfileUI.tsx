@@ -39,7 +39,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
           Оцененные заведения
         </h2>
         <div>
-          <RestaurantsContainer />
+          <RestaurantsContainer shouldFilterByRating={false} />
         </div>
       </div>
       <div>
@@ -47,7 +47,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
           Может понравиться
         </h2>
         <div>
-          <RestaurantsContainer />
+          <RestaurantsContainer shouldFilterByRating={false} />
         </div>
       </div>
 

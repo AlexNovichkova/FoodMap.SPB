@@ -1,14 +1,15 @@
 import { FC, SyntheticEvent, Dispatch, SetStateAction } from 'react';
 export type TPriceMode = 'дешево' | 'средне' | 'дорого';
 export interface ICategory {
-  id: string;
+  id: number;
   name: string;
 }
 export type TRestaurant = {
-  id: string;
+  id: number;
   name: string;
+  address: string;
   category: ICategory[];
-  rating?: number;
+  rating: number;
   image: string;
   price?: TPriceMode;
   description?: string;
