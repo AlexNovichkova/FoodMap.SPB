@@ -11,7 +11,7 @@ export type TRestaurant = {
   category: ICategory[];
   rating: number;
   image: string;
-  price?: TPriceMode;
+  price?: string;
   description?: string;
 };
 

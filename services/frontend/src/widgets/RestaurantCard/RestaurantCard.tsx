@@ -17,7 +17,7 @@ export const RestaurantCard: FC<TRestaurant> = ({
   rating,
   address
 }) => (
-  <div className=' flex flex-col gap-4'>
+  <div className=' flex flex-col  gap-4 md:w-48 lg:w-56 2xl:w-64'>
     <div className=' w-full h-full md:w-48 md:h-48 lg:w-56 lg:h-56 2xl:w-64 2xl:h-64 '>
       <img
         className=' object-cover object-center rounded-[16px] h-full w-full'
@@ -25,13 +25,13 @@ export const RestaurantCard: FC<TRestaurant> = ({
         alt={name}
       />
     </div>
-    <div className=' flex flex-col gap-2'>
+    <div className=' flex flex-col'>
       <span className=' text-black-600 text-left font-bold text-base md:text-lg lg:text-xl xl:text-2xl break-words'>
         {name}
       </span>
-      <div className=' text-orange-400 flex flex-row gap-2 items-center '>
+      <div className=' text-orange-400 flex flex-row gap-2 items-center h-20'>
         <LocationIcon className='size-6' />
-        <span className=' font-bold text-lg text-left md:text-xl lg:text-2xl xl:text-3xl italic font-caveat break-words'>
+        <span className=' font-bold text-base text-left md:text-lg lg:text-xl xl:text-2xl italic font-caveat break-words'>
           {address}
         </span>
       </div>
@@ -41,8 +41,8 @@ export const RestaurantCard: FC<TRestaurant> = ({
           {rating}
         </span>
       </div>
-      <Link to={`/restaurants/${id}`}>
-        <MainButton className='w-full' title='Перейти' />
+      <Link to={`/restaurants/${id}`} className={`outline-none`}>
+        <MainButton className='w-full mt-2' title='Перейти' />
       </Link>
     </div>
   </div>

@@ -141,3 +141,126 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.card__icon-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  min-height: 38px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  outline: 2px solid;
+  outline-color: transparent;
+  transition: outline-color 0.3s ease;
+  outline-offset: -2px;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  outline-color: rgb(27, 117, 71);
+  outline: 2px solid;
+  outline-offset: -2px;
+}
+
+.heart_circuit {
+  fill: rgb(27, 117, 71);
+  transition: fill 0.1s linear;
+}
+
+.heart_filling {
+  fill: rgb(27, 117, 71);
+  opacity: 0%;
+  transition: opacity 0.3s linear;
+}
+
+.heart_core {
+  fill: rgb(27, 117, 71);
+  opacity: 0%;
+  transition: opacity 0.3s linear 0.03s;
+}
+
+.heart_dots {
+  fill: #ff0000;
+  opacity: 0%;
+}
+
+.like-icon:hover .heart_core {
+  opacity: 100%;
+  transition: opacity 0.3s linear;
+}
+
+.like-icon:hover .heart_filling {
+  opacity: 100%;
+  transition: opacity 0.3s linear 0.05s;
+}
+
+.like-icon:active .heart_core {
+  fill: #ff0000;
+  opacity: 100%;
+  transition-delay: 0.03s;
+}
+
+.like-icon:active .heart_filling {
+  fill: #ff0000;
+  opacity: 100%;
+}
+
+.like-icon.is-liked .heart_filling {
+  fill: #ff0000;
+  opacity: 100%;
+}
+
+.like-icon.is-liked .heart_core {
+  fill: #ff0000;
+  opacity: 100%;
+}
+
+.like-icon.is-liked .heart_circuit {
+  fill: #ff0000;
+  transition: fill 0.3s linear 0.06s;
+}
+
+@keyframes heart {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.5);
+  }
+}
+
+@keyframes dots {
+  from {
+    opacity: 0%;
+  }
+
+  to {
+    opacity: 100%;
+  }
+}
+
+.like-icon.is-liked .heart {
+  animation-name: heart;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-direction: reverse;
+  animation-timing-function: ease-in;
+  animation-delay: 0.1s;
+  transform-origin: center;
+}
+
+.like-icon.is-liked .heart_dots {
+  animation-name: dots;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+  animation-direction: reverse;
+  animation-timing-function: ease-in;
+  animation-delay: 0.3s;
+  transform-origin: center;
+}

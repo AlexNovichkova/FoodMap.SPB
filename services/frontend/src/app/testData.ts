@@ -5,7 +5,7 @@ export const testRestaurants = [
     category: [{ id: '1', name: 'Русская' }],
     rating: 4.5,
     address: 'ул. Тверская, 15',
-    image: 'https://via.placeholder.com/150',
+    image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'дешево',
     description:
       'Авторская русская кухня с использованием натуральных продуктов.'
@@ -13,10 +13,13 @@ export const testRestaurants = [
   {
     id: 2,
     name: 'Царская охота',
-    category: [{ id: '1', name: 'Русская' }],
+    category: [
+      { id: '1', name: 'Русская' },
+      { id: '2', name: 'Шашлык' }
+    ],
     rating: 4.0,
     address: 'пр. Невский, 100',
-    image: 'https://via.placeholder.com/150',
+    image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'дорого',
     description: 'Традиционные блюда русской кухни в уютной обстановке.'
   },
@@ -38,7 +41,7 @@ export const testRestaurants = [
     category: [{ id: '1', name: 'Русская' }],
     rating: 4.8,
     address: 'ул. Баумана, 50',
-    image: 'https://via.placeholder.com/150',
+    image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'средне',
     description: 'Изысканная русская кухня в современном исполнении.'
   },
@@ -48,7 +51,7 @@ export const testRestaurants = [
     category: [{ id: '1', name: 'Русская' }],
     rating: 4.8,
     address: 'ул. Вайнера, 15',
-    image: 'https://via.placeholder.com/150',
+    image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'средне',
     description: 'Здесь готовят по домашним рецептам с душой.'
   },
@@ -58,7 +61,7 @@ export const testRestaurants = [
     category: [{ id: '1', name: 'Русская' }],
     rating: 4.3,
     address: 'ул. Большая Садовая, 30',
-    image: 'https://via.placeholder.com/150',
+    image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'дешево',
     description: 'Здесь вы сможете попробовать пельмени ручной работы.'
   },
@@ -68,7 +71,7 @@ export const testRestaurants = [
     category: [{ id: '1', name: 'Русская' }],
     rating: 4.6,
     address: 'ул. Красноармейская, 10',
-    image: 'https://via.placeholder.com/150',
+    image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'дорого',
     description: 'Теплые и уютные блюда из детства.'
   },
@@ -78,7 +81,7 @@ export const testRestaurants = [
     category: [{ id: '1', name: 'Русская' }],
     rating: 4.7,
     address: 'ул. 50 лет СССР, 12',
-    image: 'https://via.placeholder.com/150',
+    image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'дешево',
     description: 'Классические рецепты в интерьере в стиле русской деревни.'
   },
@@ -88,7 +91,7 @@ export const testRestaurants = [
     category: [{ id: '1', name: 'Русская' }],
     rating: 4.9,
     address: 'ул. Плехановская, 5',
-    image: 'https://via.placeholder.com/150',
+    image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'дорого',
     description: 'Уникальные блюда и стилизованная атмосфера.'
   },
@@ -98,7 +101,7 @@ export const testRestaurants = [
     category: [{ id: '1', name: 'Русская' }],
     rating: 4.4,
     address: 'ул. Пушкина, 28',
-    image: 'https://via.placeholder.com/150',
+    image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'дорого',
     description: 'Блюда домашней кухни и старинные рецепты.'
   }
@@ -109,6 +112,7 @@ export const testUsers = [
     email: 'user1@example.com',
     name: 'Alice Johnson',
     image: 'https://example.com/images/alice.jpg',
+    password: '1234',
     liked: [],
     recommended: []
   },

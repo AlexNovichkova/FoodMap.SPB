@@ -51,7 +51,7 @@ export const LoginUI: FC<LoginUIProps> = ({
     >
       Вы - новый пользователь?
       <Link
-        to='/:register'
+        to='/register'
         className={`pl-2 text-accent_green outline-none font-medium focus:text-green-400 focus:border-b hover:text-green-400 hover:border-b`}
       >
         Зарегистрироваться

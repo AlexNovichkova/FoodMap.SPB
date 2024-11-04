@@ -29,7 +29,7 @@ export const ProtectedRoute = (props: ProtectedRouteProps) => {
   }
 
   if (!props.onlyUnAuth && !isAuthenticated) {
-    return <Navigate replace to='/:login' state={{ from: location }} />;
+    return <Navigate replace to='/login' state={{ from: location }} />;
   }
 
   if (props.onlyUnAuth && isAuthenticated) {

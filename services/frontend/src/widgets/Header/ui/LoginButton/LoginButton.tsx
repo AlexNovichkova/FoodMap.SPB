@@ -13,7 +13,7 @@ export const LoginButton: React.FC<{
 
   const openLoginModal = () => {
     const { pathname, search } = location; // Извлекаем только нужные данные
-    navigate('/:login', { state: { background: { pathname, search } } });
+    navigate('/login', { state: { background: { pathname, search } } });
   };
 
   return (

@@ -17,17 +17,18 @@ export const PersonContainer: FC<TUser> = ({
           <img
             className='min-h-full object-cover object-center'
             src='https://i.pinimg.com/736x/72/7b/d2/727bd2b7be9569cd4a920fb061579cef.jpg'
+            /*src={image}*/
           />
         </div>
       </div>
       <div className=' max-w-64 md:max-w-80 lg:max-w-[600px]' id='user-name'>
         <span className='text-lg font-medium text-black-600  md:text-xl lg:text-2xl xl:text-3xl break-words'>
-          Райан Гослинг
+          Райан Гослинг {/*name*/}
         </span>
       </div>
       <div className='max-w-64 md:max-w-80 lg:max-w-[600px]' id='user-email'>
         <span className='text-base font-medium text-black-600  md:text-lg lg:text-xl xl:text-2xl break-words'>
-          lubluguapppppppppppppppp@gmail.com
+          lubluguapppppppppppppppp@gmail.com {/*email*/}
         </span>
       </div>
     </div>

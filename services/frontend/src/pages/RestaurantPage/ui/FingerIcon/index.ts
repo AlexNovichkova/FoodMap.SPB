@@ -1,0 +1,1 @@
+export { FingerIcon } from './FingerIcon';

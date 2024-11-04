@@ -40,8 +40,18 @@ export const Header = () => {
             </div>
           </Link>
         </div>
-        <div className='hidden md:flex'>
-          <LoginButton className=' text-accent_green ' title='Войти' />
+        <div className='hidden md:flex md:items-center md:gap-8'>
+          <Link to={`/`}>
+            <span className='text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl outline-none hover:border-b hover:border-b-accent_green'>
+              Главная
+            </span>
+          </Link>
+          <Link to={`/restaurants`}>
+            <span className='text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl outline-none hover:border-b hover:border-b-accent_green'>
+              Все заведения
+            </span>
+          </Link>
+          <LoginButton className=' text-accent_green  ' title='Войти' />
         </div>
         <div
           className={` mr-5 md:hidden block cursor-pointer `}
@@ -56,9 +66,19 @@ export const Header = () => {
           )}
         </div>
         <div
-          className={` absolute z-30 top-14 md:hidden bg-white transition-all duration-300 overflow-hidden w-full flex flex-col items-center justify-around
+          className={` absolute z-30 top-14 md:hidden bg-white transition-all duration-300 overflow-hidden w-full flex flex-col items-center justify-center gap-6
            h-0 ${isMenuOpen && 'h-52'}`}
         >
+          <Link to={`/`} className={`outline-none w-fit`}>
+            <span className='text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl outline-none hover:border-b hover:border-b-accent_green '>
+              Главная
+            </span>
+          </Link>
+          <Link to={`/restaurants`} className={`outline-none w-fit`}>
+            <span className='text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl outline-none hover:border-b hover:border-b-accent_green'>
+              Все заведения
+            </span>
+          </Link>
           <LoginButton className=' text-accent_green w-[80%]' title='Войти' />
         </div>
       </div>

@@ -16,6 +16,7 @@ import { getUser } from 'src/features/slices/userSlice';
 import { fetchRestaurants } from 'src/features/slices/restaurantsSlice';
 import { RestaurantPage } from 'src/pages/RestaurantPage';
 import { testRestaurants } from './testData';
+import { FindRestaurantPage } from 'src/pages/FindReastaurantPage';
 
 export const App = () => {
   const location = useLocation();
@@ -31,6 +32,7 @@ export const App = () => {
       type: 'restaurants/getAllRestaurants/fulfilled',
       payload: testRestaurants
     });
+
     dispatch(getUser());
   }, [dispatch]);
 
@@ -42,8 +44,9 @@ export const App = () => {
       <Layout>
         <Routes location={backgroundLocation || location}>
           <Route path='/' element={<HomePage />} />
+          <Route path='/restaurants' element={<FindRestaurantPage />} />
           <Route
-            path='/:login'
+            path='/login'
             element={
               <ProtectedRoute onlyUnAuth>
                 <Modal title={'Войти'} onClose={onClose}>
@@ -53,7 +56,7 @@ export const App = () => {
             }
           />
           <Route
-            path='/:register'
+            path='/register'
             element={
               <ProtectedRoute onlyUnAuth>
                 <Modal title={'Зарегистрироваться'} onClose={onClose}>
@@ -94,7 +97,7 @@ export const App = () => {
         {backgroundLocation && (
           <Routes>
             <Route
-              path='/:login'
+              path='/login'
               element={
                 <ProtectedRoute onlyUnAuth>
                   <Modal title={'Войти'} onClose={onClose}>
@@ -104,7 +107,7 @@ export const App = () => {
               }
             />
             <Route
-              path='/:register'
+              path='/register'
               element={
                 <ProtectedRoute onlyUnAuth>
                   <Modal title={'Зарегистрироваться'} onClose={onClose}>

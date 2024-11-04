@@ -34,7 +34,6 @@ export const RestaurantsContainer: FC<{
     // Устанавливаем начальное значение
     updateItemsPerPage();
 
-    // Добавляем обработчик события изменения размера окна
     window.addEventListener('resize', updateItemsPerPage);
 
     // Убираем обработчик при размонтировании
@@ -42,6 +41,7 @@ export const RestaurantsContainer: FC<{
       window.removeEventListener('resize', updateItemsPerPage);
     };
   }, []);
+
   useEffect(() => {
     // Вместо вызова API, используем тестовые данные
     dispatch({
@@ -49,6 +49,7 @@ export const RestaurantsContainer: FC<{
       payload: testRestaurants
     });
   }, [dispatch]);
+
   const filteredRestaurants = shouldFilterByRating
     ? restaurants.filter((restaurant) => restaurant.rating > 4.7)
     : restaurants;
@@ -56,18 +57,17 @@ export const RestaurantsContainer: FC<{
   const handleNext = () => {
     if (currentIndex + itemsPerPage < filteredRestaurants.length) {
       setCurrentIndex(currentIndex + itemsPerPage);
-    } else {
-      setCurrentIndex(currentIndex); // Если нельзя пролистнуть
     }
   };
 
   const handlePrev = () => {
     if (currentIndex - itemsPerPage >= 0) {
       setCurrentIndex(currentIndex - itemsPerPage);
-    } else {
-      setCurrentIndex(currentIndex); // Если нельзя пролистнуть
     }
   };
+
+  const canNext = currentIndex + itemsPerPage < filteredRestaurants.length;
+  const canPrev = currentIndex > 0;
 
   if (filteredRestaurants.length === 0) {
     return <div>No restaurants found.</div>; // Ошибка или пустой список
@@ -75,16 +75,20 @@ export const RestaurantsContainer: FC<{
 
   return (
     <>
-      <div className=' flex flex-row justify-center md:justify-between w-full'>
-        <div className=' hidden flex-row gap-6 items-center md:flex'>
+      <div className='flex flex-row justify-center md:justify-between w-full'>
+        <div className='hidden flex-row gap-6 items-center md:flex'>
           <ArrowButton
-            className=' bg-accent_green shadow-orange-400 rotate-180 '
+            className={
+              canPrev
+                ? 'bg-accent_green shadow-orange-400 rotate-180'
+                : 'bg-black-500 opacity-50 cursor-not-allowed rotate-180 '
+            }
             onClick={handlePrev}
+            disabled={!canPrev} // Отключаем кнопку, если нельзя перейти назад
           />
         </div>
-        <div className='mb-5 mt-16 md:mb-16 flex flex-col  gap-10 md:flex-row'>
+        <div className='mb-5 mt-16 md:mb-16 flex flex-col gap-10 md:flex-row'>
           {filteredRestaurants
-            .slice(0, 20)
             .slice(currentIndex, currentIndex + itemsPerPage)
             .map((restaurant) => (
               <RestaurantCard
@@ -98,24 +102,39 @@ export const RestaurantsContainer: FC<{
               />
             ))}
         </div>
-        <div className=' hidden flex-row gap-6 items-center md:flex'>
+        <div className='hidden flex-row gap-6 items-center md:flex'>
           <ArrowButton
-            className=' bg-accent_green shadow-orange-400'
+            className={
+              canNext
+                ? 'bg-accent_green shadow-orange-400'
+                : 'bg-black-500 opacity-50 cursor-not-allowed animate-none'
+            }
             onClick={handleNext}
+            disabled={!canNext} // Отключаем кнопку, если нельзя перейти вперед
           />
         </div>
       </div>
-      <div className='mb-16 flex justify-between md:hidden '>
-        <div className=' md:hidden flex-row gap-6 items-center flex'>
+      <div className='mb-16 flex justify-between md:hidden'>
+        <div className='md:hidden flex-row gap-6 items-center flex'>
           <ArrowButton
-            className=' bg-accent_green shadow-orange-400 rotate-180'
+            className={
+              canPrev
+                ? 'bg-accent_green shadow-orange-400 rotate-180'
+                : 'bg-black-500 opacity-50 cursor-not-allowed rotate-180 animate-none'
+            }
             onClick={handlePrev}
+            disabled={!canPrev} // Отключаем кнопку, если нельзя перейти назад
           />
         </div>
-        <div className=' md:hidden flex-row gap-6 items-center flex'>
+        <div className='md:hidden flex-row gap-6 items-center flex'>
           <ArrowButton
-            className=' bg-accent_green shadow-orange-400'
+            className={
+              canNext
+                ? 'bg-accent_green shadow-orange-400'
+                : 'bg-black-500 opacity-50 cursor-not-allowed animate-none'
+            }
             onClick={handleNext}
+            disabled={!canNext} // Отключаем кнопку, если нельзя перейти вперед
           />
         </div>
       </div>

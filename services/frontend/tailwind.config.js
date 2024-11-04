@@ -29,7 +29,8 @@ module.exports = {
     animation: {
       textForwards: 'textMoving 0.3s linear normal forwards',
       textBackwards: 'textReturning 0.3s linear forwards',
-      arrowForwards: 'arrowMoving 0.5s linear infinite'
+      arrowForwards: 'arrowMoving 0.5s linear infinite',
+      none: 'none;'
     },
     colors: {
       orange: {

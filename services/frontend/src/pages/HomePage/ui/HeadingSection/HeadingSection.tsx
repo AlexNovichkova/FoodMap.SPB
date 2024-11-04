@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { MainButton } from 'src/shared/ui/MainButton';
 
 export const HeadingSection = () => {
@@ -12,7 +13,9 @@ export const HeadingSection = () => {
           <p className=' header_paragraph text-black-600 font-caveat text-xl lg:text-4xl font-normal leading-none'>
             В несколько кликов найди заведение, которое придется тебе по душе
           </p>
-          <MainButton title=' Найти заведение' className=' md:w-fit' />
+          <Link to={'/restaurants'} className={`outline-none w-fit`}>
+            <MainButton title=' Найти заведение' className=' md:w-fit' />
+          </Link>
         </div>
         <div className=' z-10 max-w-80  top-[100%] md:top-[60%] md:max-w-md lg:max-w-lg lg:max-h-full xl:max-w-xl absolute right-0'>
           <img
