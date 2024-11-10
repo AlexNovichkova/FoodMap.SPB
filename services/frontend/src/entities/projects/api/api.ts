@@ -61,6 +61,9 @@ export type TRegisterData = {
   email: string;
   name: string;
   password: string;
+  image?: string;
+  liked?: TRestaurant[];
+  recommended?: TRestaurant[];
 };
 
 type TAuthResponse = TServerResponse<{

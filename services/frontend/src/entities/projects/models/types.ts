@@ -3,6 +3,7 @@ export type TPriceMode = 'дешево' | 'средне' | 'дорого';
 export interface ICategory {
   id: number;
   name: string;
+  image?: string;
 }
 export type TRestaurant = {
   id: number;

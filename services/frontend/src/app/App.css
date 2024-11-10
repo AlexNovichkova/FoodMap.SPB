@@ -41,6 +41,7 @@ body {
     180deg,
     rgba(255, 178, 56, 0.22) 0%,
     rgba(255, 178, 56, 0.22) 20%,
+    rgba(255, 178, 56, 0.15) 50%,
     rgba(253, 237, 202, 0) 100%
   );
 }
@@ -263,4 +264,17 @@ body {
   animation-timing-function: ease-in;
   animation-delay: 0.3s;
   transform-origin: center;
+}
+
+.input_error {
+  border-color: rgba(248, 130, 64, 1) !important;
+  color: rgba(248, 130, 64, 1) !important;
+}
+
+.error {
+  margin-top: 8px;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--colors-interface-orange);
 }

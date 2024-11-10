@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from 'src/features/store';
 import { ArrowButton } from 'src/shared/ui/ArrowButton';
 import { RestaurantCard } from 'src/widgets/RestaurantCard';
 import { RestaurantsContainer } from 'src/widgets/RestaurantsContainer';
 
 export const HighRateSection = () => {
+  const restaurants = useSelector((state) => state.restaurants.restaurants);
   return (
     <section className=' '>
       <div className=' pt-20 mx-5 md:m-auto md:w-[90%]'>
@@ -12,7 +14,10 @@ export const HighRateSection = () => {
             Заведения с высоким рейтингом
           </h2>
         </div>
-        <RestaurantsContainer shouldFilterByRating={true} />
+        <RestaurantsContainer
+          restaurants={restaurants}
+          shouldFilterByRating={true}
+        />
       </div>
     </section>
   );

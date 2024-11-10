@@ -74,16 +74,16 @@ export const FindRestaurantPage = () => {
   return (
     <main className='bg_section_profile'>
       <section className='w-[95%] md:w-[90%] m-auto py-9 md:p-9'>
-        <div className='flex flex-col p-4 mb-6 bg-white shadow-md md:p-6 md:mb-8 rounded-[8px] m-auto gap-3'>
+        <div className='flex flex-col p-4 mb-6 bg-white shadow-md md:p-6 2xl:p-10 md:mb-8 rounded-[8px] m-auto gap-3 xl:gap-0'>
           <h3 className='text-black-600 self-start font-bold text-base md:text-lg lg:text-xl xl:text-2xl break-words'>
             Фильтры
           </h3>
-          <div className='flex flex-col md:flex-row gap-6 xl:gap-7'>
-            <div className=''>
+          <div className='flex flex-wrap justify-between gap-6 '>
+            <div className=' xl:max-w-72 2xl:max-w-lg xl:w-auto'>
               <h3 className='text-black-500 mb-2 font-semibold text-base lg:text-lg xl:text-xl 2xl:text-2xl break-words'>
                 Выберите тип кухни:
               </h3>
-              <div className=' flex flex-wrap gap-2 content-center items-start'>
+              <div className=' flex flex-wrap gap-[10px] content-center items-start'>
                 {uniqueCategories.map((category) => (
                   <label
                     className='flex justify-center items-center text-black-600 gap-[6px] lowercase text-base lg:text-lg xl:text-xl'
@@ -99,7 +99,7 @@ export const FindRestaurantPage = () => {
                 ))}
               </div>
             </div>
-            <div>
+            <div className='max-w-96 2xl:w-auto'>
               <h3 className='text-black-500 mb-2 font-semibold text-base lg:text-lg xl:text-xl 2xl:text-2xl break-words'>
                 Выберите ценовые категории:
               </h3>
@@ -119,7 +119,7 @@ export const FindRestaurantPage = () => {
                 ))}
               </div>
             </div>
-            <div>
+            <div className='max-w-96 2xl:w-auto'>
               <h3 className='text-black-500 mb-2 font-semibold text-base lg:text-lg xl:text-xl 2xl:text-2xl break-words'>
                 Сортировка по рейтингу:
               </h3>

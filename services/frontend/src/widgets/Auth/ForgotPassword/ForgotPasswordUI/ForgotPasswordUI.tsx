@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { PageUIProps } from 'src/entities/projects/models/types';
+import { Input } from 'src/shared/ui/Input';
 import { MainButton } from 'src/shared/ui/MainButton';
 
 export const ForgotPasswordUI: FC<PageUIProps> = ({
@@ -16,13 +17,15 @@ export const ForgotPasswordUI: FC<PageUIProps> = ({
       </h3>
       <form className={`pb-15 `} name='login' onSubmit={handleSubmit}>
         <div className='pb-6'>
-          <input
+          <Input
             className='w-full  md:min-w-[40%] outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
             type='email'
             placeholder='Укажите e-mail'
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             name='email'
+            error={false}
+            errorText=''
           />
         </div>
         <div className=' flex items-center min-h-16'>

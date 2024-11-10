@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'src/features/store';
+import React, { useEffect, useState } from 'react';
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams
+} from 'react-router-dom';
+import { useDispatch, useSelector } from 'src/features/store';
 import { LocationIcon } from 'src/widgets/RestaurantCard/ui/LocationIcon';
 import { StarIcon } from 'src/widgets/RestaurantCard/ui/StarIcon';
 import { FingerIcon } from './ui/FingerIcon';
 import { HeartIcon } from './ui/HeartIcon';
+import {
+  authenticatedSelector,
+  checkUserAuth
+} from 'src/features/slices/userSlice';
+import { updateUserApi } from 'src/entities/projects/api/api';
 export const RestaurantPage = () => {
   const { id } = useParams(); // Получаем id из URL
+  const location = useLocation(); // Для передачи состояния при навигации
+  const dispatch = useDispatch(); // Для dispatch действий
+  const navigate = useNavigate(); // Хук для программной навигации
   const restaurants = useSelector((state) => state.restaurants.restaurants);
+  const user = useSelector((state) => state.user); // Получаем пользователя из состояния
+  const isAuthenticated = useSelector(authenticatedSelector); // Проверка авторизации
+  useEffect(() => {
+    dispatch(checkUserAuth());
+  }, [dispatch]);
   const restaurant = restaurants.find(
     (restaurant) => restaurant.id === Number(id)
   ); // Находим ресторан по id
@@ -16,11 +34,29 @@ export const RestaurantPage = () => {
     return <div>Ресторан не найден.</div>;
   }
 
-  const [isLiked, setIsLiked] = useState(false); // Состояние для отслеживания "лайка"
-  const toggleIsLiked = () => {
-    setIsLiked((prev) => !prev); // Переключаем состояние "лайка"
-  };
+  // Проверяем, лайкнут ли ресторан, с установкой значения по умолчанию
+  const likedRestaurants = user.user.liked || [];
+  const [isLiked, setIsLiked] = useState(
+    likedRestaurants.some((r) => r.id === restaurant.id)
+  ); // Проверяем, лайкнут ли ресторан
 
+  const toggleIsLiked = () => {
+    if (!isAuthenticated) {
+      // Перенаправляем на страницу входа
+      const { pathname, search } = location; // Извлекаем только нужные данные
+      navigate('/login', { state: { background: { pathname, search } } });
+      return; // Выходим из функции
+    }
+
+    const updatedLiked = isLiked
+      ? likedRestaurants.filter((r) => r.id !== restaurant.id) // Убираем лайк
+      : [...likedRestaurants, restaurant]; // Добавляем лайк
+
+    setIsLiked(!isLiked); // Переключаем состояние "лайка"
+
+    // Обновляем пользователя через API
+    updateUserApi({ liked: updatedLiked });
+  };
   return (
     <section className='bg_restaurant'>
       <div className='pt-20 pb-16 mx-5 md:m-auto md:w-[90%]'>
@@ -37,22 +73,28 @@ export const RestaurantPage = () => {
           </div>
           <div className=' flex flex-col gap-3 md:max-w-[50%] xl:max-w-[60%]'>
             <div className=' text-black-600 text-left flex flex-row gap-2 items-center'>
-              <span className=' font-medium text-base md:text-xl lg:text-2xl xl:text-3xl italic break-words'>
+              <span className=' font-medium text-base md:text-xl lg:text-2xl xl:text-3xl break-words'>
                 {restaurant.description}
               </span>
             </div>
             <div className=' text-green-600 text-left flex flex-row gap-2 items-center'>
-              <span className=' flex gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl break-words items-center'>
+              <span className=' flex gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl break-words  items-start'>
                 Кухня:
-                <span className='font-medium text-black-600 italic font-caveat text-xl md:text-2xl lg:text-3xl xl:text-4xl'>
-                  армянская, домашняя
+                <span className='flex flex-wrap gap-1'>
+                  {restaurant.category.map((category, index) => (
+                    <span className='font-medium text-black-600 font-caveat break-words text-xl md:text-2xl lg:text-3xl xl:text-4xl lowercase leading-none md:leading-none'>
+                      {category.name}
+                      {index < restaurant.category.length - 1 && ','}{' '}
+                      {/* Добавляем запятую, если это не последний элемент */}
+                    </span>
+                  ))}
                 </span>
               </span>
             </div>
             <div className=' text-accent_orange text-left flex flex-row gap-2 items-center'>
               <span className='flex gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl break-words items-center'>
                 Ценовой сегмент:
-                <span className='font-medium text-black-600 italic font-caveat text-xl md:text-2xl lg:text-3xl xl:text-4xl'>
+                <span className='font-medium text-black-600 font-caveat text-xl md:text-2xl lg:text-3xl xl:text-4xl md:leading-none'>
                   {restaurant.price}
                 </span>
               </span>

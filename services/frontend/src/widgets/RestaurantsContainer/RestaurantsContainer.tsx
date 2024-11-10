@@ -7,12 +7,14 @@ import {
   selectRestaurants
 } from 'src/features/slices/restaurantsSlice';
 import { testRestaurants } from 'src/app/testData';
+import { TRestaurant } from 'src/entities/projects/models/types';
+import { Link } from 'react-router-dom';
 
 export const RestaurantsContainer: FC<{
   shouldFilterByRating: boolean;
-}> = ({ shouldFilterByRating }) => {
+  restaurants: TRestaurant[];
+}> = ({ shouldFilterByRating, restaurants }) => {
   const dispatch = useDispatch();
-  const restaurants = useSelector((state) => state.restaurants.restaurants);
   const isLoading = useSelector(selectIsLoading);
   const [currentIndex, setCurrentIndex] = useState(0); // Индекс текущей карточки
   const [itemsPerPage, setItemsPerPage] = useState(1); // Начальное значение
@@ -53,6 +55,7 @@ export const RestaurantsContainer: FC<{
   const filteredRestaurants = shouldFilterByRating
     ? restaurants.filter((restaurant) => restaurant.rating > 4.7)
     : restaurants;
+  // Определяем, какие рестораны показывать
 
   const handleNext = () => {
     if (currentIndex + itemsPerPage < filteredRestaurants.length) {
@@ -70,7 +73,16 @@ export const RestaurantsContainer: FC<{
   const canPrev = currentIndex > 0;
 
   if (filteredRestaurants.length === 0) {
-    return <div>No restaurants found.</div>; // Ошибка или пустой список
+    return (
+      <div className='flex items-center justify-center cursor-pointer gap-5 text-black-500 py-8 text-lg lg:text-xl xl:text-2xl xl:py-10'>
+        <Link
+          to={`/restaurants`}
+          className='hover:text-green-600 hover:border-b-green-600 hover:border-b '
+        >
+          Ничего не найдено <span>&#9785;</span>
+        </Link>
+      </div>
+    );
   }
 
   return (

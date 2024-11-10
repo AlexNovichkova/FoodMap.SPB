@@ -29,7 +29,8 @@ const initialState: UserState = {
   isAuthenticated: false,
   user: {
     email: '',
-    name: ' '
+    name: ' ',
+    image: ' '
   },
   isLoading: false,
   error: null
@@ -75,7 +76,12 @@ export const getUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setTestUser(state, action) {
+      state.user = action.payload; // Устанавливаем тестового пользователя
+      state.isAuthenticated = true; // Устанавливаем флаг аутентификации
+    }
+  },
   selectors: {
     selectUser: (state) => state.user,
     authenticatedSelector: (state) => state.isAuthenticated
@@ -175,5 +181,5 @@ const userSlice = createSlice({
 });
 
 export const { selectUser, authenticatedSelector } = userSlice.selectors;
-
+export const { setTestUser } = userSlice.actions;
 export default userSlice.reducer;

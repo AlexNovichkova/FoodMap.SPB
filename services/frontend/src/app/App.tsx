@@ -12,10 +12,10 @@ import { ForgotPassword } from 'src/widgets/Auth/ForgotPassword';
 import { Profile } from 'src/pages/Profile';
 import { ProtectedRoute } from './ProtectedRoute';
 import { useEffect } from 'react';
-import { getUser } from 'src/features/slices/userSlice';
+import { getUser, setTestUser } from 'src/features/slices/userSlice';
 import { fetchRestaurants } from 'src/features/slices/restaurantsSlice';
 import { RestaurantPage } from 'src/pages/RestaurantPage';
-import { testRestaurants } from './testData';
+import { testRestaurants, testUsers } from './testData';
 import { FindRestaurantPage } from 'src/pages/FindReastaurantPage';
 
 export const App = () => {
@@ -33,7 +33,12 @@ export const App = () => {
       payload: testRestaurants
     });
 
-    dispatch(getUser());
+    /*dispatch(getUser());*/
+    dispatch(setTestUser(testUsers[0]));
+    /*dispatch({
+      type: 'user/getUser/fulfilled',
+      payload: testUsers
+    });*/
   }, [dispatch]);
 
   const onClose = () => {
@@ -59,9 +64,7 @@ export const App = () => {
             path='/register'
             element={
               <ProtectedRoute onlyUnAuth>
-                <Modal title={'Зарегистрироваться'} onClose={onClose}>
-                  <Register />
-                </Modal>
+                <Register />
               </ProtectedRoute>
             }
           />
@@ -82,15 +85,9 @@ export const App = () => {
               </ProtectedRoute>
             }
           />
+
           <Route path='/profile'>
-            <Route
-              index
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
+            <Route index element={<Profile />} />
           </Route>
           <Route path='/restaurants/:id' element={<RestaurantPage />} />
         </Routes>
@@ -102,16 +99,6 @@ export const App = () => {
                 <ProtectedRoute onlyUnAuth>
                   <Modal title={'Войти'} onClose={onClose}>
                     <Login />
-                  </Modal>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='/register'
-              element={
-                <ProtectedRoute onlyUnAuth>
-                  <Modal title={'Зарегистрироваться'} onClose={onClose}>
-                    <Register />
                   </Modal>
                 </ProtectedRoute>
               }
