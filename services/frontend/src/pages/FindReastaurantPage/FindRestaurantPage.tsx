@@ -135,7 +135,7 @@ export const FindRestaurantPage = () => {
           </div>
         </div>
         <div className='flex justify-center items-center mt-8 mb-8'>
-          <div className='flex flex-wrap gap-6 m-auto '>
+          <div className='flex flex-wrap gap-8 md:gap-6 m-auto justify-center md:justify-normal '>
             {sortedRestaurants.map((restaurant) => (
               <RestaurantCard
                 id={restaurant.id}

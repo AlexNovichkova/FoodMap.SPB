@@ -213,6 +213,50 @@ export const testRestaurants = [
     image: 'https://college.spbstu.ru/userfiles/images/news/scale_1200.jpg',
     price: 'дорого',
     description: 'Блюда домашней кухни и старинные рецепты.'
+  },
+  {
+    id: 11,
+    name: 'Terrassa',
+    category: [testCategorys[2], testCategorys[4]],
+    rating: 4.7,
+    address: ' Санкт-Петербург, Казанская улица, 3',
+    image:
+      'https://avatars.mds.yandex.net/i?id=4e33329a2eada4a2d764261007d1be18_l-6298174-images-thumbs&n=13',
+    price: 'дорого',
+    description: 'Блюда домашней кухни и старинные рецепты.'
+  },
+  {
+    id: 12,
+    name: 'Terrassa',
+    category: [testCategorys[2], testCategorys[4]],
+    rating: 5,
+    address: ' Санкт-Петербург, Казанская улица, 3',
+    image:
+      'https://avatars.mds.yandex.net/i?id=4e33329a2eada4a2d764261007d1be18_l-6298174-images-thumbs&n=13',
+    price: 'дорого',
+    description: 'Блюда домашней кухни и старинные рецепты.'
+  },
+  {
+    id: 13,
+    name: 'Terrassa',
+    category: [testCategorys[2], testCategorys[4]],
+    rating: 5,
+    address: ' Санкт-Петербург, Казанская улица, 3',
+    image:
+      'https://avatars.mds.yandex.net/i?id=4e33329a2eada4a2d764261007d1be18_l-6298174-images-thumbs&n=13',
+    price: 'дорого',
+    description: 'Блюда домашней кухни и старинные рецепты.'
+  },
+  {
+    id: 14,
+    name: 'Terrassa',
+    category: [testCategorys[2], testCategorys[4]],
+    rating: 5,
+    address: ' Санкт-Петербург, Казанская улица, 3',
+    image:
+      'https://avatars.mds.yandex.net/i?id=4e33329a2eada4a2d764261007d1be18_l-6298174-images-thumbs&n=13',
+    price: 'дорого',
+    description: 'Блюда домашней кухни и старинные рецепты.'
   }
 ];
 

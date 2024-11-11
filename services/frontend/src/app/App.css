@@ -28,6 +28,30 @@ body {
   margin: auto;
 }
 
+.circle-orange-background {
+  background-color: #feb239;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  border-radius: 0 0 30% 60%;
+}
+
+.circle-green-background {
+  background: linear-gradient(
+    340deg,
+    rgba(37, 158, 98, 1) 0%,
+    rgba(153, 206, 102, 1) 100%
+  );
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25%;
+  z-index: -1;
+}
+
 .bg_image_meal {
   background: radial-gradient(
     circle at right top,

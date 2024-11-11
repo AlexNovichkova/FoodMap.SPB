@@ -9,6 +9,7 @@ import {
 import { testRestaurants } from 'src/app/testData';
 import { TRestaurant } from 'src/entities/projects/models/types';
 import { Link } from 'react-router-dom';
+import { Preloader } from 'src/app/Preloader';
 
 export const RestaurantsContainer: FC<{
   shouldFilterByRating: boolean;
@@ -27,8 +28,12 @@ export const RestaurantsContainer: FC<{
       setItemsPerPage(2);
     } else if (window.innerWidth < 1400) {
       setItemsPerPage(3);
-    } else {
+    } else if (window.innerWidth < 1900) {
       setItemsPerPage(4);
+    } else if (window.innerWidth < 2300) {
+      setItemsPerPage(5);
+    } else {
+      setItemsPerPage(6);
     }
   };
 
@@ -100,19 +105,23 @@ export const RestaurantsContainer: FC<{
           />
         </div>
         <div className='mb-5 mt-16 md:mb-16 flex flex-col gap-10 md:flex-row'>
-          {filteredRestaurants
-            .slice(currentIndex, currentIndex + itemsPerPage)
-            .map((restaurant) => (
-              <RestaurantCard
-                id={restaurant.id}
-                key={restaurant.id}
-                rating={restaurant.rating}
-                address={restaurant.address}
-                name={restaurant.name}
-                image={restaurant.image}
-                category={restaurant.category}
-              />
-            ))}
+          {isLoading ? ( // Условный рендеринг прелоадера или карты
+            <Preloader />
+          ) : (
+            filteredRestaurants
+              .slice(currentIndex, currentIndex + itemsPerPage)
+              .map((restaurant) => (
+                <RestaurantCard
+                  id={restaurant.id}
+                  key={restaurant.id}
+                  rating={restaurant.rating}
+                  address={restaurant.address}
+                  name={restaurant.name}
+                  image={restaurant.image}
+                  category={restaurant.category}
+                />
+              ))
+          )}
         </div>
         <div className='hidden flex-row gap-6 items-center md:flex'>
           <ArrowButton
@@ -126,7 +135,7 @@ export const RestaurantsContainer: FC<{
           />
         </div>
       </div>
-      <div className='mb-16 flex justify-between md:hidden'>
+      <div className='mb-16 mt-8 flex justify-between md:hidden'>
         <div className='md:hidden flex-row gap-6 items-center flex'>
           <ArrowButton
             className={
@@ -135,7 +144,7 @@ export const RestaurantsContainer: FC<{
                 : 'bg-black-500 opacity-50 cursor-not-allowed rotate-180 animate-none'
             }
             onClick={handlePrev}
-            disabled={!canPrev} // Отключаем кнопку, если нельзя перейти назад
+            disabled={!canPrev}
           />
         </div>
         <div className='md:hidden flex-row gap-6 items-center flex'>
@@ -146,7 +155,7 @@ export const RestaurantsContainer: FC<{
                 : 'bg-black-500 opacity-50 cursor-not-allowed animate-none'
             }
             onClick={handleNext}
-            disabled={!canNext} // Отключаем кнопку, если нельзя перейти вперед
+            disabled={!canNext}
           />
         </div>
       </div>

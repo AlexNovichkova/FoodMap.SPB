@@ -17,8 +17,8 @@ export const RestaurantCard: FC<TRestaurant> = ({
   rating,
   address
 }) => (
-  <div className=' flex flex-col  gap-4 md:w-48 lg:w-56 2xl:w-64'>
-    <div className=' w-full h-full md:w-48 md:h-48 lg:w-56 lg:h-56 2xl:w-64 2xl:h-64 '>
+  <div className=' flex flex-col  gap-4 w-[90%] self-center sm:w-[45%] md:w-48 xl:w-56 2xl:w-64'>
+    <div className=' w-full h-full md:w-48 md:h-48 xl:w-56 xl:h-56 2xl:w-64 2xl:h-64 '>
       <img
         className=' object-cover object-center rounded-[16px] h-full w-full'
         src={image}
