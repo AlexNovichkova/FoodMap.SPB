@@ -3,7 +3,8 @@ import {
   Navigate,
   useLocation,
   useNavigate,
-  useParams
+  useParams,
+  redirect
 } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'src/features/store';
@@ -22,42 +23,31 @@ import {
   fetchRestaurants,
   selectIsLoading
 } from 'src/features/slices/restaurantsSlice';
+import { testRestaurants } from 'src/app/testData';
 
 export const RestaurantPage = () => {
-  const { id } = useParams(); // Получаем id из URL
-  const location = useLocation(); // Для передачи состояния при навигации
-  const dispatch = useDispatch(); // Для dispatch действий
-  const navigate = useNavigate(); // Хук для программной навигации
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const restaurants = useSelector((state) => state.restaurants.restaurants);
   const user = useSelector((state) => state.user); // Получаем пользователя из состояния
   const isAuthenticated = useSelector(authenticatedSelector); // Проверка авторизации
   const isLoading = useSelector(selectIsLoading);
-  useEffect(() => {
-    dispatch(checkUserAuth());
-  }, [dispatch]);
+  const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
 
-  if (isLoading) {
-    return <Preloader />; // Показать прелоадер, пока рестораны загружаются
-  }
+  const { id } = useParams(); // Получаем id из URL
 
   const restaurant = restaurants.find(
     (restaurant) => restaurant.id === Number(id)
-  ); // Находим ресторан по id
+  );
+
+  if (!id) {
+    return <Navigate to='/restaurants' />;
+  }
 
   if (!restaurant) {
     return <div>Ресторан не найден.</div>;
   }
-
-  const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
-
-  useEffect(() => {
-    const getCoordinates = async () => {
-      const coords = await fetchCoordinates(restaurant.address);
-      setCoordinates(coords);
-    };
-
-    getCoordinates();
-  }, [restaurant.address]);
 
   // Проверяем, лайкнут ли ресторан, с установкой значения по умолчанию
   const likedRestaurants = user.user.liked || [];
@@ -82,6 +72,28 @@ export const RestaurantPage = () => {
     // Обновляем пользователя через API
     updateUserApi({ liked: updatedLiked });
   };
+
+  useEffect(() => {
+    dispatch(checkUserAuth());
+    dispatch({
+      type: 'restaurants/getAllRestaurants/fulfilled',
+      payload: testRestaurants
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    const getCoordinates = async () => {
+      const coords = await fetchCoordinates(restaurant.address);
+      setCoordinates(coords);
+    };
+
+    getCoordinates();
+  }, [restaurant.address]);
+
+  if (isLoading) {
+    return <Preloader />; // Показать прелоадер, пока рестораны загружаются
+  }
+
   return (
     <>
       <section className='bg_restaurant'>
@@ -108,7 +120,10 @@ export const RestaurantPage = () => {
                   Кухня:
                   <span className='flex flex-wrap gap-1'>
                     {restaurant.category.map((category, index) => (
-                      <span className='font-medium text-black-600 font-caveat break-words text-xl md:text-2xl lg:text-3xl xl:text-4xl lowercase leading-none md:leading-none'>
+                      <span
+                        key={index}
+                        className='font-medium text-black-600 font-caveat break-words text-xl md:text-2xl lg:text-3xl xl:text-4xl lowercase leading-none md:leading-none'
+                      >
                         {category.name}
                         {index < restaurant.category.length - 1 && ','}{' '}
                       </span>

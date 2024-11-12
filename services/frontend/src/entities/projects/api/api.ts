@@ -175,7 +175,7 @@ export const getRestaurantsApi = () =>
       return Promise.reject(data);
     });
 
-const apiKey = '90b594c5-60ad-4e4f-b665-a25fc23b8193'; // Переместите ваш ключ API сюда
+const apiKey = '90b594c5-60ad-4e4f-b665-a25fc23b8193';
 
 export const fetchCoordinates = async (
   address: string

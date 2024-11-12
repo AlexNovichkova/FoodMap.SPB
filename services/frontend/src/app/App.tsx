@@ -17,6 +17,7 @@ import { fetchRestaurants } from 'src/features/slices/restaurantsSlice';
 import { RestaurantPage } from 'src/pages/RestaurantPage';
 import { testRestaurants, testUsers } from './testData';
 import { FindRestaurantPage } from 'src/pages/FindReastaurantPage';
+import { NotFound404 } from 'src/pages/NotFound404';
 
 export const App = () => {
   const location = useLocation();
@@ -85,7 +86,7 @@ export const App = () => {
               </ProtectedRoute>
             }
           />
-
+          <Route path='*' element={<NotFound404 />} />
           <Route path='/profile'>
             <Route index element={<Profile />} />
           </Route>

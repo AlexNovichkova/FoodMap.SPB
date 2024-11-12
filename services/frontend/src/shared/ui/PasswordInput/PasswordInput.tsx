@@ -10,7 +10,6 @@ interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorText?: string;
 }
 
-// eslint-disable-next-line react/display-name
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   (
     {
