@@ -29,14 +29,16 @@ module.exports = {
     animation: {
       textForwards: 'textMoving 0.3s linear normal forwards',
       textBackwards: 'textReturning 0.3s linear forwards',
-      arrowForwards: 'arrowMoving 0.5s linear infinite'
+      arrowForwards: 'arrowMoving 0.5s linear infinite',
+      none: 'none;'
     },
     colors: {
       orange: {
         400: 'rgb(255, 178, 56)'
       },
       green: {
-        400: 'rgb(153, 206, 101)'
+        400: 'rgb(153, 206, 101)',
+        600: 'rgb(27, 117, 71)'
       },
       transparent: 'rgba(0,0,0,0)',
       white: 'rgb(255, 255, 255)',

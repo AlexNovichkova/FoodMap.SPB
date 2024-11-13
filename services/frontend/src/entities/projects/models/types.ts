@@ -1,15 +1,18 @@
+import { FC, SyntheticEvent, Dispatch, SetStateAction } from 'react';
 export type TPriceMode = 'дешево' | 'средне' | 'дорого';
 export interface ICategory {
-  id: string;
+  id: number;
   name: string;
+  image?: string;
 }
 export type TRestaurant = {
-  id: string;
+  id: number;
   name: string;
+  address: string;
   category: ICategory[];
-  rating?: number;
+  rating: number;
   image: string;
-  price?: TPriceMode;
+  price?: string;
   description?: string;
 };
 
@@ -18,6 +21,7 @@ export type TUser = {
   name: string;
   image?: string;
   liked?: TRestaurant[];
+  recommended?: TRestaurant[];
 };
 
 export interface IAppState {
@@ -25,3 +29,10 @@ export interface IAppState {
   liked: string[];
   loading: boolean;
 }
+
+export type PageUIProps = {
+  errorText: string | undefined;
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+  handleSubmit: (e: SyntheticEvent) => void;
+};

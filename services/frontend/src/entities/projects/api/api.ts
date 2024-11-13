@@ -61,6 +61,9 @@ export type TRegisterData = {
   email: string;
   name: string;
   password: string;
+  image?: string;
+  liked?: TRestaurant[];
+  recommended?: TRestaurant[];
 };
 
 type TAuthResponse = TServerResponse<{
@@ -171,3 +174,29 @@ export const getRestaurantsApi = () =>
       if (data?.success) return data.data;
       return Promise.reject(data);
     });
+
+const apiKey = '90b594c5-60ad-4e4f-b665-a25fc23b8193';
+
+export const fetchCoordinates = async (
+  address: string
+): Promise<[number, number] | null> => {
+  const response = await fetch(
+    `https://geocode-maps.yandex.ru/1.x/?apikey=${apiKey}&geocode=${encodeURIComponent(address)}&format=json`
+  );
+  const data = await response.json();
+
+  if (
+    data &&
+    data.response &&
+    data.response.GeoObjectCollection &&
+    data.response.GeoObjectCollection.featureMember.length > 0
+  ) {
+    const geoObject =
+      data.response.GeoObjectCollection.featureMember[0].GeoObject;
+    const [longitude, latitude] = geoObject.Point.pos.split(' ').map(Number);
+    return [latitude, longitude];
+  } else {
+    console.error('Coordinates not found');
+    return null;
+  }
+};
