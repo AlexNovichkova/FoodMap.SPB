@@ -1,9 +1,3 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import {
-  selectIsLoading,
-  selectRestaurants
-} from 'src/features/slices/restaurantsSlice';
 import { FC } from 'react';
 import { LocationIcon } from './ui/LocationIcon';
 import { StarIcon } from './ui/StarIcon';
@@ -15,34 +9,34 @@ export const RestaurantCard: FC<TRestaurant> = ({
   name,
   image,
   rating,
-  address
+  address,
 }) => (
-  <div className=' flex flex-col  gap-4 w-[90%] self-center sm:w-[45%] md:w-48 xl:w-56 2xl:w-64'>
-    <div className=' w-full h-full md:w-48 md:h-48 xl:w-56 xl:h-56 2xl:w-64 2xl:h-64 '>
+  <div className=" flex flex-col  gap-4 w-[90%] self-center sm:w-[45%] md:w-48 xl:w-56 2xl:w-64">
+    <div className=" w-full h-full md:w-48 md:h-48 xl:w-56 xl:h-56 2xl:w-64 2xl:h-64 ">
       <img
-        className=' object-cover object-center rounded-[16px] h-full w-full'
+        className=" object-cover object-center rounded-[16px] h-full w-full"
         src={image}
         alt={name}
       />
     </div>
-    <div className=' flex flex-col'>
-      <span className=' text-black-600 text-left font-bold text-base md:text-lg lg:text-xl xl:text-2xl break-words'>
+    <div className=" flex flex-col">
+      <span className=" text-black-600 text-left font-bold text-base md:text-lg lg:text-xl xl:text-2xl break-words">
         {name}
       </span>
-      <div className=' text-orange-400 flex flex-row gap-2 items-center h-20'>
-        <LocationIcon className='size-6' />
-        <span className=' font-bold text-base text-left md:text-lg lg:text-xl xl:text-2xl italic font-caveat break-words'>
+      <div className=" text-orange-400 flex flex-row gap-2 items-center h-20">
+        <LocationIcon className="size-6" />
+        <span className=" font-bold text-base text-left md:text-lg lg:text-xl xl:text-2xl italic font-caveat break-words">
           {address}
         </span>
       </div>
-      <div className=' text-black-600 text-left flex flex-row gap-2 items-center'>
-        <StarIcon className='size-5' />
-        <span className=' font-bold text-base md:text-lg lg:text-xl xl:text-2xl italic '>
+      <div className=" text-black-600 text-left flex flex-row gap-2 items-center">
+        <StarIcon className="size-5" />
+        <span className=" font-bold text-base md:text-lg lg:text-xl xl:text-2xl italic ">
           {rating}
         </span>
       </div>
       <Link to={`/restaurants/${id}`} className={`outline-none`}>
-        <MainButton className='w-full mt-2' title='Перейти' />
+        <MainButton className="w-full mt-2" title="Перейти" />
       </Link>
     </div>
   </div>

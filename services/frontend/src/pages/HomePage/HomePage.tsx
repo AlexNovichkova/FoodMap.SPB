@@ -1,7 +1,7 @@
-import React from 'react';
 import { CategorySection } from './ui/CategorySection';
 import { HighRateSection } from './ui/HighRateSection';
 import { HeadingSection } from './ui/HeadingSection';
+import { MoreSection } from './ui/MoreSection';
 
 export const HomePage = () => {
   return (
@@ -9,6 +9,7 @@ export const HomePage = () => {
       <HeadingSection />
       <CategorySection />
       <HighRateSection />
+      <MoreSection />
     </main>
   );
 };

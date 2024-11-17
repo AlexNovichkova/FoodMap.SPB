@@ -1,8 +1,8 @@
 import { setCookie, getCookie } from './cookie';
 import { TRestaurant, TUser } from '../models/types';
 
-const URL = process.env.FOODMAP_API_URL;
-
+/*const URL = process.env.FOODMAP_API_URL;*/
+const URL = `http://localhost:4000/`;
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
@@ -19,11 +19,11 @@ export const refreshToken = (): Promise<TRefreshResponse> =>
   fetch(`${URL}/auth/token`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
     body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
-    })
+      token: localStorage.getItem('refreshToken'),
+    }),
   })
     .then((res) => checkResponse<TRefreshResponse>(res))
     .then((refreshData) => {
@@ -76,9 +76,9 @@ export const registerUserApi = (data: TRegisterData) =>
   fetch(`${URL}/auth/register`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
     .then((res) => checkResponse<TAuthResponse>(res))
     .then((data) => {
@@ -95,9 +95,9 @@ export const loginUserApi = (data: TLoginData) =>
   fetch(`${URL}/auth/login`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
     .then((res) => checkResponse<TAuthResponse>(res))
     .then((data) => {
@@ -109,9 +109,9 @@ export const forgotPasswordApi = (data: { email: string }) =>
   fetch(`${URL}/password-reset`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
     .then((res) => checkResponse<TServerResponse<{}>>(res))
     .then((data) => {
@@ -123,9 +123,9 @@ export const resetPasswordApi = (data: { password: string; token: string }) =>
   fetch(`${URL}/password-reset/reset`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
     .then((res) => checkResponse<TServerResponse<{}>>(res))
     .then((data) => {
@@ -138,8 +138,8 @@ type TUserResponse = TServerResponse<{ user: TUser }>;
 export const getUserApi = () =>
   fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
     headers: {
-      authorization: getCookie('accessToken')
-    } as HeadersInit
+      authorization: getCookie('accessToken'),
+    } as HeadersInit,
   });
 
 export const updateUserApi = (user: Partial<TRegisterData>) =>
@@ -147,20 +147,20 @@ export const updateUserApi = (user: Partial<TRegisterData>) =>
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken')
+      authorization: getCookie('accessToken'),
     } as HeadersInit,
-    body: JSON.stringify(user)
+    body: JSON.stringify(user),
   });
 
 export const logoutApi = () =>
   fetch(`${URL}/auth/logout`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
     body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
-    })
+      token: localStorage.getItem('refreshToken'),
+    }),
   }).then((res) => checkResponse<TServerResponse<{}>>(res));
 
 type TRestaurantsResponse = TServerResponse<{
@@ -181,7 +181,9 @@ export const fetchCoordinates = async (
   address: string
 ): Promise<[number, number] | null> => {
   const response = await fetch(
-    `https://geocode-maps.yandex.ru/1.x/?apikey=${apiKey}&geocode=${encodeURIComponent(address)}&format=json`
+    `https://geocode-maps.yandex.ru/1.x/?apikey=${apiKey}&geocode=${encodeURIComponent(
+      address
+    )}&format=json`
   );
   const data = await response.json();
 

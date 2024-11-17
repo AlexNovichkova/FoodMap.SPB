@@ -1,14 +1,14 @@
-import { TUser } from 'src/entities/projects/models/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { TUser } from '../../entities/projects/models/types';
+import { deleteCookie, setCookie } from '../../entities/projects/api/cookie';
 import {
   getUserApi,
   loginUserApi,
-  TLoginData,
   logoutApi,
   registerUserApi,
-  updateUserApi
-} from 'src/entities/projects/api/api';
-import { deleteCookie, setCookie } from 'src/entities/projects/api/cookie';
+  TLoginData,
+  updateUserApi,
+} from '../../entities/projects/api/api';
 
 interface UserState {
   isAuthChecked: boolean;
@@ -30,10 +30,10 @@ const initialState: UserState = {
   user: {
     email: '',
     name: ' ',
-    image: ' '
+    image: ' ',
   },
   isLoading: false,
-  error: null
+  error: null,
 };
 
 export const registerUser = createAsyncThunk(
@@ -80,11 +80,11 @@ const userSlice = createSlice({
     setTestUser(state, action) {
       state.user = action.payload; // Устанавливаем тестового пользователя
       state.isAuthenticated = true; // Устанавливаем флаг аутентификации
-    }
+    },
   },
   selectors: {
     selectUser: (state) => state.user,
-    authenticatedSelector: (state) => state.isAuthenticated
+    authenticatedSelector: (state) => state.isAuthenticated,
   },
   extraReducers: (builder) => {
     builder
@@ -129,7 +129,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = {
           email: '',
-          name: ''
+          name: '',
         };
         state.error = null;
         state.isAuthenticated = false;
@@ -177,7 +177,7 @@ const userSlice = createSlice({
         state.user = action.payload.user;
         state.error = null;
       });
-  }
+  },
 });
 
 export const { selectUser, authenticatedSelector } = userSlice.selectors;

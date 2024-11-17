@@ -1,22 +1,19 @@
 import { FC, ChangeEvent, SyntheticEvent } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ProfileMenu } from '../../Profile';
-import { MainButton } from 'src/shared/ui/MainButton';
-import { PersonContainer } from '../PersonContainer';
 import { useSelector } from 'src/features/store';
+import { PersonContainer } from '../PersonContainer';
 import { RestaurantsContainer } from 'src/widgets/RestaurantsContainer';
 import { Input } from 'src/shared/ui/Input';
 import { PasswordInput } from 'src/shared/ui/PasswordInput';
+import { MainButton } from 'src/shared/ui/MainButton';
+import { ProfileMenu } from '../../Profile';
 
 export type ProfileMenuUIProps = {
   pathname: string;
   handleLogout: () => void;
 };
 
-export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
-  pathname,
-  handleLogout
-}) => {
+export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
   const likedRestaurants = useSelector((state) => state.user.user.liked);
   const recommendedRestaurants = useSelector(
     (state) => state.user.user.recommended
@@ -26,11 +23,13 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
   const userImage = useSelector((state) => state.user.user.image);
   return (
     <>
-      <div className='flex flex-col gap-5'>
+      <div className="flex flex-col gap-5">
         <NavLink
           to={'/profile'}
           className={({ isActive }) =>
-            `flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl ${''} ${isActive ? '' : ''}`
+            `flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl ${''} ${
+              isActive ? '' : ''
+            }`
           }
           end
         >
@@ -43,7 +42,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
         />
       </div>
       <div>
-        <h2 className='flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl '>
+        <h2 className="flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl ">
           Оцененные заведения
         </h2>
         <div>
@@ -54,7 +53,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
         </div>
       </div>
       <div>
-        <h2 className='flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl'>
+        <h2 className="flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl">
           Может понравиться
         </h2>
         <div>
@@ -65,7 +64,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
         </div>
       </div>
 
-      <p className=' md:mt-10 flex items-start  lg:leading-10 text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl'>
+      <p className=" md:mt-10 flex items-start  lg:leading-10 text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl">
         {pathname === '/profile'} В этом разделе вы можете изменить свои
         персональные данные
       </p>
@@ -94,76 +93,76 @@ export const ProfileUI: FC<ProfileUIProps> = ({
   handleLogout,
   handleSubmit,
   handleCancel,
-  handleInputChange
+  handleInputChange,
 }) => (
   <main className={` bg_section_profile m-auto pt-9 pb-12`}>
-    <section className='w-[93%] md:w-[90%] m-auto flex flex-col'>
+    <section className="w-[93%] md:w-[90%] m-auto flex flex-col">
       <div className={`flex flex-col gap-14`}>
         <ProfileMenu />
       </div>
       <form
-        id='change-user-info'
+        id="change-user-info"
         className={`mt-8 mb-12 w-[98%] md:w-[70%] lg:w-[55%] xl:w-[40%] self-center`}
         onSubmit={handleSubmit}
       >
         <>
-          <div className='pb-6'>
+          <div className="pb-6">
             <Input
-              className='w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
-              label='Загрузить изображение'
-              type='file'
+              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+              label="Загрузить изображение"
+              type="file"
               name={'file'}
               onChange={handleInputChange}
-              accept='image/*'
+              accept="image/*"
             />
           </div>
-          <div className='pb-6'>
+          <div className="pb-6">
             <Input
-              className='w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
+              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
               type={'text'}
               onChange={handleInputChange}
               value={formValue.name}
               name={'name'}
               placeholder={'Имя'}
-              label='Имя'
+              label="Имя"
               error={false}
-              errorText=''
+              errorText=""
             />
           </div>
-          <div className='pb-6'>
+          <div className="pb-6">
             <Input
-              className='w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
+              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
               type={'email'}
               placeholder={'E-mail'}
               onChange={handleInputChange}
               value={formValue.email}
               name={'email'}
-              label='Почта'
+              label="Почта"
               error={false}
-              errorText=''
+              errorText=""
             />
           </div>
-          <div className='pb-6'>
+          <div className="pb-6">
             <PasswordInput
-              className='w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
+              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
               type={'password'}
               placeholder={'Пароль'}
               onChange={handleInputChange}
               value={formValue.password}
               name={'password'}
-              label='Пароль'
+              label="Пароль"
             />
           </div>
           {isFormChanged && (
-            <div className=' flex flex-row justify-between'>
+            <div className=" flex flex-row justify-between">
               <MainButton
-                type='button'
-                className=''
-                title='Отменить'
+                type="button"
+                className=""
+                title="Отменить"
                 onClick={handleCancel}
               />
 
-              <MainButton type='submit' className='' title='Сохранить' />
+              <MainButton type="submit" className="" title="Сохранить" />
             </div>
           )}
           {updateUserError && (
@@ -174,7 +173,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
         </>
       </form>
       <MainButton
-        title='Выход'
+        title="Выход"
         className={`text text_type_main-medium text_color_inactive pt-4 pb-4 self-center w-[98%] md:w-[70%] lg:w-[55%] xl:w-[40%]`}
         onClick={handleLogout}
       ></MainButton>

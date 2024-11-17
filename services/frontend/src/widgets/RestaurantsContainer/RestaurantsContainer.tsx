@@ -1,11 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { ArrowButton } from 'src/shared/ui/ArrowButton';
 import { RestaurantCard } from '../RestaurantCard';
 import { useDispatch, useSelector } from 'src/features/store';
-import {
-  selectIsLoading,
-  selectRestaurants
-} from 'src/features/slices/restaurantsSlice';
+import { selectIsLoading } from 'src/features/slices/restaurantsSlice';
 import { testRestaurants } from 'src/app/testData';
 import { TRestaurant } from 'src/entities/projects/models/types';
 import { Link } from 'react-router-dom';
@@ -38,12 +35,8 @@ export const RestaurantsContainer: FC<{
   };
 
   useEffect(() => {
-    // Устанавливаем начальное значение
     updateItemsPerPage();
-
     window.addEventListener('resize', updateItemsPerPage);
-
-    // Убираем обработчик при размонтировании
     return () => {
       window.removeEventListener('resize', updateItemsPerPage);
     };
@@ -53,7 +46,7 @@ export const RestaurantsContainer: FC<{
     // Вместо вызова API, используем тестовые данные
     dispatch({
       type: 'restaurants/getAllRestaurants/fulfilled',
-      payload: testRestaurants
+      payload: testRestaurants,
     });
   }, [dispatch]);
 
@@ -79,10 +72,10 @@ export const RestaurantsContainer: FC<{
 
   if (filteredRestaurants.length === 0) {
     return (
-      <div className='flex items-center justify-center cursor-pointer gap-5 text-black-500 py-8 text-lg lg:text-xl xl:text-2xl xl:py-10'>
+      <div className="flex items-center justify-center cursor-pointer gap-5 text-black-500 py-8 text-lg lg:text-xl xl:text-2xl xl:py-10">
         <Link
           to={`/restaurants`}
-          className='hover:text-green-600 hover:border-b-green-600 hover:border-b '
+          className="hover:text-green-600 hover:border-b-green-600 hover:border-b "
         >
           Ничего не найдено <span>&#9785;</span>
         </Link>
@@ -92,8 +85,8 @@ export const RestaurantsContainer: FC<{
 
   return (
     <>
-      <div className='flex flex-row justify-center md:justify-between w-full'>
-        <div className='hidden flex-row gap-6 items-center md:flex'>
+      <div className="flex flex-row justify-center md:justify-between w-full">
+        <div className="hidden flex-row gap-6 items-center md:flex">
           <ArrowButton
             className={
               canPrev
@@ -104,7 +97,7 @@ export const RestaurantsContainer: FC<{
             disabled={!canPrev} // Отключаем кнопку, если нельзя перейти назад
           />
         </div>
-        <div className='mb-5 mt-16 md:mb-16 flex flex-col gap-10 md:flex-row'>
+        <div className="mb-5 mt-16 md:mb-16 flex flex-col gap-10 md:flex-row">
           {isLoading ? ( // Условный рендеринг прелоадера или карты
             <Preloader />
           ) : (
@@ -123,7 +116,7 @@ export const RestaurantsContainer: FC<{
               ))
           )}
         </div>
-        <div className='hidden flex-row gap-6 items-center md:flex'>
+        <div className="hidden flex-row gap-6 items-center md:flex">
           <ArrowButton
             className={
               canNext
@@ -135,8 +128,8 @@ export const RestaurantsContainer: FC<{
           />
         </div>
       </div>
-      <div className='mb-16 mt-8 flex justify-between md:hidden'>
-        <div className='md:hidden flex-row gap-6 items-center flex'>
+      <div className="mb-16 mt-8 flex justify-between md:hidden">
+        <div className="md:hidden flex-row gap-6 items-center flex">
           <ArrowButton
             className={
               canPrev
@@ -147,7 +140,7 @@ export const RestaurantsContainer: FC<{
             disabled={!canPrev}
           />
         </div>
-        <div className='md:hidden flex-row gap-6 items-center flex'>
+        <div className="md:hidden flex-row gap-6 items-center flex">
           <ArrowButton
             className={
               canNext

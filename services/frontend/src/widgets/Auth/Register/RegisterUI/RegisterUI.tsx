@@ -1,5 +1,5 @@
 import { FC, Dispatch, SetStateAction } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PageUIProps } from 'src/entities/projects/models/types';
 import { Input } from 'src/shared/ui/Input';
 import { MainButton } from 'src/shared/ui/MainButton';
@@ -21,7 +21,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
   password,
   setPassword,
   userName,
-  setUserName
+  setUserName,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,43 +31,43 @@ export const RegisterUI: FC<RegisterUIProps> = ({
     navigate('/login', { state: { background: { pathname, search } } });
   };
   return (
-    <main className='pt-20 pb-20 mx-5 md:m-auto md:w-[50%] '>
+    <main className="pt-20 pb-20 mx-5 md:m-auto md:w-[50%] ">
       <div className={`pt-0 md:pt-3  md:w-full lg:px-4 xl:px-5`}>
-        <h3 className='pb-6 text-lg text-black-700  font-medium lg:text-xl xl:text-2xl  2xl:text-3xl'>
+        <h3 className="pb-6 text-lg text-black-700  font-medium lg:text-xl xl:text-2xl  2xl:text-3xl">
           Регистрация
         </h3>
-        <form className={`pb-15 `} name='register' onSubmit={handleSubmit}>
+        <form className={`pb-15 `} name="register" onSubmit={handleSubmit}>
           <>
-            <div className='pb-6'>
+            <div className="pb-6">
               <input
-                className='w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
-                type='text'
-                placeholder='Имя'
+                className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+                type="text"
+                placeholder="Имя"
                 onChange={(e) => setUserName(e.target.value)}
                 value={userName}
-                name='name'
+                name="name"
               />
             </div>
-            <div className='pb-6'>
+            <div className="pb-6">
               <Input
-                className='w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
-                type='email'
-                placeholder='E-mail'
+                className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+                type="email"
+                placeholder="E-mail"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 name={'email'}
                 error={false}
-                errorText=''
+                errorText=""
               />
             </div>
-            <div className='pb-6'>
+            <div className="pb-6">
               <PasswordInput
-                label='Пароль'
-                className='w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
+                label="Пароль"
+                className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
-                placeholder='Пароль'
-                name='password'
+                placeholder="Пароль"
+                name="password"
               />
             </div>
 
@@ -87,12 +87,12 @@ export const RegisterUI: FC<RegisterUIProps> = ({
             Войти
           </button>
         </div>
-        <div className=' flex items-center min-h-16'>
+        <div className=" flex items-center min-h-16">
           <MainButton
-            className=' w-full focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange'
-            type='submit'
-            data-cy='closeX'
-            title='Зарегистрироваться'
+            className=" w-full focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange"
+            type="submit"
+            data-cy="closeX"
+            title="Зарегистрироваться"
           />
         </div>
       </div>

@@ -1,10 +1,10 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
-
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'src/features/store';
-import { logoutUser, updateUser } from 'src/features/slices/userSlice';
+
 import { ProfileMenuUI, ProfileUI } from './ui/ProfileUI/ProfileUI';
+import { useDispatch, useSelector } from '../../features/store';
+import { logoutUser, updateUser } from '../../features/slices/userSlice';
 
 export const ProfileMenu: FC = () => {
   const { pathname } = useLocation();
@@ -28,14 +28,14 @@ export const Profile: FC = () => {
   const [formValue, setFormValue] = useState({
     name: user.name,
     email: user.email,
-    password: ''
+    password: '',
   });
 
   useEffect(() => {
     setFormValue((prevState) => ({
       ...prevState,
       name: user?.name || '',
-      email: user?.email || ''
+      email: user?.email || '',
     }));
   }, [user]);
 
@@ -50,7 +50,7 @@ export const Profile: FC = () => {
     setFormValue({
       name: user.name,
       email: user.email,
-      password: ''
+      password: '',
     });
   };
 
@@ -59,14 +59,14 @@ export const Profile: FC = () => {
     setFormValue({
       name: user.name,
       email: user.email,
-      password: ''
+      password: '',
     });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValue((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
