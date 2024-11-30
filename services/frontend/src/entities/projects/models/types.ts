@@ -5,20 +5,32 @@ export interface ICategory {
   name: string;
   image?: string;
 }
+
+export type TNewRestaurant = {
+  id: number;
+  name: string;
+  address: string;
+  cuisine_type: ICategory[];
+  rating: number;
+  photo_links: string;
+  prices?: string;
+  description?: string;
+};
+
 export type TRestaurant = {
   id: number;
   name: string;
   address: string;
-  category: ICategory[];
+  cuisine_type: string[];
   rating: number;
-  image: string;
-  price?: string;
+  photo_links: string;
+  prices?: string;
   description?: string;
 };
 
 export type TUser = {
   email: string;
-  name: string;
+  username: string;
   image?: string;
   liked?: TRestaurant[];
   recommended?: TRestaurant[];

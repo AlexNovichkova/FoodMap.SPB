@@ -1,8 +1,8 @@
 import { setCookie, getCookie } from './cookie';
-import { TRestaurant, TUser } from '../models/types';
+import { ICategory, TRestaurant, TUser } from '../models/types';
 
 /*const URL = process.env.FOODMAP_API_URL;*/
-const URL = `http://localhost:4000/`;
+const URL = `http://localhost:8000`;
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
@@ -16,7 +16,7 @@ type TRefreshResponse = TServerResponse<{
 }>;
 
 export const refreshToken = (): Promise<TRefreshResponse> =>
-  fetch(`${URL}/auth/token`, {
+  fetch(`${URL}/token/refresh/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -59,7 +59,7 @@ export const fetchWithRefresh = async <T>(
 
 export type TRegisterData = {
   email: string;
-  name: string;
+  username: string;
   password: string;
   image?: string;
   liked?: TRestaurant[];
@@ -73,7 +73,7 @@ type TAuthResponse = TServerResponse<{
 }>;
 
 export const registerUserApi = (data: TRegisterData) =>
-  fetch(`${URL}/auth/register`, {
+  fetch(`${URL}/api/register/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -92,7 +92,7 @@ export type TLoginData = {
 };
 
 export const loginUserApi = (data: TLoginData) =>
-  fetch(`${URL}/auth/login`, {
+  fetch(`${URL}/api/login/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -106,7 +106,7 @@ export const loginUserApi = (data: TLoginData) =>
     });
 
 export const forgotPasswordApi = (data: { email: string }) =>
-  fetch(`${URL}/password-reset`, {
+  fetch(`${URL}/password-reset/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -120,7 +120,7 @@ export const forgotPasswordApi = (data: { email: string }) =>
     });
 
 export const resetPasswordApi = (data: { password: string; token: string }) =>
-  fetch(`${URL}/password-reset/reset`, {
+  fetch(`${URL}/password-reset/reset/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -136,24 +136,24 @@ export const resetPasswordApi = (data: { password: string; token: string }) =>
 type TUserResponse = TServerResponse<{ user: TUser }>;
 
 export const getUserApi = () =>
-  fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
+  fetchWithRefresh<TUserResponse>(`${URL}/api/user-info/`, {
     headers: {
-      authorization: getCookie('accessToken'),
+      authorization: `Bearer ${getCookie('accessToken')}`,
     } as HeadersInit,
   });
 
 export const updateUserApi = (user: Partial<TRegisterData>) =>
-  fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
+  fetchWithRefresh<TUserResponse>(`${URL}/api/user-info/`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken'),
+      authorization: `Bearer ${getCookie('accessToken')}`,
     } as HeadersInit,
     body: JSON.stringify(user),
   });
 
 export const logoutApi = () =>
-  fetch(`${URL}/auth/logout`, {
+  fetch(`${URL}/api/logout/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -167,11 +167,25 @@ type TRestaurantsResponse = TServerResponse<{
   data: TRestaurant[];
 }>;
 
+type TCategorysResponse = TServerResponse<{
+  data: ICategory[];
+}>;
+
+export const getCategoriesApi = () =>
+  fetch(`${URL}/api/categories/`)
+    .then((res) => checkResponse<TCategorysResponse>(res))
+    .then((data) => {
+      if (data?.success) return data.data;
+      console.log(data);
+      return Promise.reject(data);
+    });
+
 export const getRestaurantsApi = () =>
-  fetch(`${URL}/restaurants`)
+  fetch(`${URL}/api/restaurants/`)
     .then((res) => checkResponse<TRestaurantsResponse>(res))
     .then((data) => {
       if (data?.success) return data.data;
+      console.log(data);
       return Promise.reject(data);
     });
 

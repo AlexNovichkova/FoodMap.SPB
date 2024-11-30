@@ -15,16 +15,16 @@ export const Register: FC = () => {
       return;
     }
     console.log('Register', {
-      name: userName,
+      username: userName,
       email,
-      password
+      password,
     });
-    dispatch(registerUser({ name: userName, email, password }));
+    dispatch(registerUser({ username: userName, email, password }));
   };
 
   return (
     <RegisterUI
-      errorText=''
+      errorText=""
       email={email}
       userName={userName}
       password={password}

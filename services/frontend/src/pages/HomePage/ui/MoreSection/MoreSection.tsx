@@ -30,8 +30,8 @@ export const MoreSection = () => {
                     rating={restaurant.rating}
                     address={restaurant.address}
                     name={restaurant.name}
-                    image={restaurant.image}
-                    category={restaurant.category}
+                    photo_links={restaurant.photo_links}
+                    cuisine_type={restaurant.cuisine_type}
                   />
                 ))
             )}

@@ -13,7 +13,10 @@ import {
 import { fetchCoordinates, updateUserApi } from 'src/entities/projects/api/api';
 import { RestaurantMapComponent } from './ui/RestaurantMapComponent/RestaurantMapComponent';
 import { Preloader } from 'src/app/Preloader';
-import { selectIsLoading } from 'src/features/slices/restaurantsSlice';
+import {
+  fetchRestaurants,
+  selectIsLoading,
+} from 'src/features/slices/restaurantsSlice';
 import { testRestaurants } from 'src/app/testData';
 
 export const RestaurantPage = () => {
@@ -39,10 +42,11 @@ export const RestaurantPage = () => {
 
   useEffect(() => {
     dispatch(checkUserAuth());
-    dispatch({
+    /*dispatch({
       type: 'restaurants/getAllRestaurants/fulfilled',
       payload: testRestaurants,
-    });
+    });*/
+    dispatch(fetchRestaurants());
   }, [dispatch]);
 
   useEffect(() => {
@@ -94,7 +98,7 @@ export const RestaurantPage = () => {
             <div className=" w-full h-full md:w-64 md:min-w-56 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
               <img
                 className=" object-cover object-center rounded-[16px] h-full w-full shadow"
-                src={restaurant.image}
+                src={restaurant.photo_links}
                 alt={restaurant.name}
               />
             </div>
@@ -108,13 +112,13 @@ export const RestaurantPage = () => {
                 <span className=" flex gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl break-words  items-start">
                   Кухня:
                   <span className="flex flex-wrap gap-1">
-                    {restaurant.category.map((category, index) => (
+                    {restaurant.cuisine_type.map((category, index) => (
                       <span
                         key={index}
                         className="font-medium text-black-600 font-caveat break-words text-xl md:text-2xl lg:text-3xl xl:text-4xl lowercase leading-none md:leading-none"
                       >
-                        {category.name}
-                        {index < restaurant.category.length - 1 && ','}{' '}
+                        {category}
+                        {index < restaurant.cuisine_type.length - 1 && ','}{' '}
                       </span>
                     ))}
                   </span>
@@ -124,7 +128,7 @@ export const RestaurantPage = () => {
                 <span className="flex gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl break-words items-center">
                   Ценовой сегмент:
                   <span className="font-medium text-black-600 font-caveat text-xl md:text-2xl lg:text-3xl xl:text-4xl md:leading-none">
-                    {restaurant.price}
+                    {restaurant.prices}
                   </span>
                 </span>
               </div>

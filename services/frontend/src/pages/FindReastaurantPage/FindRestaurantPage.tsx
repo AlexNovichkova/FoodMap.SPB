@@ -4,6 +4,7 @@ import { RestaurantCard } from 'src/widgets/RestaurantCard';
 
 export const FindRestaurantPage = () => {
   const restaurants = useSelector((state) => state.restaurants.restaurants);
+  console.log(restaurants);
 
   // Состояния для фильтров с явными типами
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -37,7 +38,7 @@ export const FindRestaurantPage = () => {
   const uniqueCategories = Array.from(
     new Set(
       restaurants.flatMap((restaurant) =>
-        restaurant.category.map((cat) => cat.name)
+        restaurant.cuisine_type.map((cat) => cat)
       )
     )
   );
@@ -45,20 +46,18 @@ export const FindRestaurantPage = () => {
   const uniquePrices = Array.from(
     new Set(
       restaurants
-        .map((restaurant) => restaurant.price)
-        .filter((price): price is string => price !== undefined)
+        .map((restaurant) => restaurant.prices)
+        .filter((prices): prices is string => prices !== undefined)
     )
   );
 
   const filteredRestaurants = restaurants.filter((restaurant) => {
     const matchesCategory = selectedCategories.length
-      ? restaurant.category.some((cat) =>
-          selectedCategories.includes(cat.name!)
-        )
+      ? restaurant.cuisine_type.some((cat) => selectedCategories.includes(cat!))
       : true;
 
     const matchesPrice = selectedPrices.length
-      ? selectedPrices.includes(restaurant.price!)
+      ? selectedPrices.includes(restaurant.prices!)
       : true;
 
     const matchesSearchQuery = restaurant.name
@@ -163,8 +162,8 @@ export const FindRestaurantPage = () => {
                 rating={restaurant.rating}
                 address={restaurant.address}
                 name={restaurant.name}
-                image={restaurant.image}
-                category={restaurant.category}
+                photo_links={restaurant.photo_links}
+                cuisine_type={restaurant.cuisine_type}
               />
             ))}
           </div>

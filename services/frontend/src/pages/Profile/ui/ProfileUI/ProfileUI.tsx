@@ -13,21 +13,24 @@ export type ProfileMenuUIProps = {
   handleLogout: () => void;
 };
 
-export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
-  const likedRestaurants = useSelector((state) => state.user.user.liked);
-  const recommendedRestaurants = useSelector(
-    (state) => state.user.user.recommended
-  );
-  const userName = useSelector((state) => state.user.user.name);
-  const userEmail = useSelector((state) => state.user.user.email);
-  const userImage = useSelector((state) => state.user.user.image);
+export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
+  pathname,
+  handleLogout,
+}) => {
+  const user = useSelector((state) => state.user.user); // Получаем объект пользователя
+  const likedRestaurants = user?.liked || []; // Используем опциональную цепочку
+  const recommendedRestaurants = user?.recommended || []; // Используем опциональную цепочку
+  const userName = user?.username || ''; // Используем опциональную цепочку
+  const userEmail = user?.email || ''; // Используем опциональную цепочку
+  const userImage = user?.image || ''; // Используем опциональную цепочку
+
   return (
     <>
       <div className="flex flex-col gap-5">
         <NavLink
           to={'/profile'}
           className={({ isActive }) =>
-            `flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl ${''} ${
+            `flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl ${
               isActive ? '' : ''
             }`
           }
@@ -36,9 +39,9 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
           Профиль
         </NavLink>
         <PersonContainer
-          name={userName ? userName : ''}
-          email={userEmail ? userEmail : ''}
-          image={userImage ? userImage : ''}
+          username={userName}
+          email={userEmail}
+          image={userImage}
         />
       </div>
       <div>
@@ -48,7 +51,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
         <div>
           <RestaurantsContainer
             shouldFilterByRating={false}
-            restaurants={likedRestaurants ? likedRestaurants : []}
+            restaurants={likedRestaurants}
           />
         </div>
       </div>
@@ -59,12 +62,12 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
         <div>
           <RestaurantsContainer
             shouldFilterByRating={false}
-            restaurants={recommendedRestaurants ? recommendedRestaurants : []}
+            restaurants={recommendedRestaurants}
           />
         </div>
       </div>
 
-      <p className=" md:mt-10 flex items-start  lg:leading-10 text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl">
+      <p className="md:mt-10 flex items-start lg:leading-10 text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl">
         {pathname === '/profile'} В этом разделе вы можете изменить свои
         персональные данные
       </p>
@@ -74,7 +77,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
 
 export type ProfileUIProps = {
   formValue: {
-    name: string;
+    username: string;
     email: string;
     password: string;
   };
@@ -121,8 +124,8 @@ export const ProfileUI: FC<ProfileUIProps> = ({
               className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
               type={'text'}
               onChange={handleInputChange}
-              value={formValue.name}
-              name={'name'}
+              value={formValue.username}
+              name={'username'}
               placeholder={'Имя'}
               label="Имя"
               error={false}

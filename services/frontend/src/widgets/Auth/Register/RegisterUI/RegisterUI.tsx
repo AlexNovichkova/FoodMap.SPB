@@ -93,6 +93,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
             type="submit"
             data-cy="closeX"
             title="Зарегистрироваться"
+            onClick={handleSubmit}
           />
         </div>
       </div>

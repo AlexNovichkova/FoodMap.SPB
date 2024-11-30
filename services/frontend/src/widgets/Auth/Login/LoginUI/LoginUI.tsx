@@ -83,6 +83,7 @@ export const LoginUI: FC<LoginUIProps> = ({
           type="submit"
           data-cy="closeX"
           title="Войти"
+          onClick={handleSubmit}
         />
       </div>
     </div>

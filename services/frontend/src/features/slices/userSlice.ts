@@ -19,7 +19,7 @@ interface UserState {
 }
 
 interface TRegisterData {
-  name: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -29,8 +29,7 @@ const initialState: UserState = {
   isAuthenticated: false,
   user: {
     email: '',
-    name: ' ',
-    image: ' ',
+    username: ' ',
   },
   isLoading: false,
   error: null,
@@ -76,12 +75,7 @@ export const getUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    setTestUser(state, action) {
-      state.user = action.payload; // Устанавливаем тестового пользователя
-      state.isAuthenticated = true; // Устанавливаем флаг аутентификации
-    },
-  },
+  reducers: {},
   selectors: {
     selectUser: (state) => state.user,
     authenticatedSelector: (state) => state.isAuthenticated,
@@ -116,6 +110,8 @@ const userSlice = createSlice({
         state.error = null;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
+        console.log(state.user);
+        location.replace('/profile');
       })
       .addCase(logoutUser.pending, (state, action) => {
         state.isLoading = true;
@@ -129,7 +125,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = {
           email: '',
-          name: '',
+          username: '',
         };
         state.error = null;
         state.isAuthenticated = false;
@@ -181,5 +177,5 @@ const userSlice = createSlice({
 });
 
 export const { selectUser, authenticatedSelector } = userSlice.selectors;
-export const { setTestUser } = userSlice.actions;
+
 export default userSlice.reducer;

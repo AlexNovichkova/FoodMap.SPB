@@ -12,6 +12,7 @@
   "dependencies": {
     "@pbe/react-yandex-maps": "^1.2.5",
     "@reduxjs/toolkit": "^2.3.0",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
     "nanoid": "^5.0.8",

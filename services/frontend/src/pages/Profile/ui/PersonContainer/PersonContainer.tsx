@@ -3,7 +3,7 @@ import { TUser } from 'src/entities/projects/models/types';
 import { MainButton } from 'src/shared/ui/MainButton';
 import { Modal } from 'src/widgets/Modal/Modal';
 
-export const PersonContainer: FC<TUser> = ({ name, email, image }) => {
+export const PersonContainer: FC<TUser> = ({ username, email, image }) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleEditDataClick = () => {
@@ -46,7 +46,7 @@ export const PersonContainer: FC<TUser> = ({ name, email, image }) => {
       </div>
       <div className=" max-w-64 md:max-w-80 lg:max-w-[600px]" id="user-name">
         <span className="text-lg font-medium text-black-600  md:text-xl lg:text-2xl xl:text-3xl break-words">
-          {name}
+          {username}
         </span>
       </div>
       <div className="max-w-64 md:max-w-80 lg:max-w-[600px]" id="user-email">

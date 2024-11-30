@@ -2,9 +2,15 @@ import { FC, useEffect, useState } from 'react';
 import { ArrowButton } from 'src/shared/ui/ArrowButton';
 import { RestaurantCard } from '../RestaurantCard';
 import { useDispatch, useSelector } from 'src/features/store';
-import { selectIsLoading } from 'src/features/slices/restaurantsSlice';
+import {
+  fetchRestaurants,
+  selectIsLoading,
+} from 'src/features/slices/restaurantsSlice';
 import { testRestaurants } from 'src/app/testData';
-import { TRestaurant } from 'src/entities/projects/models/types';
+import {
+  TNewRestaurant,
+  TRestaurant,
+} from 'src/entities/projects/models/types';
 import { Link } from 'react-router-dom';
 import { Preloader } from 'src/app/Preloader';
 
@@ -48,6 +54,7 @@ export const RestaurantsContainer: FC<{
       type: 'restaurants/getAllRestaurants/fulfilled',
       payload: testRestaurants,
     });
+    /*dispatch(fetchRestaurants());*/
   }, [dispatch]);
 
   const filteredRestaurants = shouldFilterByRating
@@ -110,8 +117,8 @@ export const RestaurantsContainer: FC<{
                   rating={restaurant.rating}
                   address={restaurant.address}
                   name={restaurant.name}
-                  image={restaurant.image}
-                  category={restaurant.category}
+                  photo_links={restaurant.photo_links}
+                  cuisine_type={restaurant.cuisine_type}
                 />
               ))
           )}
