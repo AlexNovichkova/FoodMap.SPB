@@ -31,14 +31,14 @@ export const PersonContainer: FC<TUser> = ({ username, email, image }) => {
             className="min-h-full object-cover object-center"
             onClick={handleImageClick}
             /*src='https://i.pinimg.com/736x/72/7b/d2/727bd2b7be9569cd4a920fb061579cef.jpg'*/
-            src={image}
+            src={image || '/public/images/user.png'}
           />
           {isModalOpen && (
             <Modal onClose={handleCloseModal} title="Аватар">
               <img
                 className="max-w-80 xl:max-w-xl w-[90%] min-h-full object-cover object-center pt-4"
                 /*src='https://i.pinimg.com/736x/72/7b/d2/727bd2b7be9569cd4a920fb061579cef.jpg'*/
-                src={image}
+                src={image || '/public/images/user.png'}
               />
             </Modal>
           )}

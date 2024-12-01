@@ -1,4 +1,4 @@
-import { setCookie, getCookie } from './cookie';
+import { setCookie, getCookie, deleteCookie } from './cookie';
 import { ICategory, TRestaurant, TUser } from '../models/types';
 
 /*const URL = process.env.FOODMAP_API_URL;*/
@@ -157,11 +157,15 @@ export const logoutApi = () =>
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
+      authorization: `Bearer ${getCookie('accessToken')}`,
     },
     body: JSON.stringify({
-      token: localStorage.getItem('refreshToken'),
+      refresh: localStorage.getItem('refreshToken'), // Измените 'token' на 'refresh'
     }),
-  }).then((res) => checkResponse<TServerResponse<{}>>(res));
+  }).then((res) => {
+    checkResponse<TServerResponse<{}>>(res);
+    deleteCookie('accessToken');
+  });
 
 type TRestaurantsResponse = TServerResponse<{
   data: TRestaurant[];

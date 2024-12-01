@@ -82,7 +82,7 @@ export const RestaurantsContainer: FC<{
       <div className="flex items-center justify-center cursor-pointer gap-5 text-black-500 py-8 text-lg lg:text-xl xl:text-2xl xl:py-10">
         <Link
           to={`/restaurants`}
-          className="hover:text-green-600 hover:border-b-green-600 hover:border-b "
+          className="hover:text-green-600 hover:border-b-green-600 hover:border-b focus:outline-none focus:border-b focus:text-green-600 focus:border-b-green-600"
         >
           Ничего не найдено <span>&#9785;</span>
         </Link>

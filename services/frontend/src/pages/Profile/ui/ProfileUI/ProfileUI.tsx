@@ -30,7 +30,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
         <NavLink
           to={'/profile'}
           className={({ isActive }) =>
-            `flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl ${
+            `flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl focus:outline-none ${
               isActive ? '' : ''
             }`
           }

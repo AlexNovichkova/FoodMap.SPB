@@ -12,7 +12,7 @@ import { ForgotPassword } from 'src/widgets/Auth/ForgotPassword';
 import { Profile } from 'src/pages/Profile';
 import { ProtectedRoute } from './ProtectedRoute';
 import { useEffect } from 'react';
-import { getUser } from 'src/features/slices/userSlice';
+import { checkUserAuth, getUser } from 'src/features/slices/userSlice';
 import { fetchRestaurants } from 'src/features/slices/restaurantsSlice';
 import { RestaurantPage } from 'src/pages/RestaurantPage';
 import { testCategorys, testRestaurants, testUsers } from './testData';
@@ -37,6 +37,8 @@ export const App = () => {
       type: 'categories/getAllCategories/fulfilled',
       payload: testCategorys,
     });
+
+    dispatch(checkUserAuth());
 
     dispatch(getUser());
     /*dispatch(setTestUser(testUsers[0]));*/
@@ -92,7 +94,14 @@ export const App = () => {
           />
           <Route path="*" element={<NotFound404 />} />
           <Route path="/profile">
-            <Route index element={<Profile />} />
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
           </Route>
           <Route path="/restaurants/:id" element={<RestaurantPage />} />
         </Routes>
