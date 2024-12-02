@@ -50,7 +50,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     recommended = models.JSONField(blank=True, null=True)
     
 
-
     # Свойство USERNAME_FIELD сообщает нам, какое поле мы будем использовать
     # для входа в систему. В данном случае мы хотим использовать почту.
     USERNAME_FIELD = 'email'
