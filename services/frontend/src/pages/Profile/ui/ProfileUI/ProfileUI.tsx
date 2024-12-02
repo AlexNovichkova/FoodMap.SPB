@@ -4,7 +4,7 @@ import { useSelector } from 'src/features/store';
 import { PersonContainer } from '../PersonContainer';
 import { RestaurantsContainer } from 'src/widgets/RestaurantsContainer';
 import { Input } from 'src/shared/ui/Input';
-import { PasswordInput } from 'src/shared/ui/PasswordInput';
+/*import { PasswordInput } from 'src/shared/ui/PasswordInput';*/
 import { MainButton } from 'src/shared/ui/MainButton';
 import { ProfileMenu } from '../../Profile';
 
@@ -13,10 +13,7 @@ export type ProfileMenuUIProps = {
   handleLogout: () => void;
 };
 
-export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
-  pathname,
-  handleLogout,
-}) => {
+export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
   const user = useSelector((state) => state.user.user); // Получаем объект пользователя
   const likedRestaurants = user?.liked || []; // Используем опциональную цепочку
   const recommendedRestaurants = user?.recommended || []; // Используем опциональную цепочку
@@ -79,7 +76,7 @@ export type ProfileUIProps = {
   formValue: {
     username: string;
     email: string;
-    password: string;
+    image: string;
   };
   isFormChanged: boolean;
   handleLogout: () => void;
@@ -143,17 +140,6 @@ export const ProfileUI: FC<ProfileUIProps> = ({
               label="Почта"
               error={false}
               errorText=""
-            />
-          </div>
-          <div className="pb-6">
-            <PasswordInput
-              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
-              type={'password'}
-              placeholder={'Пароль'}
-              onChange={handleInputChange}
-              value={formValue.password}
-              name={'password'}
-              label="Пароль"
             />
           </div>
           {isFormChanged && (
