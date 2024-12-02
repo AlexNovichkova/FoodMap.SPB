@@ -23,7 +23,7 @@ export type TRestaurant = {
   address: string;
   cuisine_type: string[];
   rating: number;
-  photo_links: string;
+  photo_links?: string;
   prices?: string;
   description?: string;
 };

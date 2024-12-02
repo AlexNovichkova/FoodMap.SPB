@@ -168,7 +168,7 @@ export const logoutApi = () =>
   });
 
 type TRestaurantsResponse = TServerResponse<{
-  data: TRestaurant[];
+  restaurants: TRestaurant[];
 }>;
 
 type TCategorysResponse = TServerResponse<{
@@ -188,7 +188,7 @@ export const getRestaurantsApi = () =>
   fetch(`${URL}/api/restaurants/`)
     .then((res) => checkResponse<TRestaurantsResponse>(res))
     .then((data) => {
-      if (data?.success) return data.data;
+      if (data?.success) return data.restaurants;
       console.log(data);
       return Promise.reject(data);
     });

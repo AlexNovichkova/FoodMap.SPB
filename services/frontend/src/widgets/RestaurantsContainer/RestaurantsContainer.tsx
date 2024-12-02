@@ -57,10 +57,10 @@ export const RestaurantsContainer: FC<{
     dispatch(fetchRestaurants());
   }, [dispatch]);
 
-  const filteredRestaurants = shouldFilterByRating
-    ? restaurants.filter((restaurant) => restaurant.rating > 4.7)
-    : restaurants;
-  // Определяем, какие рестораны показывать
+  const filteredRestaurants =
+    shouldFilterByRating && restaurants
+      ? restaurants.filter((restaurant) => restaurant.rating > 4.7)
+      : restaurants || []; // Если restaurants undefined, возвращаем пустой массив
 
   const handleNext = () => {
     if (currentIndex + itemsPerPage < filteredRestaurants.length) {

@@ -6,7 +6,8 @@ import { MainButton } from 'src/shared/ui/MainButton';
 import { RestaurantCard } from 'src/widgets/RestaurantCard';
 
 export const MoreSection = () => {
-  const restaurants = useSelector((state) => state.restaurants.restaurants);
+  const restaurants =
+    useSelector((state) => state.restaurants.restaurants) || [];
   const isLoading = useSelector(selectIsLoading);
   return (
     <section className="mb-14">
@@ -20,7 +21,7 @@ export const MoreSection = () => {
           <div className="flex flex-wrap gap-8 md:gap-6 m-auto justify-center md:justify-normal ">
             {isLoading ? (
               <Preloader />
-            ) : (
+            ) : restaurants.length > 0 ? (
               restaurants
                 .slice(0, 10)
                 .map((restaurant) => (
@@ -34,6 +35,10 @@ export const MoreSection = () => {
                     cuisine_type={restaurant.cuisine_type}
                   />
                 ))
+            ) : (
+              <p className="flex items-center justify-center cursor-pointer gap-5 text-black-500 py-8 text-lg lg:text-xl xl:text-2xl xl:py-10">
+                Нет доступных ресторанов
+              </p> // Сообщение, если ресторанов нет
             )}
           </div>
         </div>

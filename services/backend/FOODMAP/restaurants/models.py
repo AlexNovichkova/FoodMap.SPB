@@ -8,7 +8,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=255)
     prices = models.CharField(max_length=50)
     cuisine_type = models.JSONField()
-    photo_links = models.JSONField(blank=True, null=True)
+    photo_links = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
