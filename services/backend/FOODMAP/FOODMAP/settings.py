@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'cuisines',
     'corsheaders',
     "rest_framework_simplejwt.token_blacklist",
-]
+    'rest_framework_api_key',
+    ]
 
 AUTH_USER_MODEL = 'authentication.User'
 
@@ -65,6 +66,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     ]
+
+headers={
+  'Authorization': 'Token 8072f04f9a1eacbd52fcf7d8289a52245f2454eb'
+  }
 
 ROOT_URLCONF = 'FOODMAP.urls'
 
