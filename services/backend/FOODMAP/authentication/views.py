@@ -91,3 +91,8 @@ class UserAPIView(RetrieveUpdateAPIView):
                 "user": serializer.data
             }
             return Response(data, status=status.HTTP_200_OK)
+         # Добавляем обработку некорректных данных
+        return Response({
+            "success": False,
+            "errors": serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
