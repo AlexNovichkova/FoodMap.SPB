@@ -8,9 +8,11 @@ class CuisineView(viewsets.ModelViewSet):
     serializer_class = CuisineSerializer
     queryset = Cuisine.objects.all()
 
-    def get(self, request, *args, **kwargs):
+    def list(self, request, *args, **kwargs):
+        cuisines = self.get_queryset()
+        serializer = self.get_serializer(cuisines, many=True)
         data = {
-                    "success": True,
-                    "cuisines": self.queryset
-                }
+            "success": True,
+            "cuisines": serializer.data
+        }
         return Response(data, status=status.HTTP_200_OK)

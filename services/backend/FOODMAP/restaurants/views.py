@@ -10,10 +10,12 @@ class RestaurantView(viewsets.ModelViewSet):
     serializer_class = RestaurantSerializer
     queryset = Restaurant.objects.all()
 
-    def get(self, request, *args, **kwargs):
+    def list(self, request, *args, **kwargs):
+        restaurants = self.get_queryset()
+        serializer = self.get_serializer(restaurants, many=True)
         data = {
-                    "success": True,
-                    "restaurants": self.queryset
-                }
+            "success": True,
+            "restaurants": serializer.data
+        }
         return Response(data, status=status.HTTP_200_OK)
 
