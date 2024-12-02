@@ -1,5 +1,3 @@
-import jwt
-
 from datetime import datetime, timedelta
 
 from django.conf import settings 
@@ -47,6 +45,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    image = models.JSONField(blank=True, null=True)
+    liked = models.JSONField(blank=True, null=True)
+    recommended = models.JSONField(blank=True, null=True)
     
 
 

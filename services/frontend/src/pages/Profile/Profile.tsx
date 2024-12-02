@@ -25,6 +25,7 @@ export const Profile: FC = () => {
   };
 
   const [formValue, setFormValue] = useState({
+    image: '',
     username: '',
     email: '',
     password: '',
@@ -33,6 +34,7 @@ export const Profile: FC = () => {
   useEffect(() => {
     if (user) {
       setFormValue({
+        image: user.image || '',
         username: user.username || '',
         email: user.email || '',
         password: '',
@@ -41,6 +43,7 @@ export const Profile: FC = () => {
   }, [user]);
 
   const isFormChanged =
+    formValue.image !== user?.image ||
     formValue.username !== user?.username ||
     formValue.email !== user?.email ||
     !!formValue.password;
@@ -49,6 +52,7 @@ export const Profile: FC = () => {
     e.preventDefault();
     dispatch(updateUser(formValue));
     setFormValue({
+      image: formValue.image,
       username: formValue.username,
       email: formValue.email,
       password: '',
@@ -58,6 +62,7 @@ export const Profile: FC = () => {
   const handleCancel = (e: SyntheticEvent) => {
     e.preventDefault();
     setFormValue({
+      image: user?.image || '',
       username: user?.username || '',
       email: user?.email || '',
       password: '',

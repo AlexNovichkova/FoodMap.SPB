@@ -114,7 +114,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
               className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
               label="Загрузить изображение"
               type="file"
-              name={'file'}
+              name={'image'}
               onChange={handleInputChange}
               accept="image/*"
             />
