@@ -50,11 +50,11 @@ export const RestaurantsContainer: FC<{
 
   useEffect(() => {
     // Вместо вызова API, используем тестовые данные
-    dispatch({
+    /*dispatch({
       type: 'restaurants/getAllRestaurants/fulfilled',
       payload: testRestaurants,
-    });
-    /*dispatch(fetchRestaurants());*/
+    });*/
+    dispatch(fetchRestaurants());
   }, [dispatch]);
 
   const filteredRestaurants = shouldFilterByRating

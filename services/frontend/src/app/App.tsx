@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 import { checkUserAuth, getUser } from 'src/features/slices/userSlice';
 import { fetchRestaurants } from 'src/features/slices/restaurantsSlice';
 import { RestaurantPage } from 'src/pages/RestaurantPage';
-import { testCategorys, testRestaurants, testUsers } from './testData';
+import { testCategorys } from './testData';
 import { FindRestaurantPage } from 'src/pages/FindReastaurantPage';
 import { NotFound404 } from 'src/pages/NotFound404';
 
@@ -27,12 +27,12 @@ export const App = () => {
 
   useEffect(() => {
     {
-      /*dispatch(fetchRestaurants())*/
+      dispatch(fetchRestaurants());
     }
-    dispatch({
+    /*dispatch({
       type: 'restaurants/getAllRestaurants/fulfilled',
       payload: testRestaurants,
-    });
+    });*/
     dispatch({
       type: 'categories/getAllCategories/fulfilled',
       payload: testCategorys,

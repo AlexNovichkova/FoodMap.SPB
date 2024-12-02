@@ -17,7 +17,6 @@ import {
   fetchRestaurants,
   selectIsLoading,
 } from 'src/features/slices/restaurantsSlice';
-import { testRestaurants } from 'src/app/testData';
 
 export const RestaurantPage = () => {
   const location = useLocation();
