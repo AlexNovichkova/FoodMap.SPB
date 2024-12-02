@@ -1,14 +1,14 @@
-import { TUser } from 'src/entities/projects/models/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { TUser } from '../../entities/projects/models/types';
+import { deleteCookie, setCookie } from '../../entities/projects/api/cookie';
 import {
   getUserApi,
   loginUserApi,
-  TLoginData,
   logoutApi,
   registerUserApi,
-  updateUserApi
-} from 'src/entities/projects/api/api';
-import { deleteCookie, setCookie } from 'src/entities/projects/api/cookie';
+  TLoginData,
+  updateUserApi,
+} from '../../entities/projects/api/api';
 
 interface UserState {
   isAuthChecked: boolean;
@@ -19,7 +19,7 @@ interface UserState {
 }
 
 interface TRegisterData {
-  name: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -29,11 +29,10 @@ const initialState: UserState = {
   isAuthenticated: false,
   user: {
     email: '',
-    name: ' ',
-    image: ' '
+    username: ' ',
   },
   isLoading: false,
-  error: null
+  error: null,
 };
 
 export const registerUser = createAsyncThunk(
@@ -76,15 +75,10 @@ export const getUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    setTestUser(state, action) {
-      state.user = action.payload; // Устанавливаем тестового пользователя
-      state.isAuthenticated = true; // Устанавливаем флаг аутентификации
-    }
-  },
+  reducers: {},
   selectors: {
     selectUser: (state) => state.user,
-    authenticatedSelector: (state) => state.isAuthenticated
+    authenticatedSelector: (state) => state.isAuthenticated,
   },
   extraReducers: (builder) => {
     builder
@@ -116,6 +110,8 @@ const userSlice = createSlice({
         state.error = null;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
+        console.log(state.user);
+        location.replace('/profile');
       })
       .addCase(logoutUser.pending, (state, action) => {
         state.isLoading = true;
@@ -129,7 +125,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = {
           email: '',
-          name: ''
+          username: '',
         };
         state.error = null;
         state.isAuthenticated = false;
@@ -177,9 +173,9 @@ const userSlice = createSlice({
         state.user = action.payload.user;
         state.error = null;
       });
-  }
+  },
 });
 
 export const { selectUser, authenticatedSelector } = userSlice.selectors;
-export const { setTestUser } = userSlice.actions;
+
 export default userSlice.reducer;

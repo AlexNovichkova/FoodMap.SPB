@@ -1,10 +1,9 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
-
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'src/features/store';
-import { logoutUser, updateUser } from 'src/features/slices/userSlice';
 import { ProfileMenuUI, ProfileUI } from './ui/ProfileUI/ProfileUI';
+import { useDispatch, useSelector } from '../../features/store';
+import { logoutUser, updateUser } from '../../features/slices/userSlice';
 
 export const ProfileMenu: FC = () => {
   const { pathname } = useLocation();
@@ -26,21 +25,23 @@ export const Profile: FC = () => {
   };
 
   const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
-    password: ''
+    username: '',
+    email: '',
+    password: '',
   });
 
   useEffect(() => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      name: user?.name || '',
-      email: user?.email || ''
-    }));
+    if (user) {
+      setFormValue({
+        username: user.username || '',
+        email: user.email || '',
+        password: '',
+      });
+    }
   }, [user]);
 
   const isFormChanged =
-    formValue.name !== user?.name ||
+    formValue.username !== user?.username ||
     formValue.email !== user?.email ||
     !!formValue.password;
 
@@ -48,25 +49,25 @@ export const Profile: FC = () => {
     e.preventDefault();
     dispatch(updateUser(formValue));
     setFormValue({
-      name: user.name,
-      email: user.email,
-      password: ''
+      username: formValue.username,
+      email: formValue.email,
+      password: '',
     });
   };
 
   const handleCancel = (e: SyntheticEvent) => {
     e.preventDefault();
     setFormValue({
-      name: user.name,
-      email: user.email,
-      password: ''
+      username: user?.username || '',
+      email: user?.email || '',
+      password: '',
     });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValue((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 

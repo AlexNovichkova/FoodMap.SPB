@@ -12,10 +12,10 @@ import { ForgotPassword } from 'src/widgets/Auth/ForgotPassword';
 import { Profile } from 'src/pages/Profile';
 import { ProtectedRoute } from './ProtectedRoute';
 import { useEffect } from 'react';
-import { getUser, setTestUser } from 'src/features/slices/userSlice';
+import { checkUserAuth, getUser } from 'src/features/slices/userSlice';
 import { fetchRestaurants } from 'src/features/slices/restaurantsSlice';
 import { RestaurantPage } from 'src/pages/RestaurantPage';
-import { testRestaurants, testUsers } from './testData';
+import { testCategorys, testRestaurants, testUsers } from './testData';
 import { FindRestaurantPage } from 'src/pages/FindReastaurantPage';
 import { NotFound404 } from 'src/pages/NotFound404';
 
@@ -31,11 +31,17 @@ export const App = () => {
     }
     dispatch({
       type: 'restaurants/getAllRestaurants/fulfilled',
-      payload: testRestaurants
+      payload: testRestaurants,
+    });
+    dispatch({
+      type: 'categories/getAllCategories/fulfilled',
+      payload: testCategorys,
     });
 
-    /*dispatch(getUser());*/
-    dispatch(setTestUser(testUsers[0]));
+    dispatch(checkUserAuth());
+
+    dispatch(getUser());
+    /*dispatch(setTestUser(testUsers[0]));*/
     /*dispatch({
       type: 'user/getUser/fulfilled',
       payload: testUsers
@@ -49,10 +55,10 @@ export const App = () => {
     <>
       <Layout>
         <Routes location={backgroundLocation || location}>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/restaurants' element={<FindRestaurantPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/restaurants" element={<FindRestaurantPage />} />
           <Route
-            path='/login'
+            path="/login"
             element={
               <ProtectedRoute onlyUnAuth>
                 <Modal title={'Войти'} onClose={onClose}>
@@ -62,7 +68,7 @@ export const App = () => {
             }
           />
           <Route
-            path='/register'
+            path="/register"
             element={
               <ProtectedRoute onlyUnAuth>
                 <Register />
@@ -71,7 +77,7 @@ export const App = () => {
           />
 
           <Route
-            path='/forgot-password'
+            path="/forgot-password"
             element={
               <ProtectedRoute onlyUnAuth>
                 <ForgotPassword />
@@ -79,23 +85,30 @@ export const App = () => {
             }
           />
           <Route
-            path='/reset-password'
+            path="/reset-password"
             element={
               <ProtectedRoute onlyUnAuth>
                 <ResetPassword />
               </ProtectedRoute>
             }
           />
-          <Route path='*' element={<NotFound404 />} />
-          <Route path='/profile'>
-            <Route index element={<Profile />} />
+          <Route path="*" element={<NotFound404 />} />
+          <Route path="/profile">
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
           </Route>
-          <Route path='/restaurants/:id' element={<RestaurantPage />} />
+          <Route path="/restaurants/:id" element={<RestaurantPage />} />
         </Routes>
         {backgroundLocation && (
           <Routes>
             <Route
-              path='/login'
+              path="/login"
               element={
                 <ProtectedRoute onlyUnAuth>
                   <Modal title={'Войти'} onClose={onClose}>

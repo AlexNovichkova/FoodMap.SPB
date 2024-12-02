@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getRestaurantsApi } from 'src/entities/projects/api/api';
-import { TRestaurant } from 'src/entities/projects/models/types';
+import { getRestaurantsApi } from '../../entities/projects/api/api';
+import { TRestaurant } from '../../entities/projects/models/types';
 
 type TRestaurantsState = {
   restaurants: TRestaurant[];
@@ -11,7 +11,7 @@ type TRestaurantsState = {
 const initialState: TRestaurantsState = {
   restaurants: [],
   isLoading: true,
-  error: null
+  error: null,
 };
 
 export const fetchRestaurants = createAsyncThunk(
@@ -24,7 +24,7 @@ const restaurantsSlice = createSlice({
   reducers: {},
   selectors: {
     selectRestaurants: (sliceState) => sliceState.restaurants,
-    selectIsLoading: (sliceState) => sliceState.isLoading
+    selectIsLoading: (sliceState) => sliceState.isLoading,
   },
   extraReducers: (builder) => {
     builder
@@ -40,7 +40,7 @@ const restaurantsSlice = createSlice({
         state.restaurants = action.payload;
         state.isLoading = false;
       });
-  }
+  },
 });
 export const { selectRestaurants, selectIsLoading } =
   restaurantsSlice.selectors;

@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { Dispatch, SetStateAction } from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { PageUIProps } from 'src/entities/projects/models/types';
 import { Input } from 'src/shared/ui/Input';
@@ -21,7 +20,7 @@ export const ResetPasswordUI: FC<ResetPasswordUIProps> = ({
   setPassword,
   handleSubmit,
   token,
-  setToken
+  setToken,
 }) => {
   const navigate = useNavigate();
   const openLoginModal = () => {
@@ -29,38 +28,38 @@ export const ResetPasswordUI: FC<ResetPasswordUIProps> = ({
     navigate('/login', { state: { background: { pathname, search } } });
   };
   return (
-    <main className='pt-20 mx-5 md:m-auto md:w-[50%] '>
+    <main className="pt-20 mx-5 md:m-auto md:w-[50%] ">
       <div className={`pt-0 md:pt-3 xl:w-full xl:px-4`}>
-        <h3 className='pb-6   2xl:text-3xl text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl'>
+        <h3 className="pb-6   2xl:text-3xl text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl">
           Восстановление пароля
         </h3>
-        <form className={`pb-15 `} name='login' onSubmit={handleSubmit}>
-          <div className='pb-6'>
+        <form className={`pb-15 `} name="login" onSubmit={handleSubmit}>
+          <div className="pb-6">
             <PasswordInput
-              className='w-full  md:min-w-[40%] outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
+              className="w-full  md:min-w-[40%] outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              name='password'
-              placeholder='Новый пароль'
-              label='Пароль'
+              name="password"
+              placeholder="Новый пароль"
+              label="Пароль"
             />
           </div>
-          <div className='pb-6'>
+          <div className="pb-6">
             <Input
-              className='w-full  md:min-w-[40%] outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
-              type='text'
-              placeholder='Введите код из письма'
+              className="w-full  md:min-w-[40%] outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+              type="text"
+              placeholder="Введите код из письма"
               onChange={(e) => setToken(e.target.value)}
               value={token}
-              name='token'
+              name="token"
             />
           </div>
-          <div className=' flex items-center min-h-16'>
+          <div className=" flex items-center min-h-16">
             <MainButton
-              className='  w-full  md:min-w-[40%] focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange'
-              type='submit'
-              data-cy='closeX'
-              title='Сохранить'
+              className="  w-full  md:min-w-[40%] focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange"
+              type="submit"
+              data-cy="closeX"
+              title="Сохранить"
             />
           </div>
           {errorText && (

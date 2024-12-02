@@ -1,11 +1,11 @@
-import { FC, Dispatch, SetStateAction, SyntheticEvent, useState } from 'react';
+import { FC, Dispatch, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 import { PageUIProps } from 'src/entities/projects/models/types';
-import { useDispatch } from 'src/features/store';
+
 import { Input } from 'src/shared/ui/Input';
 import { MainButton } from 'src/shared/ui/MainButton';
 import { PasswordInput } from 'src/shared/ui/PasswordInput';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
 export type LoginUIProps = PageUIProps & {
   password: string;
   setPassword: Dispatch<SetStateAction<string>>;
@@ -17,36 +17,36 @@ export const LoginUI: FC<LoginUIProps> = ({
   errorText,
   handleSubmit,
   password,
-  setPassword
+  setPassword,
 }) => {
   return (
     <div className={`pt-0 md:pt-3 xl:w-full xl:px-4 `}>
-      <h3 className='pb-6 text-lg text-black-700   font-medium lg:text-xl xl:text-2xl  2xl:text-3xl'>
+      <h3 className="pb-6 text-lg text-black-700   font-medium lg:text-xl xl:text-2xl  2xl:text-3xl">
         Вход
       </h3>
-      <form className={`pb-15 `} name='login' onSubmit={handleSubmit}>
+      <form className={`pb-15 `} name="login" onSubmit={handleSubmit}>
         <>
-          <div className='pb-6'>
+          <div className="pb-6">
             <Input
-              className='w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
-              type='email'
-              placeholder='E-mail'
+              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+              type="email"
+              placeholder="E-mail"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              name='email'
+              name="email"
               error={false}
-              errorText=''
+              errorText=""
             />
           </div>
-          <div className='pb-6'>
+          <div className="pb-6">
             <PasswordInput
-              className='w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
-              placeholder='Пароль'
+              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+              placeholder="Пароль"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              name='password'
-              label='Пароль'
-              type='password'
+              name="password"
+              label="Пароль"
+              type="password"
               required
             />
           </div>
@@ -60,7 +60,7 @@ export const LoginUI: FC<LoginUIProps> = ({
       >
         Вы - новый пользователь?
         <Link
-          to='/register'
+          to="/register"
           className={`pl-2 text-accent_green outline-none font-medium focus:text-green-400 focus:border-b hover:text-green-400 hover:border-b`}
         >
           Зарегистрироваться
@@ -77,12 +77,13 @@ export const LoginUI: FC<LoginUIProps> = ({
           Восстановить пароль
         </Link>
       </div>
-      <div className=' flex items-center min-h-16'>
+      <div className=" flex items-center min-h-16">
         <MainButton
-          className=' w-full focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange'
-          type='submit'
-          data-cy='closeX'
-          title='Войти'
+          className=" w-full focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange"
+          type="submit"
+          data-cy="closeX"
+          title="Войти"
+          onClick={handleSubmit}
         />
       </div>
     </div>

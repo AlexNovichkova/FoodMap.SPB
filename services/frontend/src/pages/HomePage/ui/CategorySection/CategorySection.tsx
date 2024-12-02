@@ -4,12 +4,13 @@ import { CategoryCard } from './ui/CategoryCard';
 import { useSelector } from 'src/features/store';
 
 export const CategorySection = () => {
-  const restaurants = useSelector((state) => state.restaurants.restaurants);
-  const uniqueCategories = Array.from(
+  /*const restaurants = useSelector((state) => state.restaurants.restaurants);*/
+  const categories = useSelector((state) => state.categories.categories);
+  /*const uniqueCategories = Array.from(
     new Set(
       restaurants.flatMap((restaurant) => restaurant.category.map((cat) => cat))
     )
-  );
+  );*/
   // Состояние для отслеживания, раскрыты ли дополнительные категории
   const [showAll, setShowAll] = useState(false);
 
@@ -18,14 +19,14 @@ export const CategorySection = () => {
     setShowAll((prev) => !prev);
   };
   return (
-    <section className=' bg_section_category'>
-      <div className=' pt-20 mx-5 md:m-auto md:w-[90%]'>
-        <div className=' flex flex-col gap-6 justify-between md:gap-0 md:flex-row'>
-          <h2 className=' flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl'>
+    <section className=" bg_section_category">
+      <div className=" pt-20 mx-5 md:m-auto md:w-[90%]">
+        <div className=" flex flex-col gap-6 justify-between md:gap-0 md:flex-row">
+          <h2 className=" flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl">
             Выбери любимую кухню
           </h2>
-          <div className=' flex flex-row gap-6 items-center'>
-            <span className=' text-lg font-bold text-accent_green md:text-base lg:text-xl xl:text-2xl'>
+          <div className=" flex flex-row gap-6 items-center">
+            <span className=" text-lg font-bold text-accent_green md:text-base lg:text-xl xl:text-2xl">
               Посмотреть все категории
             </span>
             <ArrowButton
@@ -36,9 +37,9 @@ export const CategorySection = () => {
             />
           </div>
         </div>
-        <div className=' mt-16 mb-16 gap-3 lg:gap-6 xl:gap-8 flex flex-wrap transition-all'>
-          {uniqueCategories
-            .slice(0, showAll ? uniqueCategories.length : 8)
+        <div className=" mt-16 mb-16 gap-3 lg:gap-6 xl:gap-8 flex flex-wrap transition-all">
+          {categories
+            .slice(0, showAll ? categories.length : 8)
             .map((category) => (
               <CategoryCard
                 key={category.name}

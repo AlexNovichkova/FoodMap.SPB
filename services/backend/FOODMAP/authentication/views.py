@@ -20,9 +20,14 @@ class UserRegistrationAPIView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         token = RefreshToken.for_user(user)
-        data = serializer.data
-        data["tokens"] = {"refresh": str(token), "access": str(token.access_token)}
+        data = {
+            "success": True,  # Успешная регистрация
+            "accessToken": str(token.access_token),
+            "refreshToken": str(token),
+            "user": serializer.data,  # Оборачиваем данные о пользователе в объект user
+        }
         return Response(data, status=status.HTTP_201_CREATED)
+        
 
 
 class UserLoginAPIView(GenericAPIView):
@@ -34,10 +39,15 @@ class UserLoginAPIView(GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
-        serializer = serializers.CustomUserSerializer(user)
+        serializer = serializers.UserSerializer(user)
         token = RefreshToken.for_user(user)
-        data = serializer.data
-        data["tokens"] = {"refresh": str(token), "access": str(token.access_token)}
+        
+        data = {
+            "success": True,  # Успешная регистрация
+            "accessToken": str(token.access_token),
+            "refreshToken": str(token),
+            "user": serializer.data,  
+        }
         return Response(data, status=status.HTTP_200_OK)
 
 
@@ -50,10 +60,9 @@ class UserLogoutAPIView(GenericAPIView):
             refresh_token = request.data["refresh"]
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return Response(status=status.HTTP_205_RESET_CONTENT)
+            return Response({"success": True, "message": "Successful logout"}, status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-
+            return Response({"success": False, "message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class UserAPIView(RetrieveUpdateAPIView):
 
@@ -62,3 +71,12 @@ class UserAPIView(RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+    def get(self, request, *args, **kwargs):
+        user = self.get_object()
+        serializer = self.get_serializer(user)
+        data = {
+            "success": True,  # Успешный запрос
+            "user": serializer.data  # Данные о пользователе
+        }
+        return Response(data, status=status.HTTP_200_OK)
