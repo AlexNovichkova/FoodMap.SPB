@@ -23,7 +23,7 @@ export const MoreSection = () => {
               <Preloader />
             ) : restaurants.length > 0 ? (
               restaurants
-                .slice(0, 10)
+                .slice(0, 20)
                 .map((restaurant) => (
                   <RestaurantCard
                     id={restaurant.id}

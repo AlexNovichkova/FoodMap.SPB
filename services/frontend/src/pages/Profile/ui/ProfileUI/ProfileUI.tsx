@@ -113,7 +113,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
               type="file"
               name={'image'}
               onChange={handleInputChange}
-              accept="image/*"
+              accept="image/png,image/jpeg,image/gif"
             />
           </div>
           <div className="pb-6">

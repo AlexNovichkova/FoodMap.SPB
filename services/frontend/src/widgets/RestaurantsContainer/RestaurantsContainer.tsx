@@ -6,11 +6,7 @@ import {
   fetchRestaurants,
   selectIsLoading,
 } from 'src/features/slices/restaurantsSlice';
-import { testRestaurants } from 'src/app/testData';
-import {
-  TNewRestaurant,
-  TRestaurant,
-} from 'src/entities/projects/models/types';
+import { TRestaurant } from 'src/entities/projects/models/types';
 import { Link } from 'react-router-dom';
 import { Preloader } from 'src/app/Preloader';
 
@@ -59,7 +55,7 @@ export const RestaurantsContainer: FC<{
 
   const filteredRestaurants =
     shouldFilterByRating && restaurants
-      ? restaurants.filter((restaurant) => restaurant.rating > 4.7)
+      ? restaurants.filter((restaurant) => restaurant.rating > 4.7).slice(0, 20)
       : restaurants || []; // Если restaurants undefined, возвращаем пустой массив
 
   const handleNext = () => {

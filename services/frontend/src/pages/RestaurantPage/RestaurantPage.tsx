@@ -9,8 +9,9 @@ import { HeartIcon } from './ui/HeartIcon';
 import {
   authenticatedSelector,
   checkUserAuth,
+  updateUser,
 } from 'src/features/slices/userSlice';
-import { fetchCoordinates, updateUserApi } from 'src/entities/projects/api/api';
+import { fetchCoordinates } from 'src/entities/projects/api/api';
 import { RestaurantMapComponent } from './ui/RestaurantMapComponent/RestaurantMapComponent';
 import { Preloader } from 'src/app/Preloader';
 import {
@@ -79,7 +80,7 @@ export const RestaurantPage = () => {
       : [...likedRestaurants, restaurant];
 
     setIsLiked(!isLiked);
-    updateUserApi({ liked: updatedLiked });
+    dispatch(updateUser({ liked: updatedLiked }));
   };
 
   if (isLoading) {
@@ -102,9 +103,12 @@ export const RestaurantPage = () => {
               />
             </div>
             <div className=" flex flex-col gap-3 md:max-w-[50%] xl:max-w-[60%]">
-              <div className=" text-black-600 text-left flex flex-row gap-2 items-center">
-                <span className=" font-medium text-base md:text-xl lg:text-2xl xl:text-3xl break-words">
-                  {restaurant.description}
+              <div className=" text-left flex flex-row gap-2 items-center">
+                <span className=" text-accent_orange flex flex-col gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl break-words  items-start">
+                  Описание:
+                  <span className=" text-black-600 font-medium text-base md:text-xl lg:text-2xl xl:text-3xl break-words">
+                    {restaurant.description}
+                  </span>
                 </span>
               </div>
               <div className=" text-green-600 text-left flex flex-row gap-2 items-center">

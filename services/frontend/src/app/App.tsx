@@ -39,7 +39,6 @@ export const App = () => {
     });
 
     dispatch(checkUserAuth());
-
     dispatch(getUser());
     /*dispatch(setTestUser(testUsers[0]));*/
     /*dispatch({
