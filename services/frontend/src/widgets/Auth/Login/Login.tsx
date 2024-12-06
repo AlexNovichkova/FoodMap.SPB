@@ -10,7 +10,7 @@ export const Login: FC = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const dispatch = useDispatch();
-
+  let isValid = true;
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -21,9 +21,30 @@ export const Login: FC = () => {
     return passwordRegex.test(password);
   };
 
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (!password || !validatePassword(password)) {
+      setPasswordError(true);
+      setErrorText('Пароль должен содержать не менее 6 символов.');
+      isValid = false;
+    } else {
+      setPasswordError(false);
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (!email || !validateEmail(email)) {
+      setEmailError(true);
+      setErrorText('Введите корректный email.');
+      isValid = false;
+    } else {
+      setEmailError(false);
+    }
+  };
+
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    let isValid = true;
 
     if (!email || !validateEmail(email)) {
       setEmailError(true);
@@ -63,6 +84,8 @@ export const Login: FC = () => {
     <LoginUI
       errorText={errorText}
       email={email}
+      handleEmailChange={handleEmailChange}
+      handlePasswordChange={handlePasswordChange}
       setEmail={setEmail}
       password={password}
       setPassword={setPassword}

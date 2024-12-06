@@ -9,9 +9,9 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   extClassName?: string;
   error?: boolean;
   errorText?: string;
-  customIcon?: React.ReactNode;
   onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   extClassNameInput?: string;
+  handleEmailChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -26,7 +26,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       placeholder,
       error,
       errorText,
-      onIconClick,
       className,
       ...props
     },
@@ -35,7 +34,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const id = nanoid();
 
     const inputClass = error
-      ? ' outline-accent_orange focus:outline-accent_orange'
+      ? ' outline-accent_orange outline outline-1 py-1 px-2 focus:outline-accent_orange active:outline-accent_orange w-full rounded-[8px] text-base lg:text-lg 2xl:text-xl'
       : 'outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green';
 
     return (

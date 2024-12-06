@@ -18,6 +18,7 @@ import { RestaurantPage } from 'src/pages/RestaurantPage';
 import { testCategorys } from './testData';
 import { FindRestaurantPage } from 'src/pages/FindReastaurantPage';
 import { NotFound404 } from 'src/pages/NotFound404';
+import { fetchCategories } from 'src/features/slices/categoriesSlice';
 
 export const App = () => {
   const location = useLocation();
@@ -29,14 +30,17 @@ export const App = () => {
     {
       dispatch(fetchRestaurants());
     }
+    {
+      dispatch(fetchCategories());
+    }
     /*dispatch({
       type: 'restaurants/getAllRestaurants/fulfilled',
       payload: testRestaurants,
     });*/
-    dispatch({
+    /*dispatch({
       type: 'categories/getAllCategories/fulfilled',
       payload: testCategorys,
-    });
+    });*/
 
     dispatch(checkUserAuth());
     dispatch(getUser());

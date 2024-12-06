@@ -3,7 +3,7 @@ export type TPriceMode = 'дешево' | 'средне' | 'дорого';
 export interface ICategory {
   id: number;
   name: string;
-  image?: string;
+  photo_link?: string;
 }
 
 export type TNewRestaurant = {
@@ -48,5 +48,7 @@ export type PageUIProps = {
   errorText: string | undefined;
   email: string;
   setEmail: Dispatch<SetStateAction<string>>;
+  handlePasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: SyntheticEvent) => void;
 };

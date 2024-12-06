@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowButton } from 'src/shared/ui/ArrowButton';
 import { CategoryCard } from './ui/CategoryCard';
 import { useSelector } from 'src/features/store';
+import { Preloader } from 'src/app/Preloader';
+import { selectIsLoading } from 'src/features/slices/categoriesSlice';
 
 export const CategorySection = () => {
   /*const restaurants = useSelector((state) => state.restaurants.restaurants);*/
   const categories = useSelector((state) => state.categories.categories);
+  const isLoading = useSelector(selectIsLoading);
   /*const uniqueCategories = Array.from(
     new Set(
       restaurants.flatMap((restaurant) => restaurant.category.map((cat) => cat))
@@ -37,19 +40,27 @@ export const CategorySection = () => {
             />
           </div>
         </div>
-        <div className=" mt-16 mb-16 gap-3 lg:gap-6 xl:gap-8 flex flex-wrap transition-all">
-          {categories
-            .slice(0, showAll ? categories.length : 8)
-            .map((category) => (
-              <CategoryCard
-                key={category.name}
-                name={category.name}
-                src={
-                  category.image ||
-                  'https://avatars.mds.yandex.net/i?id=2eb19203b95d3fe798621110fe66e333_l-5235083-images-thumbs&n=13'
-                }
-              />
-            ))}
+        <div className=" mt-16 mb-16 gap-3 lg:gap-6 xl:gap-8 category_grid transition-all">
+          {isLoading ? (
+            <Preloader />
+          ) : categories.length > 0 ? (
+            categories
+              .slice(0, showAll ? categories.length : 8)
+              .map((category) => (
+                <CategoryCard
+                  key={category.name}
+                  name={category.name}
+                  src={
+                    category.photo_link ||
+                    'https://avatars.mds.yandex.net/i?id=2eb19203b95d3fe798621110fe66e333_l-5235083-images-thumbs&n=13'
+                  }
+                />
+              ))
+          ) : (
+            <p className="flex items-center justify-center cursor-pointer gap-5 text-black-500 py-8 text-lg lg:text-xl xl:text-2xl xl:py-10">
+              Нет доступных категорий
+            </p>
+          )}
         </div>
       </div>
     </section>

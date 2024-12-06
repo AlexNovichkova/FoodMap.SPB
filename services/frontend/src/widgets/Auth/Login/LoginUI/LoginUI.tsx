@@ -20,6 +20,8 @@ export const LoginUI: FC<LoginUIProps> = ({
   setPassword,
   emailError,
   passwordError,
+  handleEmailChange,
+  handlePasswordChange,
 }) => {
   return (
     <div className={`pt-0 md:pt-3 xl:w-full xl:px-4 `}>
@@ -34,6 +36,7 @@ export const LoginUI: FC<LoginUIProps> = ({
               type="email"
               placeholder="E-mail"
               onChange={(e) => setEmail(e.target.value)}
+              handleEmailChange={handleEmailChange}
               value={email}
               name="email"
               error={emailError}
@@ -45,6 +48,7 @@ export const LoginUI: FC<LoginUIProps> = ({
               className={'w-full '}
               placeholder="Пароль"
               onChange={(e) => setPassword(e.target.value)}
+              handlePasswordChange={handlePasswordChange}
               value={password}
               name="password"
               label="Пароль"

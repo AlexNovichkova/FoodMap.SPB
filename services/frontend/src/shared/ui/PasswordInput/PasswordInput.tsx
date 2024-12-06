@@ -8,6 +8,7 @@ interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   extClassName?: string;
   error?: boolean;
   errorText?: string;
+  handlePasswordChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(

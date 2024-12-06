@@ -172,14 +172,14 @@ type TRestaurantsResponse = TServerResponse<{
 }>;
 
 type TCategorysResponse = TServerResponse<{
-  data: ICategory[];
+  cuisines: ICategory[];
 }>;
 
 export const getCategoriesApi = () =>
-  fetch(`${URL}/api/categories/`)
+  fetch(`${URL}/api/cuisines/`)
     .then((res) => checkResponse<TCategorysResponse>(res))
     .then((data) => {
-      if (data?.success) return data.data;
+      if (data?.success) return data.cuisines;
       console.log(data);
       return Promise.reject(data);
     });
