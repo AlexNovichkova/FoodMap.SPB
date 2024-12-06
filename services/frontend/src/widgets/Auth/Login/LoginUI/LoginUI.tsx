@@ -18,6 +18,8 @@ export const LoginUI: FC<LoginUIProps> = ({
   handleSubmit,
   password,
   setPassword,
+  emailError,
+  passwordError,
 }) => {
   return (
     <div className={`pt-0 md:pt-3 xl:w-full xl:px-4 `}>
@@ -28,19 +30,19 @@ export const LoginUI: FC<LoginUIProps> = ({
         <>
           <div className="pb-6">
             <Input
-              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+              className="w-full "
               type="email"
               placeholder="E-mail"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               name="email"
-              error={false}
-              errorText=""
+              error={emailError}
+              errorText={emailError ? 'Введите корректный email' : ''}
             />
           </div>
           <div className="pb-6">
             <PasswordInput
-              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+              className={'w-full '}
               placeholder="Пароль"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
@@ -48,10 +50,16 @@ export const LoginUI: FC<LoginUIProps> = ({
               label="Пароль"
               type="password"
               required
+              error={passwordError}
+              errorText={
+                passwordError ? 'Пароль должен быть не менее 6 символов' : ''
+              }
             />
           </div>
           {errorText && (
-            <p className={` text text_type_main-default pb-6`}>{errorText}</p>
+            <p className=" text-base lg:text-lg xl:text-xl 2xl:text-2xl text-accent_orange font-bold">
+              {errorText ? errorText : ''}
+            </p>
           )}
         </>
       </form>

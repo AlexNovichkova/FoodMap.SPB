@@ -43,6 +43,8 @@ export interface IAppState {
 }
 
 export type PageUIProps = {
+  emailError: boolean | undefined;
+  passwordError: boolean | undefined;
   errorText: string | undefined;
   email: string;
   setEmail: Dispatch<SetStateAction<string>>;

@@ -5,6 +5,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
+  className?: string;
   extClassName?: string;
   error?: boolean;
   errorText?: string;
@@ -26,6 +27,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       error,
       errorText,
       onIconClick,
+      className,
       ...props
     },
     ref
@@ -33,10 +35,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const id = nanoid();
 
     const inputClass = error
-      ? 'input_error'
-      : extClassNameInput
-        ? extClassNameInput
-        : 'input';
+      ? ' outline-accent_orange focus:outline-accent_orange'
+      : 'outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green';
 
     return (
       <div className={extClassName} data-testid={'div'}>
@@ -54,13 +54,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             type={type}
             name={name}
-            className={'text' + inputClass}
+            className={
+              className +
+              '  outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
+            }
             onChange={onChange}
             placeholder={placeholder}
             id={id}
             {...props}
           />
-          <span className={'error text'}>
+          <span
+            className={
+              'text-sm lg:text-base xl:text-lg 2xl:text-xl text-orange-400'
+            }
+          >
             {errorText === ' ' ? <span>&nbsp;</span> : errorText}
           </span>
         </div>
