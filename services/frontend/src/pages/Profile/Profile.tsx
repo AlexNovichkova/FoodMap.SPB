@@ -1,9 +1,10 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect } from 'react';
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ProfileMenuUI, ProfileUI } from './ui/ProfileUI/ProfileUI';
 import { useDispatch, useSelector } from '../../features/store';
 import { logoutUser, updateUser } from '../../features/slices/userSlice';
+import { useForm } from 'src/shared/ui/hooks';
 
 export const ProfileMenu: FC = () => {
   const { pathname } = useLocation();
@@ -20,92 +21,81 @@ export const Profile: FC = () => {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
+  const validateField = (name: string, value: string) => {
+    if (name === 'email')
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+        ? ''
+        : 'Введите корректный email.';
+    if (name === 'password')
+      return value.length >= 6 || value === ''
+        ? ''
+        : 'Пароль должен быть не менее 6 символов.';
+    if (name === 'username')
+      return value.length >= 2
+        ? ''
+        : 'Имя не может содержать менее 2 символов.';
+    return '';
+  };
+
   const handleLogout = () => {
     dispatch(logoutUser());
   };
 
-  const [formValue, setFormValue] = useState({
-    image: '',
-    username: '',
-    email: '',
-    password: '',
-  });
-
-  useEffect(() => {
-    if (user) {
-      setFormValue({
-        image: user.image || '',
-        username: user.username || '',
-        email: user.email || '',
-        password: '',
-      });
-    }
-  }, [user]);
-
-  const isFormChanged =
-    formValue.image !== user?.image ||
-    formValue.username !== user?.username ||
-    formValue.email !== user?.email ||
-    !!formValue.password;
-
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
-    dispatch(updateUser(formValue));
-    setFormValue({
-      image: formValue.image,
-      username: formValue.username,
-      email: formValue.email,
-      password: '',
-    });
-  };
+  const {
+    formData,
+    errors,
+    generalError,
+    handleInputChange,
+    handleBlur,
+    setFormData,
+    handleSubmit,
+  } = useForm(
+    { image: '', username: '', email: '', password: '' },
+    validateField
+  );
 
   const handleCancel = (e: SyntheticEvent) => {
     e.preventDefault();
-    setFormValue({
+    setFormData({
       image: user?.image || '',
       username: user?.username || '',
       email: user?.email || '',
       password: '',
     });
   };
-  const file2Base64 = (file: File): Promise<string> => {
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result?.toString() || '');
-      reader.onerror = (error) => reject(error);
-    });
-  };
 
-  const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, files } = e.target;
+  const isFormChanged =
+    formData.image !== user?.image ||
+    formData.username !== user?.username ||
+    formData.email !== user?.email ||
+    !!formData.password;
 
-    if (name === 'image' && files?.[0]) {
-      try {
-        const base64 = await file2Base64(files[0]);
-        setFormValue((prevState) => ({
-          ...prevState,
-          image: base64,
-        }));
-      } catch (error) {
-        console.error('Error converting file to Base64:', error);
-      }
-    } else {
-      setFormValue((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        image: user.image || '',
+        username: user.username || '',
+        email: user.email || '',
+        password: '',
+      });
     }
+  }, [user, setFormData]);
+
+  const onSubmit = () => {
+    dispatch(updateUser(formData));
   };
 
   return (
     <ProfileUI
       handleLogout={handleLogout}
-      formValue={formValue}
-      isFormChanged={isFormChanged}
       handleCancel={handleCancel}
-      handleSubmit={handleSubmit}
-      handleInputChange={handleInputChange}
+      generalError={generalError}
+      isFormChanged={isFormChanged}
+      formData={formData}
+      errors={errors}
+      onInputChange={handleInputChange}
+      onBlur={handleBlur}
+      onSubmit={() => handleSubmit(onSubmit)}
     />
   );
 };

@@ -3,6 +3,7 @@ import { Preloader } from 'src/app/Preloader';
 import { selectIsLoading } from 'src/features/slices/restaurantsSlice';
 import { useSelector } from 'src/features/store';
 import { RestaurantCard } from 'src/widgets/RestaurantCard';
+import { Pagination } from './ui/Pagination';
 
 export const FindRestaurantPage = () => {
   const restaurants = useSelector((state) => state.restaurants.restaurants);
@@ -21,12 +22,14 @@ export const FindRestaurantPage = () => {
         ? prev.filter((cat) => cat !== category)
         : [...prev, category]
     );
+    setCurrentPage(1); // Сброс на первую страницу
   };
 
   const handlePriceChange = (price: string) => {
     setSelectedPrices((prev) =>
       prev.includes(price) ? prev.filter((p) => p !== price) : [...prev, price]
     );
+    setCurrentPage(1); // Сброс на первую страницу
   };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,6 +38,7 @@ export const FindRestaurantPage = () => {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
+    setCurrentPage(1); // Сброс на первую страницу
   };
 
   const uniqueCategories = Array.from(
@@ -95,7 +99,7 @@ export const FindRestaurantPage = () => {
         <div className="flex flex-col p-4 mb-6 bg-white shadow-md md:p-6 2xl:p-10 md:mb-8 rounded-[8px] m-auto gap-3 xl:gap-0">
           {/* Поисковая строка */}
           <div className="xl:mb-4">
-            <h3 className="text-black-600 self-start font-bold text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl break-words mb-3">
+            <h3 className="text-black-600 self-start font-bold text-base mb-3 md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl 2xl:my-4 break-words">
               Поиск
             </h3>
             <div className="w-full">
@@ -104,11 +108,11 @@ export const FindRestaurantPage = () => {
                 placeholder="Поиск ресторана по названию..."
                 value={searchQuery}
                 onChange={handleSearchChange}
-                className="border p-2 w-full rounded-[8px] break-words"
+                className="border p-2 w-full rounded-[8px] break-words xl:text-xl 2xl:text-2xl outline-accent_green active:outline-accent_green"
               />
             </div>
           </div>
-          <h3 className="text-black-600 self-start font-bold text-base md:text-lg lg:text-xl xl:mb-3 xl:text-2xl 2xl:text-4xl break-words">
+          <h3 className="text-black-600 self-start font-bold text-base md:text-lg lg:text-xl xl:mb-3 2xl:my-4 xl:text-2xl 2xl:text-4xl break-words">
             Фильтры
           </h3>
           <div className="flex flex-wrap justify-between gap-6 ">
@@ -123,6 +127,7 @@ export const FindRestaurantPage = () => {
                     key={category}
                   >
                     <input
+                      className="xl:size-[15px] 2xl:size-[17px]"
                       type="checkbox"
                       value={category}
                       onChange={() => handleCategoryChange(category)}
@@ -143,6 +148,7 @@ export const FindRestaurantPage = () => {
                     key={price}
                   >
                     <input
+                      className="xl:size-[15px] 2xl:size-[17px]"
                       type="checkbox"
                       value={price}
                       onChange={() => handlePriceChange(price)}
@@ -169,7 +175,7 @@ export const FindRestaurantPage = () => {
         </div>
         <div className="flex justify-center items-center mt-8 mb-8">
           <div className="flex flex-wrap gap-8 md:gap-6 m-auto justify-center md:justify-normal ">
-            {isLoading ? ( // Условный рендеринг прелоадера или карты
+            {isLoading ? ( // Условный рендеринг прелоадера
               <Preloader />
             ) : currentRestaurants.length > 0 ? (
               currentRestaurants.map((restaurant) => (
@@ -191,6 +197,14 @@ export const FindRestaurantPage = () => {
           </div>
         </div>
         {/* Пагинация */}
+        {totalPages > 1 && (
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        )}
+        {/*
         <div
           className={`flex flex-wrap gap-2 mt-4 ${
             totalPages < 25 ? 'justify-center' : 'justify-start'
@@ -209,7 +223,7 @@ export const FindRestaurantPage = () => {
               {page}
             </button>
           ))}
-        </div>
+        </div>*/}
       </section>
     </main>
   );

@@ -34,14 +34,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const id = nanoid();
 
     const inputClass = error
-      ? ' outline-accent_orange outline outline-1 py-1 px-2 focus:outline-accent_orange active:outline-accent_orange w-full rounded-[8px] text-base lg:text-lg 2xl:text-xl'
-      : 'outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green';
+      ? ' w-full outline-accent_orange outline outline-1 py-1 px-2 focus:outline-accent_orange active:outline-accent_orange w-full rounded-[8px] text-base lg:text-lg 2xl:text-xl 3xl:text-2xl'
+      : ' w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl 3xl:text-2xl focus:outline-accent_green focus:outline-2 active:outline-accent_green';
 
     return (
       <div className={extClassName} data-testid={'div'}>
         {label && (
           <label
-            className={'text-base lg:text-lg 2xl:text-xl text-black-700'}
+            className={
+              'text-base lg:text-lg 2xl:text-xl 3xl:text-2xl text-black-700'
+            }
             htmlFor={id}
           >
             {label}
@@ -53,10 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             type={type}
             name={name}
-            className={
-              className +
-              '  outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green'
-            }
+            className={className + inputClass}
             onChange={onChange}
             placeholder={placeholder}
             id={id}

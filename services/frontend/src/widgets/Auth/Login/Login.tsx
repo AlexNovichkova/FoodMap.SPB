@@ -4,94 +4,62 @@ import { useDispatch } from 'src/features/store';
 import { LoginUI } from './LoginUI';
 
 export const Login: FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorText, setErrorText] = useState('');
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({ email: '', password: '' });
+  const [generalError, setGeneralError] = useState('');
   const dispatch = useDispatch();
-  let isValid = true;
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
-  const validatePassword = (password: string) => {
-    const passwordRegex = /^.{6,}$/;
-    return passwordRegex.test(password);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    if (!password || !validatePassword(password)) {
-      setPasswordError(true);
-      setErrorText('Пароль должен содержать не менее 6 символов.');
-      isValid = false;
-    } else {
-      setPasswordError(false);
+  const validateField = (name: string, value: string) => {
+    if (name === 'email') {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+        ? ''
+        : 'Введите корректный email.';
     }
+    if (name === 'password') {
+      return value.length >= 6 ? '' : 'Пароль должен быть не менее 6 символов.';
+    }
+    return '';
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    if (!email || !validateEmail(email)) {
-      setEmailError(true);
-      setErrorText('Введите корректный email.');
-      isValid = false;
-    } else {
-      setEmailError(false);
-    }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
+    setGeneralError(''); // Сбрасываем общую ошибку при любом изменении
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
   };
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    const newErrors: { email: string; password: string } = Object.keys(
+      formData
+    ).reduce((acc, key) => {
+      const error = validateField(key, formData[key as keyof typeof formData]);
+      return { ...acc, [key]: error };
+    }, {} as { email: string; password: string });
 
-    if (!email || !validateEmail(email)) {
-      setEmailError(true);
-      setErrorText('Введите корректный email.');
-      isValid = false;
-    } else {
-      setEmailError(false);
+    if (Object.values(newErrors).some((error) => error)) {
+      setErrors(newErrors);
+      return;
     }
 
-    if (!password || !validatePassword(password)) {
-      setPasswordError(true);
-      setErrorText('Пароль должен содержать не менее 6 символов.');
-      isValid = false;
-    } else {
-      setPasswordError(false);
-    }
-
-    if (
-      (!password || !validatePassword(password)) &&
-      (!email || !validateEmail(email))
-    ) {
-      setPasswordError(true);
-      setErrorText('Неккоректные данные для входа');
-      isValid = false;
-    } else {
-      setPasswordError(false);
-    }
-
-    if (isValid) {
-      dispatch(loginUser({ email, password }))
-        .unwrap()
-        .catch(() => setErrorText('Пользователь не найден'));
-    }
+    dispatch(loginUser(formData))
+      .unwrap()
+      .catch(() => setGeneralError('Пользователь не найден.'));
   };
 
   return (
     <LoginUI
-      errorText={errorText}
-      email={email}
-      handleEmailChange={handleEmailChange}
-      handlePasswordChange={handlePasswordChange}
-      setEmail={setEmail}
-      password={password}
-      setPassword={setPassword}
-      handleSubmit={handleSubmit}
-      emailError={emailError}
-      passwordError={passwordError}
+      formData={formData}
+      errors={errors}
+      generalError={generalError}
+      onInputChange={handleInputChange}
+      onBlur={handleBlur}
+      onSubmit={handleSubmit}
     />
   );
 };

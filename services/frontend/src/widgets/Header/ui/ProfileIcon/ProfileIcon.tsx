@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
 export const ProfileIcon: React.FC<{
   className: string;
 }> = ({ className }) => {
@@ -12,7 +10,7 @@ export const ProfileIcon: React.FC<{
       xmlns="http://www.w3.org/2000/svg"
       className={
         className +
-        ` text-accent_green size-8 md:size-6 lg:size-8 hover:text-green-600 hover:shadow-lg rounded-full focus:text-green-600 focus:outline-none focus:shadow-green-400  active:shadow-green-400  hover:shadow-green-400`
+        ` text-accent_green size-8 md:size-6 lg:size-8 3xl:size-10 hover:text-green-600 hover:shadow-lg rounded-full focus:text-green-600 focus:outline-none focus:shadow-green-400  active:shadow-green-400  hover:shadow-green-400`
       }
     >
       <path

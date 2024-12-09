@@ -12,7 +12,7 @@ export const CategoryCard: React.FC<{
           src={src}
         />
       </div>
-      <span className=" text-black-600 ml-1 font-bold text-base md:text-lg lg:text-xl xl:text-2xl break-words">
+      <span className=" text-black-600 ml-1 font-bold text-base md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl break-words">
         {name}
       </span>
     </div>

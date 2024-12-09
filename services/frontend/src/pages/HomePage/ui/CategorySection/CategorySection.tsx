@@ -14,10 +14,9 @@ export const CategorySection = () => {
       restaurants.flatMap((restaurant) => restaurant.category.map((cat) => cat))
     )
   );*/
-  // Состояние для отслеживания, раскрыты ли дополнительные категории
+
   const [showAll, setShowAll] = useState(false);
 
-  // Функция для переключения состояния
   const toggleShowAll = () => {
     setShowAll((prev) => !prev);
   };
@@ -25,11 +24,11 @@ export const CategorySection = () => {
     <section className=" bg_section_category">
       <div className=" pt-20 mx-5 md:m-auto md:w-[90%]">
         <div className=" flex flex-col gap-6 justify-between md:gap-0 md:flex-row">
-          <h2 className=" flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl">
+          <h2 className=" flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-[2.5rem]">
             Выбери любимую кухню
           </h2>
           <div className=" flex flex-row gap-6 items-center">
-            <span className=" text-lg font-bold text-accent_green md:text-base lg:text-xl xl:text-2xl">
+            <span className=" text-lg font-bold text-accent_green md:text-base lg:text-xl xl:text-2xl 3xl:text-3xl">
               Посмотреть все категории
             </span>
             <ArrowButton

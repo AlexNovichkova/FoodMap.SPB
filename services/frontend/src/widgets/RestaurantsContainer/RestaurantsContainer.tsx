@@ -21,7 +21,7 @@ export const RestaurantsContainer: FC<{
 
   // Функция для обновления количества карточек на странице
   const updateItemsPerPage = () => {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 576) {
       setItemsPerPage(1);
     } else if (window.innerWidth < 900) {
       setItemsPerPage(2);
@@ -56,7 +56,7 @@ export const RestaurantsContainer: FC<{
   const filteredRestaurants =
     shouldFilterByRating && restaurants
       ? restaurants.filter((restaurant) => restaurant.rating > 4.7).slice(0, 20)
-      : restaurants || []; // Если restaurants undefined, возвращаем пустой массив
+      : restaurants || [];
 
   const handleNext = () => {
     if (currentIndex + itemsPerPage < filteredRestaurants.length) {
@@ -97,11 +97,11 @@ export const RestaurantsContainer: FC<{
                 : 'bg-black-500 opacity-50 cursor-not-allowed rotate-180 '
             }
             onClick={handlePrev}
-            disabled={!canPrev} // Отключаем кнопку, если нельзя перейти назад
+            disabled={!canPrev}
           />
         </div>
-        <div className="mb-5 mt-16 md:mb-16 flex flex-col gap-10 md:flex-row">
-          {isLoading ? ( // Условный рендеринг прелоадера или карты
+        <div className="mb-5 mt-16 md:mb-16 flex flex-col gap-10 justify-center sm:flex-row">
+          {isLoading ? (
             <Preloader />
           ) : (
             filteredRestaurants
@@ -127,7 +127,7 @@ export const RestaurantsContainer: FC<{
                 : 'bg-black-500 opacity-50 cursor-not-allowed animate-none'
             }
             onClick={handleNext}
-            disabled={!canNext} // Отключаем кнопку, если нельзя перейти вперед
+            disabled={!canNext}
           />
         </div>
       </div>

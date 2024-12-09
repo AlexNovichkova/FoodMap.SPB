@@ -5,7 +5,7 @@ export const HeartIcon: FC<{
 }> = ({ className }) => {
   return (
     <svg
-      className={`${className} + like-icon lg:justify-center lg:w-10 lg:h-[37px] xl:w-12 xl:h-[45px]`}
+      className={`${className} + like-icon lg:justify-center lg:w-10 lg:h-[37px] xl:w-12 xl:h-[45px] 3xl:w-14 3xl:h-[53px]`}
       width="39"
       height="36"
       viewBox="0 0 39 36"

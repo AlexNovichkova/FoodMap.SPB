@@ -38,10 +38,10 @@ export const Header = () => {
     };
   }, [isMenuOpen]);
   return (
-    <header className={` mx-auto mt-7 pb-7 shadow-sm`}>
+    <header className={` mx-auto mt-7 pb-7 3xl:mt-9 shadow-sm`}>
       <div className=" md:w-[90%] header_nav_container flex flex-row justify-between items-center relative">
         <div className=" ml-5 md:ml-0 flex flex-row gap-3 items-center">
-          <div className=" min-w-9 max-w-11 md:max-w-14 cursor-pointer">
+          <div className=" min-w-9 max-w-11 md:max-w-14 3xl:max-w-16 cursor-pointer">
             <Link
               className="rounded-full outline-none  focus:outline-none focus:shadow-lg focus:shadow-green-400"
               to={'/'}
@@ -57,7 +57,7 @@ export const Header = () => {
             to={'/'}
             className={` outline-none  focus:outline-none focus:border-b focus:border-b-accent_green`}
           >
-            <div className=" text-accent_orange font-bold text-lg md:text-xl lg:text-3xl">
+            <div className=" text-accent_orange font-bold text-lg md:text-xl lg:text-3xl 3xl:text-4xl">
               Food<span className=" text-accent_green">Map.</span>SPB
             </div>
           </Link>
@@ -67,7 +67,7 @@ export const Header = () => {
             className="focus:outline-none focus:border-b focus:border-b-accent_green hover:border-b hover:border-b-accent_green"
             to={`/`}
           >
-            <span className="text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl outline-none">
+            <span className="text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl outline-none">
               Главная
             </span>
           </Link>
@@ -75,7 +75,7 @@ export const Header = () => {
             className="focus:outline-none focus:border-b focus:border-b-accent_green hover:border-b hover:border-b-accent_green"
             to={`/restaurants`}
           >
-            <span className="text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl outline-none ">
+            <span className="text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl outline-none ">
               Все заведения
             </span>
           </Link>
