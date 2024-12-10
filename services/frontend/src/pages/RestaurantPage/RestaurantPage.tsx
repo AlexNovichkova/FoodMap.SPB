@@ -39,6 +39,9 @@ export const RestaurantPage = () => {
   const [isLiked, setIsLiked] = useState(
     restaurant ? likedRestaurants.some((r) => r.id === restaurant.id) : false
   );
+  const onBack = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -90,12 +93,23 @@ export const RestaurantPage = () => {
   return (
     <>
       <section className="bg_restaurant">
-        <div className="pt-20 pb-16 mx-5 md:m-auto md:w-[90%]">
+        <div className="pt-10 mx-5 md:m-auto md:w-[90%]">
+          <span
+            onClick={onBack}
+            className=" group flex flex-row gap-2 w-fit text-black-500 text-base cursor-pointer md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl hover:text-green-600"
+          >
+            <div className=" group-hover:animate-arrowForwards transition-all">
+              &laquo;
+            </div>{' '}
+            Назад
+          </span>
+        </div>
+        <div className="pt-8 pb-16 mx-5 md:m-auto md:w-[90%]">
           <h2 className=" text-green-600 mb-10 text-left font-bold text-lg md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-[2.5rem] break-words">
             {restaurant.name}
           </h2>
           <div className="flex flex-col gap-4 md:flex-row md:gap-[5%] lg:gap-16">
-            <div className=" w-full h-full md:w-64 md:min-w-56 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 3xl:w-[26rem] 3xl:h-[26rem]">
+            <div className=" w-full h-full sm:w-[80%] aspect-square md:w-64 md:min-w-56 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 3xl:w-[26rem] 3xl:h-[26rem]">
               <img
                 className=" object-cover object-center rounded-[16px] h-full w-full shadow"
                 src={

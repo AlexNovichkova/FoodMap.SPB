@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { ProfileMenuUI, ProfileUI } from './ui/ProfileUI/ProfileUI';
 import { useDispatch, useSelector } from '../../features/store';
 import { logoutUser, updateUser } from '../../features/slices/userSlice';
-import { useForm } from 'src/shared/ui/hooks';
+import { useForm } from 'src/shared/ui/hooks/useForm/useForm';
 
 export const ProfileMenu: FC = () => {
   const { pathname } = useLocation();

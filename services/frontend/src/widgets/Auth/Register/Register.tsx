@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useDispatch } from 'src/features/store';
 import { registerUser } from 'src/features/slices/userSlice';
 import { RegisterUI } from './RegisterUI';
-import { useForm } from 'src/shared/ui/hooks';
+import { useForm } from 'src/shared/ui/hooks/useForm/useForm';
 
 export const Register: FC = () => {
   const dispatch = useDispatch();

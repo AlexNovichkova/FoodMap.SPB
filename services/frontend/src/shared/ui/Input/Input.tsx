@@ -9,7 +9,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   extClassName?: string;
   error?: boolean;
   errorText?: string;
-  onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   extClassNameInput?: string;
   handleEmailChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

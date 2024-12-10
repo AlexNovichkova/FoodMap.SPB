@@ -1,4 +1,4 @@
-import { ChangeEvent, forwardRef, InputHTMLAttributes, useState } from 'react';
+import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react';
 
 import { Input } from '../Input/Input';
 
@@ -26,23 +26,15 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     },
     ref
   ) => {
-    const [visible, setVisibility] = useState(false);
-
-    const handleIconClick = () => {
-      setVisibility((state) => !state);
-    };
-
     return (
       <Input
         ref={ref}
         {...props}
-        type={visible ? 'text' : 'password'}
         label={label}
         name={name as string}
         onChange={onChange}
         placeholder={placeholder}
         extClassName={extClassName}
-        onIconClick={handleIconClick}
         error={error}
         errorText={errorText}
       />

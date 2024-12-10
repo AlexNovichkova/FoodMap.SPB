@@ -1,12 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const CategoryCard: React.FC<{
   name: string;
   src: string;
 }> = ({ name, src }) => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = () => {
+    navigate(`/restaurants?category=${encodeURIComponent(name)}`);
+  };
   return (
-    <div className=" flex flex-col gap-4">
-      <div className=" w-full aspect-square">
+    <div
+      onClick={handleCategoryClick}
+      className=" flex flex-col gap-4 cursor-pointer "
+    >
+      <div className=" w-full aspect-square rounded-[16px] hover:shadow-lg hover:shadow-accent_orange">
         <img
           className=" object-cover object-center rounded-[16px] h-full w-full"
           src={src}

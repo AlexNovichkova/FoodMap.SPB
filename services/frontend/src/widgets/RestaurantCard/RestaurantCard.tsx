@@ -13,16 +13,21 @@ export const RestaurantCard: FC<TRestaurant> = ({
 }) => (
   <div className=" flex flex-col  gap-4 w-[90%] self-center sm:w-[45%] md:w-48 xl:w-56 2xl:w-64">
     <div className="flex flex-col gap-2 lg:gap-4 3xl:gap-5">
-      <div className=" w-full aspect-square md:w-48 md:h-48 xl:w-56 xl:h-56 2xl:w-64 2xl:h-64 ">
-        <img
-          className=" object-cover object-center rounded-[16px] h-full w-full aspect-square"
-          src={
-            photo_links ||
-            'https://bestkanc.ru/wa-data/public/shop/products/05/33/23305/images/47805/47805.970.jpeg'
-          }
-          alt={name}
-        />
-      </div>
+      <Link
+        to={`/restaurants/${id}`}
+        className={`outline-none rounded-[16px] hover:shadow-md hover:shadow-green-400`}
+      >
+        <div className=" w-full aspect-square rounded-[16px] md:w-48 md:h-48 xl:w-56 xl:h-56 2xl:w-64 2xl:h-64 ">
+          <img
+            className=" object-cover object-center rounded-[16px] h-full w-full aspect-square"
+            src={
+              photo_links ||
+              'https://bestkanc.ru/wa-data/public/shop/products/05/33/23305/images/47805/47805.970.jpeg'
+            }
+            alt={name}
+          />
+        </div>
+      </Link>
       <div className=" flex flex-col gap-2 ">
         <span className="text-black-600 text-left font-bold text-base md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl break-words line-clamp-2 min-h-14 md:min-h-16 xl:min-h-[4.5rem] ">
           {name}
@@ -41,8 +46,11 @@ export const RestaurantCard: FC<TRestaurant> = ({
         </div>
       </div>
     </div>
-    <Link to={`/restaurants/${id}`} className={`outline-none`}>
-      <MainButton className="w-full mt-2" title="Перейти" />
+    <Link to={`/restaurants/${id}`} className={`outline-none rounded-[8px]`}>
+      <MainButton
+        className="w-full mt-2 hover:shadow-md hover:shadow-green-400"
+        title="Перейти"
+      />
     </Link>
   </div>
 );
