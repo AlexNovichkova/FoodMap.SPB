@@ -4,7 +4,7 @@ from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-
+from recommendations.models import RestaurantRecommender
 from . import serializers
 
 User = get_user_model()
@@ -63,6 +63,7 @@ class UserLogoutAPIView(GenericAPIView):
             return Response({"success": True, "message": "Successful logout"}, status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response({"success": False, "message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
 
 class UserAPIView(RetrieveUpdateAPIView):
 
@@ -80,10 +81,19 @@ class UserAPIView(RetrieveUpdateAPIView):
             "user": serializer.data,
         }
         return Response(data, status=status.HTTP_200_OK)
-    
+
     def patch(self, request, *args, **kwargs):
         user = self.get_object()
         serializer = self.get_serializer(user, data=request.data, partial=True)
+        price_map = {
+            "средние": 1,
+            "выше среднего": 2,
+            "высокие": 3
+        }
+        recommender = RestaurantRecommender('data/data_fixed.json', price_map)
+        recommendations = recommender.get_recommendations(user.liked)
+        print(user.liked)
+        user.recommended = recommendations
         if serializer.is_valid():
             serializer.save()
             data = {
@@ -96,3 +106,5 @@ class UserAPIView(RetrieveUpdateAPIView):
             "success": False,
             "errors": serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
+    
+
