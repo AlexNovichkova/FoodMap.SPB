@@ -39,6 +39,9 @@ export const RestaurantPage = () => {
   const [isLiked, setIsLiked] = useState(
     restaurant ? likedRestaurants.some((r) => r.id === restaurant.id) : false
   );
+  const onBack = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -90,35 +93,49 @@ export const RestaurantPage = () => {
   return (
     <>
       <section className="bg_restaurant">
-        <div className="pt-20 pb-16 mx-5 md:m-auto md:w-[90%]">
-          <h2 className=" text-green-600 mb-10 text-left font-bold text-lg md:text-2xl lg:text-3xl xl:text-4xl break-words">
+        <div className="pt-10 mx-5 md:m-auto md:w-[90%]">
+          <span
+            onClick={onBack}
+            className=" group flex flex-row gap-2 w-fit text-black-500 text-base cursor-pointer md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl hover:text-green-600"
+          >
+            <div className=" group-hover:animate-arrowForwards transition-all">
+              &laquo;
+            </div>{' '}
+            Назад
+          </span>
+        </div>
+        <div className="pt-8 pb-16 mx-5 md:m-auto md:w-[90%]">
+          <h2 className=" text-green-600 mb-10 text-left font-bold text-lg md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-[2.5rem] break-words">
             {restaurant.name}
           </h2>
           <div className="flex flex-col gap-4 md:flex-row md:gap-[5%] lg:gap-16">
-            <div className=" w-full h-full md:w-64 md:min-w-56 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
+            <div className=" w-full h-full sm:w-[80%] aspect-square md:w-64 md:min-w-56 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 3xl:w-[26rem] 3xl:h-[26rem]">
               <img
                 className=" object-cover object-center rounded-[16px] h-full w-full shadow"
-                src={restaurant.photo_links}
+                src={
+                  restaurant.photo_links ||
+                  'https://bestkanc.ru/wa-data/public/shop/products/05/33/23305/images/47805/47805.970.jpeg'
+                }
                 alt={restaurant.name}
               />
             </div>
-            <div className=" flex flex-col gap-3 md:max-w-[50%] xl:max-w-[60%]">
+            <div className=" flex flex-col gap-3 md:max-w-[50%] xl:max-w-[60%] 3xl:gap-5">
               <div className=" text-left flex flex-row gap-2 items-center">
-                <span className=" text-accent_orange flex flex-col gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl break-words  items-start">
+                <span className=" text-accent_orange flex flex-col gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl 3xl:text-4xl break-words  items-start">
                   Описание:
                   <span className=" text-black-600 font-medium text-base md:text-xl lg:text-2xl xl:text-3xl break-words">
                     {restaurant.description}
                   </span>
                 </span>
               </div>
-              <div className=" text-green-600 text-left flex flex-row gap-2 items-center">
-                <span className=" flex gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl break-words  items-start">
+              <div className=" text-green-600 text-left flex flex-row gap-2 items-center ">
+                <span className=" flex gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl 3xl:text-4xl break-words  items-start">
                   Кухня:
                   <span className="flex flex-wrap gap-1">
                     {restaurant.cuisine_type.map((category, index) => (
                       <span
                         key={index}
-                        className="font-medium text-black-600 font-caveat break-words text-xl md:text-2xl lg:text-3xl xl:text-4xl lowercase leading-none md:leading-none"
+                        className="font-medium text-black-600 font-caveat break-words text-xl md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-5xl lowercase leading-none md:leading-none"
                       >
                         {category}
                         {index < restaurant.cuisine_type.length - 1 && ','}{' '}
@@ -128,23 +145,23 @@ export const RestaurantPage = () => {
                 </span>
               </div>
               <div className=" text-accent_orange text-left flex flex-row gap-2 items-center">
-                <span className="flex gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl break-words items-center">
+                <span className="flex gap-1 font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl 3xl:text-4xl break-words items-center">
                   Ценовой сегмент:
-                  <span className="font-medium text-black-600 font-caveat text-xl md:text-2xl lg:text-3xl xl:text-4xl md:leading-none">
+                  <span className="font-medium text-black-600 font-caveat text-xl md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-5xl md:leading-none">
                     {restaurant.prices}
                   </span>
                 </span>
               </div>
               <div className=" text-green-600 flex flex-row gap-2 items-center ">
                 <LocationIcon className="size-6" />
-                <span className=" font-bold text-lg text-left md:text-2xl lg:text-3xl xl:text-4xl font-caveat break-words">
+                <span className=" font-bold text-lg text-left md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-5xl font-caveat break-words">
                   {restaurant.address}
                 </span>
               </div>
               <div className=" ">
                 <div className=" text-accent_orange text-left flex flex-row gap-2 items-center">
                   <StarIcon className="size-5 " />
-                  <span className=" font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl italic">
+                  <span className=" font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl 3xl:text-4xl italic">
                     {restaurant.rating}
                   </span>
                 </div>
@@ -153,7 +170,7 @@ export const RestaurantPage = () => {
           </div>
         </div>
         <div className=" mx-5 pb-20 md:m-auto md:w-[90%] flex gap-2 lg:gap-5 flex-col lg:items-end lg:flex-row">
-          <span className="font-medium text-green-600 text-base md:text-lg lg:text-xl xl:text-2xl  break-words">
+          <span className="font-medium text-green-600 text-base md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl  break-words">
             Понравилось заведение?<br></br>
             <span className=" italic text-black-600">
               {' '}
@@ -161,7 +178,7 @@ export const RestaurantPage = () => {
             </span>
           </span>
           <div className=" flex flex-row gap-2 lg:items-end">
-            <FingerIcon className="rotate-90 size-9 lg:size-10 xl:size-12 fill-green-600 transition-all" />
+            <FingerIcon className="rotate-90 size-9 lg:size-10 xl:size-12 3xl:size-14 fill-green-600 transition-all" />
             <button className="card__icon-button" onClick={toggleIsLiked}>
               <HeartIcon className={isLiked ? 'is-liked' : ''} />
             </button>
@@ -172,10 +189,10 @@ export const RestaurantPage = () => {
         <div className="bg-orange-400 relative z-10 overflow-hidden pt-32 pb-20">
           <div className="w-[95%] md:w-[90%] max-w-screen-2xl m-auto flex flex-col md:flex-row shadow-xl">
             <div className="md:w-[35%] bg-white rounded-t-[8px] md:rounded-tr-none md:rounded-l-[8px] flex flex-col gap-5 justify-center py-8 px-8 md:py-0 md:px-5 lg:px-14">
-              <h2 className="text-xl font-bold text-black-600 md:text-2xl lg:text-3xl 2xl:text-4xl">
+              <h2 className="text-xl font-bold text-black-600 md:text-2xl lg:text-3xl 2xl:text-4xl 3xl:text-[2.5rem]">
                 Карта заведений
               </h2>
-              <p className="text-lg text-black-500 font-caveat md:text-xl lg:text-2xl 2xl:text-3xl">
+              <p className="text-lg text-black-500 font-caveat md:text-xl lg:text-2xl 2xl:text-3xl 3xl:text-4xl">
                 Вы можете посмотреть найденные заведения на карте
               </p>
             </div>

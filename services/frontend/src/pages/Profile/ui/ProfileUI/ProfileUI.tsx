@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, SyntheticEvent } from 'react';
+import { FC, SyntheticEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'src/features/store';
 import { PersonContainer } from '../PersonContainer';
@@ -7,6 +7,7 @@ import { Input } from 'src/shared/ui/Input';
 /*import { PasswordInput } from 'src/shared/ui/PasswordInput';*/
 import { MainButton } from 'src/shared/ui/MainButton';
 import { ProfileMenu } from '../../Profile';
+import { PageUIProps } from 'src/entities/projects/models/types';
 
 export type ProfileMenuUIProps = {
   pathname: string;
@@ -27,7 +28,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
         <NavLink
           to={'/profile'}
           className={({ isActive }) =>
-            `flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl focus:outline-none ${
+            `flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-[2.5rem] focus:outline-none ${
               isActive ? '' : ''
             }`
           }
@@ -42,7 +43,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
         />
       </div>
       <div>
-        <h2 className="flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl ">
+        <h2 className="flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-[2.5rem] ">
           Оцененные заведения
         </h2>
         <div>
@@ -53,7 +54,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
         </div>
       </div>
       <div>
-        <h2 className="flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl">
+        <h2 className="flex items-start leading-none text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-[2.5rem]">
           Может понравиться
         </h2>
         <div>
@@ -64,7 +65,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
         </div>
       </div>
 
-      <p className="md:mt-10 flex items-start lg:leading-10 text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl">
+      <p className="md:mt-10 flex items-start lg:leading-10 text-xl font-bold text-black-600 md:text-2xl lg:text-3xl xl:text-4xl 3xl:text-[2.5rem]">
         {pathname === '/profile'} В этом разделе вы можете изменить свои
         персональные данные
       </p>
@@ -72,30 +73,29 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({ pathname }) => {
   );
 };
 
-export type ProfileUIProps = {
-  formValue: {
+export type ProfileUIProps = PageUIProps & {
+  formData: {
     username: string;
     email: string;
     image: string;
   };
   isFormChanged: boolean;
   handleLogout: () => void;
-  handleSubmit: (e: SyntheticEvent) => void;
   handleCancel: (e: SyntheticEvent) => void;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  updateUserError?: string;
 };
 
 export const ProfileUI: FC<ProfileUIProps> = ({
-  formValue,
   isFormChanged,
-  updateUserError,
   handleLogout,
-  handleSubmit,
+  onSubmit,
   handleCancel,
-  handleInputChange,
+  onInputChange,
+  formData,
+  errors,
+  generalError,
+  onBlur,
 }) => (
-  <main className={` bg_section_profile m-auto pt-9 pb-12`}>
+  <main className={` bg_section_profile m-auto pt-9 pb-12 3xl:pt-12 3xl:pb-16`}>
     <section className="w-[93%] md:w-[90%] m-auto flex flex-col">
       <div className={`flex flex-col gap-14`}>
         <ProfileMenu />
@@ -103,43 +103,48 @@ export const ProfileUI: FC<ProfileUIProps> = ({
       <form
         id="change-user-info"
         className={`mt-8 mb-12 w-[98%] md:w-[70%] lg:w-[55%] xl:w-[40%] self-center`}
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       >
         <>
           <div className="pb-6">
             <Input
-              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+              className="w-full "
               label="Загрузить изображение"
               type="file"
               name={'image'}
-              onChange={handleInputChange}
               accept="image/png,image/jpeg,image/gif"
+              onChange={onInputChange}
+              onBlur={onBlur}
+              error={!!errors.image}
+              errorText={errors.image}
             />
           </div>
           <div className="pb-6">
             <Input
-              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+              className="w-full "
               type={'text'}
-              onChange={handleInputChange}
-              value={formValue.username}
               name={'username'}
               placeholder={'Имя'}
               label="Имя"
-              error={false}
-              errorText=""
+              value={formData.username}
+              onChange={onInputChange}
+              onBlur={onBlur}
+              error={!!errors.username}
+              errorText={errors.username}
             />
           </div>
           <div className="pb-6">
             <Input
-              className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+              className="w-full "
               type={'email'}
               placeholder={'E-mail'}
-              onChange={handleInputChange}
-              value={formValue.email}
               name={'email'}
               label="Почта"
-              error={false}
-              errorText=""
+              value={formData.email}
+              onChange={onInputChange}
+              onBlur={onBlur}
+              error={!!errors.email}
+              errorText={errors.email}
             />
           </div>
           {isFormChanged && (
@@ -154,9 +159,9 @@ export const ProfileUI: FC<ProfileUIProps> = ({
               <MainButton type="submit" className="" title="Сохранить" />
             </div>
           )}
-          {updateUserError && (
+          {generalError && (
             <p className={` pt-5 text text_type_main-default`}>
-              {updateUserError}
+              {generalError}
             </p>
           )}
         </>

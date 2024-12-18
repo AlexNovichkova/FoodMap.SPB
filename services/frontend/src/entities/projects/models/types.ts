@@ -43,12 +43,14 @@ export interface IAppState {
 }
 
 export type PageUIProps = {
-  emailError: boolean | undefined;
-  passwordError: boolean | undefined;
-  errorText: string | undefined;
-  email: string;
-  setEmail: Dispatch<SetStateAction<string>>;
-  handlePasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: SyntheticEvent) => void;
+  errors: {
+    username?: string;
+    email: string;
+    password: string;
+    image?: string;
+  };
+  generalError: string;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onSubmit: (e: React.SyntheticEvent) => void;
 };

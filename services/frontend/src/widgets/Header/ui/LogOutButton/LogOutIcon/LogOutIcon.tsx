@@ -1,6 +1,7 @@
 export const LogOutIcon = () => (
   <>
     <svg
+      className=" lg:w-[24px] lg:h-[24px] 3xl:w-8 3xl:h-8"
       width="24px"
       height="24px"
       viewBox="0 0 24 24"

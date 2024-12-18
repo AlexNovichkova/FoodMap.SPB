@@ -1,4 +1,3 @@
-import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'src/features/store';
@@ -15,12 +14,13 @@ import { useEffect } from 'react';
 import { checkUserAuth, getUser } from 'src/features/slices/userSlice';
 import { fetchRestaurants } from 'src/features/slices/restaurantsSlice';
 import { RestaurantPage } from 'src/pages/RestaurantPage';
-import { testCategorys } from './testData';
 import { FindRestaurantPage } from 'src/pages/FindReastaurantPage';
 import { NotFound404 } from 'src/pages/NotFound404';
 import { fetchCategories } from 'src/features/slices/categoriesSlice';
+import { ScrollToTop } from 'src/shared/ui/hooks/scrollToTop';
 
 export const App = () => {
+  ScrollToTop();
   const location = useLocation();
   const navigate = useNavigate();
   const backgroundLocation = location.state?.background;
