@@ -33,5 +33,7 @@
 
 - Клонируйте репозиторий на свой локальный компьютер
 - Установите необходимые зависимости с помощью pip и npm:
-  > npm i react-router-dom
-- Запустите сервер разработки с помощью python manage.py runserver (для Django) и npm run dev (для React)
+  > `npm install` (Убедитесь, что у вас установлен Node.js версии 16 или выше) (для Фронтенд)
+- Запустите сервер разработки:
+  > `python manage.py runserver` (для Django)
+  > `npm run dev` (для Фронтенд)
