@@ -64,7 +64,7 @@ export const Header = () => {
         </div>
         <div className="hidden md:flex md:items-center md:gap-8">
           <Link
-            className="focus:outline-none focus:border-b focus:border-b-accent_green hover:border-b hover:border-b-accent_green"
+            className="focus:outline-none focus:border-b focus:border-b-accent_green hover:border-b hover:border-b-accent_green active:border-b-accent_green"
             to={`/`}
           >
             <span className="text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl outline-none">
@@ -72,7 +72,7 @@ export const Header = () => {
             </span>
           </Link>
           <Link
-            className="focus:outline-none focus:border-b focus:border-b-accent_green hover:border-b hover:border-b-accent_green"
+            className="focus:outline-none focus:border-b focus:border-b-accent_green hover:border-b hover:border-b-accent_green active:border-b-accent_green"
             to={`/restaurants`}
           >
             <span className="text-accent_green font-bold text-base lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl outline-none ">
