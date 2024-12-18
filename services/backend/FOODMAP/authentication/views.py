@@ -92,7 +92,6 @@ class UserAPIView(RetrieveUpdateAPIView):
         }
         recommender = RestaurantRecommender('data/data_fixed.json', price_map)
         recommendations = recommender.get_recommendations(user.liked)
-        print(user.liked)
         user.recommended = recommendations
         if serializer.is_valid():
             serializer.save()
