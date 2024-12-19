@@ -36,17 +36,25 @@
 
 #### Backend
   > `python -m venv venv`
+
   > `source venv/Scripts/activate`
+
   > `python -m pip install --upgrade pip`
+
   > `pip install -r requirements.txt`
+
   > `python manage.py makemigrations`
+
   > `python manage.py migrate`
+  
   > `python manage.py runserver`
 
   - Для создания пользователя с правами администратора воспользуйтесь командой createsuperuser
+    
   > `python manage.py createsuperuser`
 
 #### Frontend
   > `npm install` (Убедитесь, что у вас установлен Node.js версии 16 или выше) (для Фронтенд)
-- Запустите сервер разработки:
+  - Запустите сервер разработки:
+    
   > `npm run dev`
