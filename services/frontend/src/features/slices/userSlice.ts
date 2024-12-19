@@ -113,7 +113,7 @@ const userSlice = createSlice({
         console.log(state.user);
         location.replace('/profile');
       })
-      .addCase(logoutUser.pending, (state, action) => {
+      .addCase(logoutUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
@@ -121,7 +121,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message || null;
       })
-      .addCase(logoutUser.fulfilled, (state, action) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.isLoading = false;
         state.user = {
           email: '',
@@ -130,7 +130,7 @@ const userSlice = createSlice({
         state.error = null;
         state.isAuthenticated = false;
       })
-      .addCase(checkUserAuth.pending, (state, action) => {
+      .addCase(checkUserAuth.pending, (state) => {
         state.isLoading = true;
         state.isAuthChecked = false;
         state.error = null;
@@ -141,13 +141,13 @@ const userSlice = createSlice({
         state.isAuthChecked = true;
         state.isAuthenticated = false;
       })
-      .addCase(checkUserAuth.fulfilled, (state, action) => {
+      .addCase(checkUserAuth.fulfilled, (state) => {
         state.isLoading = false;
         state.error = null;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
       })
-      .addCase(updateUser.pending, (state, action) => {
+      .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
@@ -160,7 +160,7 @@ const userSlice = createSlice({
         state.error = null;
         state.user = action.payload.user;
       })
-      .addCase(getUser.pending, (state, action) => {
+      .addCase(getUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })

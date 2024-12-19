@@ -45,12 +45,14 @@ export const RestaurantPage = () => {
 
   useEffect(() => {
     dispatch(checkUserAuth());
-    /*dispatch({
-      type: 'restaurants/getAllRestaurants/fulfilled',
-      payload: testRestaurants,
-    });*/
     dispatch(fetchRestaurants());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (restaurant) {
+      setIsLiked(likedRestaurants.some((r) => r.id === restaurant.id));
+    }
+  }, [restaurant, likedRestaurants]);
 
   useEffect(() => {
     const getCoordinates = async () => {
@@ -62,6 +64,10 @@ export const RestaurantPage = () => {
 
     getCoordinates();
   }, [restaurant]);
+
+  if (isLoading) {
+    return <Preloader />;
+  }
 
   if (!restaurant) {
     return (
@@ -85,10 +91,6 @@ export const RestaurantPage = () => {
     setIsLiked(!isLiked);
     dispatch(updateUser({ liked: updatedLiked }));
   };
-
-  if (isLoading) {
-    return <Preloader />;
-  }
 
   return (
     <>

@@ -7,3 +7,4 @@ alembic/versions/*.pyc
 .idea/
 
 services/backend/FOODMAP/db.sqlite3
+services/backend/FOODMAP/db.sqlite3
