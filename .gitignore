@@ -6,3 +6,7 @@ __pycache__/
 alembic/versions/*.pyc
 .idea/
 
+services/backend/FOODMAP/db.sqlite3
+services/backend/FOODMAP/db.sqlite3
+services/frontend/production
+services/frontend/node_modules

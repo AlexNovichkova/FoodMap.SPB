@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/o_briens/1081950097/', 'https://yandex.ru/maps/org/kur_krylo/146854956501/', 'https://yandex.ru/maps/org/phobo/91232786248/', 'https://yandex.ru/maps/org/chabrets/203732054850/', 'https://yandex.ru/maps/discovery/neobychnye-kafe-i-restorany-peterburga/']

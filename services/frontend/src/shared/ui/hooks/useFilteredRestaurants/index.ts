@@ -1,0 +1,1 @@
+export { useFilteredRestaurants } from './useFilteredRestaurants';

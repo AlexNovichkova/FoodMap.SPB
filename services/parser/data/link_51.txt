@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/royal_beach/1028793374/', 'https://yandex.ru/maps/org/karl_i_fridrikh/1227280367/', 'https://yandex.ru/maps/org/alpenkhaus/41158045555/', 'https://yandex.ru/maps/org/russkaya_rybalka/120152385330/', 'https://yandex.ru/maps/org/il_lago_dei_cigni/1262601259/']

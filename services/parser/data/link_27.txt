@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/matsoni/1177260756/', 'https://yandex.ru/maps/org/baggins_coffee/171481224270/', 'https://yandex.ru/maps/org/ogon_da_myaso/131745775265/', 'https://yandex.ru/maps/org/tribuna/1010086917/', 'https://yandex.ru/maps/org/bagulnik/30292738451/']

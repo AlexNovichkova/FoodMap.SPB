@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/artin/135901506987/', 'https://yandex.ru/maps/org/kafe_odzhakh/1146923718/', 'https://yandex.ru/maps/org/khyugge/47246796151/', 'https://yandex.ru/maps/org/nashe_kafe/29408077829/', 'https://yandex.ru/maps/org/brazier/1763587356/']

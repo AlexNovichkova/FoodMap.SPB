@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/sychuan/8085463341/', 'https://yandex.ru/maps/org/settlers/193887849308/', 'https://yandex.ru/maps/org/un_bol_de_caf_/104799337266/', 'https://yandex.ru/maps/org/tokio_city/80492280451/', 'https://yandex.ru/maps/org/best_tea_bubble/29169336077/']

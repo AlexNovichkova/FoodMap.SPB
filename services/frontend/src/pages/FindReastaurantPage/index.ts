@@ -1,0 +1,1 @@
+export { FindRestaurantPage } from './FindRestaurantPage';

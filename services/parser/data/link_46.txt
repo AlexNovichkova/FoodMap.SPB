@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/artin/135901506987/', 'https://yandex.ru/maps/org/baggins_coffee/18777284330/', 'https://yandex.ru/maps/org/u_rechki_kamenki/116814856689/', 'https://yandex.ru/maps/discovery/top-10-restoranov-sankt-peterburga-ot-ili-pampukha/', 'https://yandex.ru/maps/org/sundali/164302559803/']

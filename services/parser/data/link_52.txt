@@ -1,0 +1,1 @@
+['https://yandex.ru/maps/org/sunday_ginza/1300870386/', 'https://yandex.ru/maps/discovery/kafe-i-restorany-v-bolshikh-parkakh/', 'https://yandex.ru/maps/org/faces/66256902364/', 'https://yandex.ru/maps/org/luna/244516136876/', 'https://yandex.ru/maps/org/marselyeza/1046329109/']
