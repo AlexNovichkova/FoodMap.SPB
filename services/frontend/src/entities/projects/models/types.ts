@@ -1,4 +1,3 @@
-import { SyntheticEvent, Dispatch, SetStateAction } from 'react';
 export type TPriceMode = 'дешево' | 'средне' | 'дорого';
 export interface ICategory {
   id: number;

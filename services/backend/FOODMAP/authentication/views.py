@@ -21,10 +21,10 @@ class UserRegistrationAPIView(GenericAPIView):
         user = serializer.save()
         token = RefreshToken.for_user(user)
         data = {
-            "success": True,  # Успешная регистрация
+            "success": True,  
             "accessToken": str(token.access_token),
             "refreshToken": str(token),
-            "user": serializer.data,  # Оборачиваем данные о пользователе в объект user
+            "user": serializer.data,  
         }
         return Response(data, status=status.HTTP_201_CREATED)
         
@@ -43,7 +43,7 @@ class UserLoginAPIView(GenericAPIView):
         token = RefreshToken.for_user(user)
         
         data = {
-            "success": True,  # Успешная регистрация
+            "success": True,  
             "accessToken": str(token.access_token),
             "refreshToken": str(token),
             "user": serializer.data,  
@@ -100,7 +100,7 @@ class UserAPIView(RetrieveUpdateAPIView):
                 "user": serializer.data
             }
             return Response(data, status=status.HTTP_200_OK)
-         # Добавляем обработку некорректных данных
+  
         return Response({
             "success": False,
             "errors": serializer.errors

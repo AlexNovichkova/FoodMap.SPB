@@ -6,8 +6,6 @@ import { Login } from 'src/widgets/Auth/Login';
 import { Modal } from 'src/widgets/Modal/Modal';
 import { Layout } from './Layout';
 import { Register } from 'src/widgets/Auth/Register';
-import { ResetPassword } from 'src/widgets/Auth/ResetPassword';
-import { ForgotPassword } from 'src/widgets/Auth/ForgotPassword';
 import { Profile } from 'src/pages/Profile';
 import { ProtectedRoute } from './ProtectedRoute';
 import { useEffect } from 'react';
@@ -33,22 +31,8 @@ export const App = () => {
     {
       dispatch(fetchCategories());
     }
-    /*dispatch({
-      type: 'restaurants/getAllRestaurants/fulfilled',
-      payload: testRestaurants,
-    });*/
-    /*dispatch({
-      type: 'categories/getAllCategories/fulfilled',
-      payload: testCategorys,
-    });*/
-
     dispatch(checkUserAuth());
     dispatch(getUser());
-    /*dispatch(setTestUser(testUsers[0]));*/
-    /*dispatch({
-      type: 'user/getUser/fulfilled',
-      payload: testUsers
-    });*/
   }, [dispatch]);
 
   const onClose = () => {
@@ -75,23 +59,6 @@ export const App = () => {
             element={
               <ProtectedRoute onlyUnAuth>
                 <Register />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/forgot-password"
-            element={
-              <ProtectedRoute onlyUnAuth>
-                <ForgotPassword />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/reset-password"
-            element={
-              <ProtectedRoute onlyUnAuth>
-                <ResetPassword />
               </ProtectedRoute>
             }
           />
