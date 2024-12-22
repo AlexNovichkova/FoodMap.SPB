@@ -20,12 +20,12 @@ export const LoginUI: FC<LoginUIProps> = ({
 }) => {
   return (
     <div className={`pt-0 md:pt-3 xl:w-full xl:px-4 `}>
-      <h3 className="pb-6 text-lg text-black-700   font-medium lg:text-xl xl:text-2xl  2xl:text-3xl 3xl:text-4xl">
+      <h3 className=" pb-4 md:pb-6 text-lg text-black-700   font-medium lg:text-xl xl:text-2xl  2xl:text-3xl 3xl:text-4xl">
         Вход
       </h3>
       <form className={`pb-15 `} name="login" onSubmit={onSubmit}>
         <>
-          <div className="pb-6">
+          <div className="pb-4">
             <Input
               className="w-full"
               type="email"
@@ -37,9 +37,10 @@ export const LoginUI: FC<LoginUIProps> = ({
               error={!!errors.email}
               errorText={errors.email}
               label="Почта"
+              tooltip="Введите email в формате example@domain.com"
             />
           </div>
-          <div className="pb-6">
+          <div className="pb-4">
             <PasswordInput
               className="w-full"
               name="password"
@@ -50,6 +51,7 @@ export const LoginUI: FC<LoginUIProps> = ({
               error={!!errors.password}
               errorText={errors.password}
               label="Пароль"
+              tooltip="Введите пароль не менее 6 символов"
             />
           </div>
           {generalError && (

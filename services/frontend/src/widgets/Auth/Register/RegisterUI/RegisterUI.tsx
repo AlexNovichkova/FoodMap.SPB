@@ -43,6 +43,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
                 value={formData.username}
                 error={!!errors.username}
                 errorText={errors.username}
+                tooltip="Введите имя не менее 2 символов"
               />
             </div>
             <div className="pb-6">
@@ -56,6 +57,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
                 value={formData.email}
                 error={!!errors.email}
                 errorText={errors.email}
+                tooltip="Введите email в формате example@domain.com"
               />
             </div>
             <div className="pb-6">
@@ -69,6 +71,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
                 value={formData.password}
                 error={!!errors.password}
                 errorText={errors.password}
+                tooltip="Введите пароль не менее 6 символов"
               />
             </div>
 
