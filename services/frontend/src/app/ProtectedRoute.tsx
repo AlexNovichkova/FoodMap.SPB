@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import {
   authenticatedSelector,
   checkUserAuth,
-  selectUser
+  selectUser,
 } from 'src/features/slices/userSlice';
 import { useDispatch, useSelector } from 'src/features/store';
 import { Preloader } from './Preloader';
@@ -18,7 +18,6 @@ export const ProtectedRoute = (props: ProtectedRouteProps) => {
   const location = useLocation();
   const isAuthenticated = useSelector(authenticatedSelector);
   const isAuthChecked = useSelector(selectUser);
-  const backgroundLocation = location.state?.background;
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -29,7 +28,7 @@ export const ProtectedRoute = (props: ProtectedRouteProps) => {
   }
 
   if (!props.onlyUnAuth && !isAuthenticated) {
-    return <Navigate replace to='/register' state={{ from: location }} />;
+    return <Navigate replace to="/register" state={{ from: location }} />;
   }
 
   if (props.onlyUnAuth && isAuthenticated) {
