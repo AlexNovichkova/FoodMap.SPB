@@ -55,6 +55,7 @@ module.exports = {
         700: 'rgb(33, 33, 33)',
         600: 'rgb(66, 66, 66)',
         500: 'rgb(80, 79, 79)',
+        200: 'rgb(229,228,226)',
       },
       accent_green: 'rgb(37, 158, 98)',
       accent_orange: 'rgb(248, 130, 64)',

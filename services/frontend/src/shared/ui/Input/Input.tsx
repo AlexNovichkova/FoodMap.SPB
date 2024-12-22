@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -11,6 +11,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorText?: string;
   extClassNameInput?: string;
   handleEmailChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  tooltip?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -26,10 +27,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       error,
       errorText,
       className,
+      tooltip,
       ...props
     },
     ref
   ) => {
+    const [showTooltip, setShowTooltip] = useState(false);
     const id = nanoid();
 
     const inputClass = error
@@ -48,7 +51,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {label}
           </label>
         )}
-        <div className={''}>
+        <div className={` relative`}>
           <input
             data-testid={'input'}
             ref={ref}
@@ -58,8 +61,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             onChange={onChange}
             placeholder={placeholder}
             id={id}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
             {...props}
           />
+          {tooltip && showTooltip && (
+            <div className="absolute top-12 left-0 w-auto max-w-sm p-2 bg-black-200 text-accent_orange text-sm rounded shadow-md z-10 lg:max-w-lg lg:text-base 2xl:text-lg 3xl:text-xl">
+              {tooltip}
+            </div>
+          )}
           <span
             className={
               'text-sm lg:text-base xl:text-lg 2xl:text-xl text-orange-400'
