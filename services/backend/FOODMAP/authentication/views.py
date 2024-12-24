@@ -76,34 +76,41 @@ class UserAPIView(RetrieveUpdateAPIView):
     def get(self, request, *args, **kwargs):
         user = self.get_object()
         serializer = self.get_serializer(user)
+        if user.liked is None:
+            user.recommended = None
         data = {
             "success": True,
             "user": serializer.data,
         }
         return Response(data, status=status.HTTP_200_OK)
-
+    
     def patch(self, request, *args, **kwargs):
         user = self.get_object()
         serializer = self.get_serializer(user, data=request.data, partial=True)
+
         price_map = {
             "средние": 1,
             "выше среднего": 2,
             "высокие": 3
         }
         recommender = RestaurantRecommender('data/data_fixed.json', price_map)
-        recommendations = recommender.get_recommendations(user.liked)
-        user.recommended = recommendations
+
         if serializer.is_valid():
             serializer.save()
+            if user.liked and len(user.liked) > 0:
+                recommendations = recommender.get_recommendations(user.liked)
+                user.recommended = recommendations
+            else:
+                user.recommended = None
+            user.save()
+
             data = {
                 "success": True,
                 "user": serializer.data
             }
             return Response(data, status=status.HTTP_200_OK)
-  
+
         return Response({
             "success": False,
             "errors": serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
-    
-
