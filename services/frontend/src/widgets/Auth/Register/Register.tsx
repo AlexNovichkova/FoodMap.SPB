@@ -1,11 +1,13 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useDispatch } from 'src/features/store';
 import { registerUser } from 'src/features/slices/userSlice';
 import { RegisterUI } from './RegisterUI';
 import { useForm } from 'src/shared/ui/hooks/useForm/useForm';
+import { LoadingOverlay } from 'src/widgets/LoadingOverlay';
 
 export const Register: FC = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateField = (name: string, value: string) => {
     if (name === 'email')
@@ -32,18 +34,23 @@ export const Register: FC = () => {
   } = useForm({ username: '', email: '', password: '' }, validateField);
 
   const onSubmit = () => {
+    setIsLoading(true);
     dispatch(registerUser(formData))
       .unwrap()
-      .catch(() => setGeneralError('Пользователь уже существует'));
+      .catch(() => setGeneralError('Пользователь уже существует'))
+      .finally(() => setIsLoading(false));
   };
   return (
-    <RegisterUI
-      formData={formData}
-      errors={errors}
-      generalError={generalError}
-      onInputChange={handleInputChange}
-      onBlur={handleBlur}
-      onSubmit={() => handleSubmit(onSubmit)}
-    />
+    <>
+      {isLoading && <LoadingOverlay message="Отправляем данные, подождите" />}
+      <RegisterUI
+        formData={formData}
+        errors={errors}
+        generalError={generalError}
+        onInputChange={handleInputChange}
+        onBlur={handleBlur}
+        onSubmit={() => handleSubmit(onSubmit)}
+      />
+    </>
   );
 };

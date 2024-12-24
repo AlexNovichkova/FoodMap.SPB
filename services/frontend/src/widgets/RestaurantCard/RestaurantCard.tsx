@@ -29,12 +29,12 @@ export const RestaurantCard: FC<TRestaurant> = ({
         </div>
       </Link>
       <div className=" flex flex-col gap-2 ">
-        <span className="text-black-600 text-left font-bold text-base md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl break-words line-clamp-2 min-h-14 md:min-h-16 xl:min-h-[4.5rem] ">
+        <span className="text-black-600 text-left font-bold text-base md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl break-words line-clamp-2 min-h-12 md:min-h-14 xl:min-h-[4.5rem] ">
           {name}
         </span>
         <div className=" text-orange-400 flex flex-row gap-2 md:items-center md:h-16 3xl:h-20">
           <LocationIcon className="size-6" />
-          <span className=" font-bold text-lg w-full text-left md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl italic font-caveat break-words min-h-14 line-clamp-2">
+          <span className=" font-bold text-lg w-full text-left md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl italic font-caveat break-words min-h-12 md:min-h-14 line-clamp-2">
             {address}
           </span>
         </div>

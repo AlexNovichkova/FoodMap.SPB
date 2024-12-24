@@ -33,12 +33,17 @@ module.exports = {
         '50%': { transform: 'translateX(5px) scale(1.05)' },
         '100%': { transform: 'translateX(0px) scale(1.05)' },
       },
+      customBounce: {
+        '0%, 100%': { transform: 'translateY(0)' },
+        '50%': { transform: 'translateY(-0.3rem)' },
+      },
     },
     animation: {
       textForwards: 'textMoving 0.3s linear normal forwards',
       textBackwards: 'textReturning 0.3s linear forwards',
       arrowForwards: 'arrowMoving 0.5s linear infinite',
       none: 'none;',
+      customBounce: 'customBounce 0.9s ease-in-out infinite',
     },
     colors: {
       orange: {
@@ -69,5 +74,8 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    require('tailwindcss-animation-delay'),
+  ],
 };

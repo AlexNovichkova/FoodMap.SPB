@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Checkbox } from './Checkbox';
 
 interface FiltersProps {
@@ -21,18 +22,40 @@ export const Filters: React.FC<FiltersProps> = ({
   onPriceChange,
   onSortChange,
 }) => {
+  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
+
+  const toggleFiltersVisibility = () => {
+    setIsFiltersVisible((prev) => !prev);
+  };
   return (
     <>
       <h3 className="text-black-600 self-start font-bold text-base md:text-lg lg:text-xl xl:mb-3 2xl:my-4 xl:text-2xl 2xl:text-4xl break-words">
         Фильтры
       </h3>
-      <div className="filters-container flex flex-wrap justify-between gap-6">
+      <div className="filters-container flex flex-wrap justify-between gap-4 md:gap-6">
         {/* Категории */}
-        <div className="filter-section xl:w-auto">
+        <div className={` filter-section xl:w-auto`}>
           <h3 className="text-black-500 mb-2 font-semibold text-base lg:text-lg xl:text-xl 2xl:text-3xl break-words">
             Выберите тип кухни:
           </h3>
-          <div className=" flex flex-wrap gap-2 gap-x-5 pl-3.5 content-center items-start">
+          <button
+        onClick={toggleFiltersVisibility}
+        className={`flex items-center justify-between w-full  py-2 px-3 font-semibold text-base rounded-[8px] border  lg:text-lg xl:text-xl transition-all md:hidden ${
+          isFiltersVisible ? 'bg-black-500 border-white text-white hover:text-black-500 hover:bg-white hover:border-black-500' : 'text-black-500 border-black-500 hover:bg-black-500 hover:border-white hover:text-white'
+        }`}
+      >
+        {isFiltersVisible ? 'Скрыть фильтры' : 'Показать фильтры'}
+        <span
+          className={`ml-2 transform transition-transform ${
+            isFiltersVisible ? 'rotate-180' : ''
+          }`}
+        >
+          ▼
+        </span>
+      </button>
+          <div className={`overflow-hidden transition-all duration-500 ease-in-out flex flex-wrap mt-4 md:mt-0 gap-2 gap-x-5 pl-3.5 content-center items-start  ${
+                isFiltersVisible ? ' max-h-[1000px] opacity-100' : 'max-h-0 opacity-0' 
+              } md:max-h-[none] md:opacity-100  `}>
             {uniqueCategories.map((category) => (
               <Checkbox
                 key={category}
