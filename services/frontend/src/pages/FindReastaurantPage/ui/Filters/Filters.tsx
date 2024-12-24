@@ -39,23 +39,29 @@ export const Filters: React.FC<FiltersProps> = ({
             Выберите тип кухни:
           </h3>
           <button
-        onClick={toggleFiltersVisibility}
-        className={`flex items-center justify-between w-full  py-2 px-3 font-semibold text-base rounded-[8px] border  lg:text-lg xl:text-xl transition-all lg:hidden ${
-          isFiltersVisible ? 'bg-black-500 border-white text-white hover:text-black-500 hover:bg-white hover:border-black-500' : 'text-black-500 border-black-500 hover:bg-black-500 hover:border-white hover:text-white'
-        }`}
-      >
-        {isFiltersVisible ? 'Скрыть фильтры' : 'Показать фильтры'}
-        <span
-          className={`ml-2 transform transition-transform ${
-            isFiltersVisible ? 'rotate-180' : ''
-          }`}
-        >
-          ▼
-        </span>
-      </button>
-          <div className={`overflow-hidden transition-all duration-500 ease-in-out flex flex-wrap mt-4 lg:mt-0 gap-2 gap-x-5 xl:gap-x-6 2xl:gap-x-7 pl-3.5 xl:pl-4 2xl:pl-5 content-center items-start  ${
-                isFiltersVisible ? ' max-h-[1000px] opacity-100' : 'max-h-0 opacity-0' 
-              } lg:max-h-[none] lg:opacity-100  `}>
+            onClick={toggleFiltersVisibility}
+            className={`flex items-center justify-between w-full  py-2 px-3 font-semibold text-base rounded-[8px] border  lg:text-lg xl:text-xl transition-all lg:hidden ${
+              isFiltersVisible
+                ? 'bg-black-500 border-white text-white hover:text-black-500 hover:bg-white hover:border-black-500'
+                : 'text-black-500 border-black-500 hover:bg-black-500 hover:border-white hover:text-white'
+            }`}
+          >
+            {isFiltersVisible ? 'Скрыть фильтры' : 'Показать фильтры'}
+            <span
+              className={`ml-2 transform transition-transform ${
+                isFiltersVisible ? 'rotate-180' : ''
+              }`}
+            >
+              ▼
+            </span>
+          </button>
+          <div
+            className={`overflow-hidden transition-all duration-500 ease-in-out flex flex-wrap mt-4 lg:mt-0 gap-2 gap-x-5 xl:gap-x-6 2xl:gap-x-7 pl-3.5 xl:pl-4 2xl:pl-5 content-center items-start  ${
+              isFiltersVisible
+                ? ' max-h-[1000px] opacity-100'
+                : 'max-h-0 opacity-0'
+            } lg:max-h-[none] lg:opacity-100  `}
+          >
             {uniqueCategories.map((category) => (
               <Checkbox
                 key={category}

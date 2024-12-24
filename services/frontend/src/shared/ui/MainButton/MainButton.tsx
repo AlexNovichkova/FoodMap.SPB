@@ -22,8 +22,8 @@ export const MainButton: React.FC<{
     >
       <div className={`flex items-center justify-center mx-auto`}>
         <ArrowIcon
-          className={` size-[18px] opacity-0 group-hover:opacity-100 transition-all ${
-            disabled ? 'group-hover:opacity-0 ' : ''
+          className={` size-[18px] opacity-0 transition-all ${
+            disabled ? 'group-hover:opacity-0 ' : 'group-hover:opacity-100'
           }`}
         />
         <span
