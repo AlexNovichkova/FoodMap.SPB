@@ -1,4 +1,3 @@
-import { QuestionIcon } from './ui/QuestionIcon';
 import { GitIcon } from './ui/GitIcon';
 import { Link } from 'react-router-dom';
 
@@ -26,15 +25,9 @@ export const Footer = () => {
               ' flex justify-center items-center size-4 md:size-6 lg:size-8'
             }
           >
-            <QuestionIcon className=" hover:ac" />
-          </button>
-          <button
-            className={
-              ' flex justify-center items-center size-4 md:size-6 lg:size-8'
-            }
-          >
             <Link
               className=" outline-none"
+              target="_blank"
               to={'https://github.com/AlexNovichkova/FoodMap.SPB'}
             >
               <GitIcon className={' hover:text-accent'} />
