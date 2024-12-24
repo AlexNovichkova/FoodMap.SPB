@@ -20,6 +20,7 @@ export const PersonContainer: FC<TUser> = ({ username, email, image }) => {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+
   return (
     <div className=" rounded-[8px] shadow self-center flex items-center flex-col gap-5 py-6 px-5 md:py-8 md:px-7">
       <div
@@ -58,7 +59,7 @@ export const PersonContainer: FC<TUser> = ({ username, email, image }) => {
         <MainButton
           onClick={handleEditDataClick}
           title="Изменить данные"
-          className="w-full "
+          className={` w-full `}
         />
       </div>
     </div>

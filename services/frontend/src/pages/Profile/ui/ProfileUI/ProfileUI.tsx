@@ -94,83 +94,97 @@ export const ProfileUI: FC<ProfileUIProps> = ({
   errors,
   generalError,
   onBlur,
-}) => (
-  <main className={` bg_section_profile m-auto pt-9 pb-12 3xl:pt-12 3xl:pb-16`}>
-    <section className="w-[93%] md:w-[90%] m-auto flex flex-col">
-      <div className={`flex flex-col gap-14`}>
-        <ProfileMenu />
-      </div>
-      <form
-        id="change-user-info"
-        className={`mt-8 mb-12 w-[98%] md:w-[70%] lg:w-[55%] xl:w-[40%] self-center`}
-        onSubmit={onSubmit}
-      >
-        <>
-          <div className="pb-6">
-            <Input
-              className="w-full "
-              label="Загрузить изображение"
-              type="file"
-              name={'image'}
-              accept="image/png,image/jpeg,image/gif"
-              onChange={onInputChange}
-              onBlur={onBlur}
-              error={!!errors.image}
-              errorText={errors.image}
-            />
-          </div>
-          <div className="pb-6">
-            <Input
-              className="w-full "
-              type={'text'}
-              name={'username'}
-              placeholder={'Имя'}
-              label="Имя"
-              value={formData.username}
-              onChange={onInputChange}
-              onBlur={onBlur}
-              error={!!errors.username}
-              errorText={errors.username}
-            />
-          </div>
-          <div className="pb-6">
-            <Input
-              className="w-full "
-              type={'email'}
-              placeholder={'E-mail'}
-              name={'email'}
-              label="Почта"
-              value={formData.email}
-              onChange={onInputChange}
-              onBlur={onBlur}
-              error={!!errors.email}
-              errorText={errors.email}
-            />
-          </div>
-          {isFormChanged && (
-            <div className=" flex flex-row justify-between">
-              <MainButton
-                type="button"
-                className=""
-                title="Отменить"
-                onClick={handleCancel}
+}) => {
+  const isFormValid = !Object.values(errors).some((error) => error);
+  return (
+    <main
+      className={` bg_section_profile m-auto pt-9 pb-12 3xl:pt-12 3xl:pb-16`}
+    >
+      <section className="w-[93%] md:w-[90%] m-auto flex flex-col">
+        <div className={`flex flex-col gap-14`}>
+          <ProfileMenu />
+        </div>
+        <form
+          id="change-user-info"
+          className={`mt-8 mb-12 w-[98%] md:w-[70%] lg:w-[55%] xl:w-[40%] self-center`}
+          onSubmit={onSubmit}
+        >
+          <>
+            <div className="pb-6">
+              <Input
+                className="w-full "
+                label="Загрузить изображение"
+                type="file"
+                name={'image'}
+                accept="image/png,image/jpeg,image/gif"
+                onChange={onInputChange}
+                onBlur={onBlur}
+                error={!!errors.image}
+                errorText={errors.image}
               />
-
-              <MainButton type="submit" className="" title="Сохранить" />
             </div>
-          )}
-          {generalError && (
-            <p className={` pt-5 text text_type_main-default`}>
-              {generalError}
-            </p>
-          )}
-        </>
-      </form>
-      <MainButton
-        title="Выход"
-        className={`text text_type_main-medium text_color_inactive pt-4 pb-4 self-center w-[98%] md:w-[70%] lg:w-[55%] xl:w-[40%]`}
-        onClick={handleLogout}
-      ></MainButton>
-    </section>
-  </main>
-);
+            <div className="pb-6">
+              <Input
+                className="w-full "
+                type={'text'}
+                name={'username'}
+                placeholder={'Имя'}
+                label="Имя"
+                value={formData.username}
+                onChange={onInputChange}
+                onBlur={onBlur}
+                error={!!errors.username}
+                errorText={errors.username}
+              />
+            </div>
+            <div className="pb-6">
+              <Input
+                className="w-full "
+                type={'email'}
+                placeholder={'E-mail'}
+                name={'email'}
+                label="Почта"
+                value={formData.email}
+                onChange={onInputChange}
+                onBlur={onBlur}
+                error={!!errors.email}
+                errorText={errors.email}
+              />
+            </div>
+            {isFormChanged && (
+              <div className=" flex flex-row justify-between">
+                <MainButton
+                  type="button"
+                  className=""
+                  title="Отменить"
+                  onClick={handleCancel}
+                />
+
+                <MainButton
+                  type="submit"
+                  className={`   ${
+                    !isFormValid
+                      ? 'opacity-50 cursor-not-allowed hover:shadow-accent-orange'
+                      : 'focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange'
+                  } `}
+                  title="Сохранить"
+                  disabled={!isFormValid}
+                />
+              </div>
+            )}
+            {generalError && (
+              <p className={` pt-5 text text_type_main-default`}>
+                {generalError}
+              </p>
+            )}
+          </>
+        </form>
+        <MainButton
+          title="Выход"
+          className={`text text_type_main-medium text_color_inactive pt-4 pb-4 self-center w-[98%] md:w-[70%] lg:w-[55%] xl:w-[40%]`}
+          onClick={handleLogout}
+        ></MainButton>
+      </section>
+    </main>
+  );
+};

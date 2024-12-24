@@ -110,7 +110,7 @@ export const Header = () => {
           )}
         </div>
         <div
-          className={` absolute z-30 top-14 md:hidden bg-white transition-all duration-300 overflow-hidden w-full flex flex-col items-center justify-center gap-6
+          className={` absolute z-30 top-14 md:hidden shadow-xl bg-white transition-all duration-300 overflow-hidden w-full flex flex-col items-center justify-center gap-6
            h-0 ${isMenuOpen && 'h-64'}`}
         >
           <Link

@@ -40,6 +40,7 @@ export const Register: FC = () => {
       .catch(() => setGeneralError('Пользователь уже существует'))
       .finally(() => setIsLoading(false));
   };
+  const isFormValid = !Object.values(errors).some((error) => error);
   return (
     <>
       {isLoading && <LoadingOverlay message="Отправляем данные, подождите" />}
@@ -50,6 +51,7 @@ export const Register: FC = () => {
         onInputChange={handleInputChange}
         onBlur={handleBlur}
         onSubmit={() => handleSubmit(onSubmit)}
+        isFormValid={isFormValid}
       />
     </>
   );

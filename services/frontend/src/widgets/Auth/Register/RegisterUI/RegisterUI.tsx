@@ -16,6 +16,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
   onInputChange,
   onBlur,
   onSubmit,
+  isFormValid,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,7 +36,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
             <div className="pb-6">
               <Input
                 label="Имя"
-                className="w-full outline-black-700 outline outline-1 py-1 px-2 rounded-[8px] text-base lg:text-lg 2xl:text-xl focus:outline-accent_green focus:outline-2 active:outline-accent_green"
+                className="w-full "
                 type="text"
                 placeholder="Имя"
                 onChange={onInputChange}
@@ -99,11 +100,16 @@ export const RegisterUI: FC<RegisterUIProps> = ({
         </div>
         <div className=" flex items-center min-h-16">
           <MainButton
-            className=" w-full focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange"
+            className={` w-full   ${
+              !isFormValid
+                ? 'opacity-50 cursor-not-allowed hover:shadow-accent-orange'
+                : 'focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange'
+            } `}
             type="submit"
             data-cy="closeX"
             title="Зарегистрироваться"
             onClick={onSubmit}
+            disabled={!isFormValid}
           />
         </div>
       </div>

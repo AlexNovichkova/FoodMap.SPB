@@ -52,4 +52,5 @@ export type PageUIProps = {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.SyntheticEvent) => void;
+  isFormValid: boolean;
 };

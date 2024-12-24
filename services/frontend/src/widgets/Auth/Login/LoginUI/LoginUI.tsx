@@ -17,6 +17,7 @@ export const LoginUI: FC<LoginUIProps> = ({
   onInputChange,
   onBlur,
   onSubmit,
+  isFormValid,
 }) => {
   return (
     <div className={`pt-0 md:pt-3 xl:w-full xl:px-4 `}>
@@ -72,24 +73,18 @@ export const LoginUI: FC<LoginUIProps> = ({
           Зарегистрироваться
         </Link>
       </div>
-      {/*<div
-        className={` text text-black-700  text_type_main-default pb-6 text-base lg:text-lg xl:text-xl 2xl:text-2xl font-normal `}
-      >
-        Забыли пароль?
-        <Link
-          to={'/forgot-password'}
-          className={`pl-2 text-accent_green outline-none font-medium focus:text-green-400 focus:border-b hover:text-green-400 hover:border-b`}
-        >
-          Восстановить пароль
-        </Link>
-      </div>*/}
       <div className=" flex items-center min-h-16">
         <MainButton
-          className=" w-full focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange"
+          className={` w-full   ${
+            !isFormValid
+              ? 'opacity-50 cursor-not-allowed hover:shadow-accent-orange'
+              : 'focus:shadow-accent_green hover:shadow-accent_green hover:shadow-accent-orange'
+          } `}
           type="submit"
           data-cy="closeX"
           title="Войти"
-          onClick={onSubmit}
+          onClick={isFormValid ? onSubmit : undefined}
+          disabled={!isFormValid}
         />
       </div>
     </div>

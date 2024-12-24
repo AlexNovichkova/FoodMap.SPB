@@ -39,6 +39,8 @@ export const Login: FC = () => {
       .finally(() => setIsLoading(false));
   };
 
+  const isFormValid = !Object.values(errors).some((error) => error);
+
   return (
     <>
       {isLoading && <LoadingOverlay message="Вход в систему, подождите" />}
@@ -49,6 +51,7 @@ export const Login: FC = () => {
         onInputChange={handleInputChange}
         onBlur={handleBlur}
         onSubmit={() => handleSubmit(onSubmit)}
+        isFormValid={isFormValid}
       />
     </>
   );
