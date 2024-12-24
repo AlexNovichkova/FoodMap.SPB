@@ -1,10 +1,11 @@
-import { SyntheticEvent, useEffect } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ProfileMenuUI, ProfileUI } from './ui/ProfileUI/ProfileUI';
 import { useDispatch, useSelector } from '../../features/store';
 import { logoutUser, updateUser } from '../../features/slices/userSlice';
 import { useForm } from 'src/shared/ui/hooks/useForm/useForm';
+import { LoadingOverlay } from 'src/widgets/LoadingOverlay';
 
 export const ProfileMenu: FC = () => {
   const { pathname } = useLocation();
@@ -18,6 +19,7 @@ export const ProfileMenu: FC = () => {
 };
 
 export const Profile: FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
@@ -82,20 +84,24 @@ export const Profile: FC = () => {
   }, [user, setFormData]);
 
   const onSubmit = () => {
-    dispatch(updateUser(formData));
+    setIsLoading(true);
+    dispatch(updateUser(formData)).finally(() => setIsLoading(false));
   };
 
   return (
-    <ProfileUI
-      handleLogout={handleLogout}
-      handleCancel={handleCancel}
-      generalError={generalError}
-      isFormChanged={isFormChanged}
-      formData={formData}
-      errors={errors}
-      onInputChange={handleInputChange}
-      onBlur={handleBlur}
-      onSubmit={() => handleSubmit(onSubmit)}
-    />
+    <>
+      {isLoading && <LoadingOverlay message="Обновляем данные, подождите" />}
+      <ProfileUI
+        handleLogout={handleLogout}
+        handleCancel={handleCancel}
+        generalError={generalError}
+        isFormChanged={isFormChanged}
+        formData={formData}
+        errors={errors}
+        onInputChange={handleInputChange}
+        onBlur={handleBlur}
+        onSubmit={() => handleSubmit(onSubmit)}
+      />
+    </>
   );
 };

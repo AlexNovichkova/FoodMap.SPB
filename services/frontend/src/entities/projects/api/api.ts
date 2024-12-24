@@ -2,7 +2,7 @@ import { setCookie, getCookie, deleteCookie } from './cookie';
 import { ICategory, TRestaurant, TUser } from '../models/types';
 
 /*const URL = process.env.FOODMAP_API_URL;*/
-const URL = `http://176.108.254.225:8000/`;
+const URL = `http://176.108.254.225:8000`;
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
@@ -201,7 +201,12 @@ export const fetchCoordinates = async (
   const response = await fetch(
     `https://geocode-maps.yandex.ru/1.x/?apikey=${apiKey}&geocode=${encodeURIComponent(
       address
-    )}&format=json`
+    )}&format=json`,
+    {
+      headers: {
+        Referer: 'http://176.108.254.225:4000',
+      },
+    }
   );
   const data = await response.json();
 
